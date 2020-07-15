@@ -1,13 +1,14 @@
 import React from 'react'
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 
 /**
- * Compinente da página "Sobre"
+ * Representa a página "Sobre"
  */
 function About() {
     return (
         <Container className="p3">
             <h1> Sobre Page </h1>
+            <Button variant="primary" href="/">Homepage</Button>
         </Container>
     )
 }
