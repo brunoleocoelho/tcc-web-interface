@@ -38,6 +38,19 @@ Será gerado o diretório `build` contendo o _bundle_ minificado da aplicação 
 Acesse a documentação React para mais informações sobre [deploy](https://facebook.github.io/create-react-app/docs/deployment).
 
 
+## Responsividade Bootstrap
+
+A aplicação utiliza o framework bootstrap para prover responsividade em diferentes telas, portanto devem ser consideradas as siglas baixo utilizadas na aplicação.
+
+* **xs** - Extra small devices (portrait phones, less than 576px)
+* **sm** - Small devices (landscape phones, 576px and up)
+* **md** - Medium devices (tablets, 768px and up)
+* **lg** - Large devices (desktops, 992px and up)
+* **xl** - Extra large devices (large desktops, 1200px and up)
+
+> Documentação oficial: https://getbootstrap.com/docs/4.0/layout/overview/#responsive-breakpoints
+
+
 ## Outras informações
 
 * [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
