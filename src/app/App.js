@@ -1,17 +1,21 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-
 import MainRouter from './MainRouter';
+import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
 
-/** Objeto que contém as principais rotas para menu */
-const header = {
-  title: 'Biblioteca Acadêmica',
-}
+import { storeAllBooks } from '../services/StorageService'
+import { getNavbarData } from '../services/InterfaceService'
+import booksFull from '../assets/data/books.json';
 
-// Atualização do título da página
+import Header from '../components/Header';
+
+// Armazenando MOCK-UP DE LIVROS
+storeAllBooks(booksFull)
+
+// Atualizando título da página
 var tituloPrincipal = document.getElementById('titulo-principal');
-tituloPrincipal.innerHTML = header.title;
+tituloPrincipal.innerHTML = getNavbarData().title;
 
 /**
  * Componente inicial que encapsula toda a aplicação
@@ -20,6 +24,7 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
+                <Header />
                 <MainRouter />
             </BrowserRouter>
         </div>
