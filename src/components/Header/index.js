@@ -46,7 +46,7 @@ function NavToggle() {
             label="Menu" 
             aria-controls="responsive-navbar-nav"
         >
-            <i className={'fa fa-fw fa-bars'}></i>
+            <i className="fa fa-bars"></i>
         </Navbar.Toggle>
     )
 }

@@ -47,10 +47,9 @@ function NavSearch() {
                     <Col xs={2} className={btnColCss} style={btnColStyle}>
                         <Button 
                             variant="dark" 
-                            className="py-2 pl-2"
                             onClick={handleShowInput}
                         >
-                            <i className={'fa fa-fw fa-search'}></i>
+                            <i className="fa fa-search"></i>
                         </Button>
                     </Col>
 

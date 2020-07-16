@@ -16,7 +16,7 @@ function AutosuggestSearch({ value, placeholder, onChangeText, closeAction, inpu
                 style={styles.btnClose} 
                 onClick={closeAction}
             >
-                <i className="fa fa-fw fa-close" />
+                <i className="fa fa-close" />
             </Button>
 
             <FormControl 
