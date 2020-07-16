@@ -8,25 +8,18 @@ import { Card, Button, Row, Col } from 'react-bootstrap'
 function BookCard(props) {
     // PROPS
     const { actions, book } = props
-    const hasActions = (actions && actions.length > 0)
     const noImgBook = require('../../assets/img/books-icon.png')
     
     // STATE
     // const [book, setBook] = useState(props.book)
     // const [isReserved, setIsReserved] = useState(false)
-    
-    // FUNCTIONS
-    const actionBook = (e) => {
-        console.log("actionBook1", e)
-    }
 
-    const cardDynStyle = {...styles.cardContainer, }
     const cardId = `book-${book.isbn}-${book.id}`
 
     // RENDER
     return (
         <Card className="col-12 col-sm-4 col-md-3 col-lg-2 px-md-1"
-            style={styles.cardContainer} 
+
             id={cardId}
             data-toggle="tooltip" 
             data-placement="top" 
@@ -109,12 +102,12 @@ const styles = {
     cardContainer: {
         // boxShadow: '2px 2px 4px grey',
         border: '1px solid rgba(0,0,0,.4)',
-        // maxHeight: 150
     },
     cardHeader: {
         height: 150,
         display: 'flex',
         justifyContent: 'center',
+        overflow: 'hidden'
     }
 }
 

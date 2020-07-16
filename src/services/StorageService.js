@@ -1,5 +1,6 @@
 
 const booksAll = 'books-all'
+const filterApplied = 'filter-applied'
 
 /** 
  * Função que armazena todos os livros no localstorage 
@@ -53,10 +54,31 @@ function removeOneBook(id) {
     return true
 }
 
+/**
+ * Retorna todos os filtros aplicados a exibição dos livros
+ */
+function getFilterApplied() {
+    const filters = JSON.parse(localStorage.getItem(filterApplied))
+    return filters ? filters : {}
+}
+
+/**
+ * Armazena os novos valores de filtros selecionados
+ * @param {*} filter novos valores a serem adicionado
+ */
+function storeFiltersApplied(filters) {
+    if (!filters) return
+    localStorage.setItem(filterApplied, JSON.stringify(filters))
+}
+
+
 // Exports
 export {
     storeAllBooks,
     getAllBooks,
     getOneBook,
-    removeOneBook
+    removeOneBook,
+
+    getFilterApplied,
+    storeFiltersApplied
 }
