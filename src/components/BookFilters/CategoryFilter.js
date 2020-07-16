@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import { getAllCategories, getSelectedCategories, storeSelectedCategories } from '../../services/CategoryService'
 import Separator from './Separator'
+import FilterActions from './FilterActions'
 
 /**
  * Componente que renderiza um filtro de categorias
@@ -26,11 +27,31 @@ function CategoryFilter() {
         storeSelectedCategories(newSelected)
     }
 
+    /** Limpa todos os itens marcados */
+    const cleanAllChecked = () => {
+        setSelected([])
+        storeSelectedCategories([])
+    }
+
+    /** Marca todos os itens da lista */
+    const checkAllOptions = () => {
+        setSelected(categorias)
+        storeSelectedCategories(categorias)
+    }
+
+    // Array de actions para os botões
+    const actions = [
+        { label: "Limpar", onClick: cleanAllChecked },
+        { label: "Selc.Todos", onClick: checkAllOptions },
+    ]
+
     return (
         <div style={styles.filterContainer}>
             <Separator />
 
             <h6>Categorias</h6>
+
+            <FilterActions actions={actions}/>
 
             { categorias.map(category => {
                 const idKey = `filter-category-${String(category).replace(' ','_')}`

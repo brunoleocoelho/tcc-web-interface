@@ -12,19 +12,6 @@ function BookFilters() {
     // STATE
     const [modalShow, setModalShow] = useState(false);
 
-    // FUNCTIONS
-    const filterBody = () => {
-        return (
-            <Container fluid>
-                <h5 className="d-none d-md-flex">{ title }</h5>
-
-                <AuthorFilter />
-                <CategoryFilter />
-
-            </Container>
-        )
-    }
-
     return (
         <React.Fragment>
             <ModalFilters 
@@ -32,12 +19,11 @@ function BookFilters() {
                 onHide={() => setModalShow(false)}
                 titulo={title}
             >
-                { filterBody() }
+                <FilterContainer title={title} key="filter-modal" />
             </ModalFilters>
             
-            <div className="p-2">
+            <div className="p-2 d-md-none">
                 <Button
-                    className="d-md-none"
                     variant="outline-primary" 
                     onClick={() => setModalShow(true)}
                 >
@@ -47,10 +33,25 @@ function BookFilters() {
             </div>
 
             <div className="d-none d-md-flex">
-                { filterBody() }
+                <FilterContainer title={title} key="filter-side" />
             </div>
 
         </React.Fragment>
+    )
+}
+
+/**
+ * Container contendo os filtros 
+ */
+function FilterContainer({ title }) {
+    return (
+        <Container fluid>
+            <h5 className="d-none d-md-flex">{ title }</h5>
+
+            <AuthorFilter />
+            <CategoryFilter />
+
+        </Container>
     )
 }
 
@@ -58,8 +59,6 @@ function BookFilters() {
 function ModalFilters(props) {
     // console.log("modal props", props)
     const { show, onHide, titulo, children } = props
-
-    if (!children) return null
 
     return (
         <Modal

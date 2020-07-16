@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Button, Row, Col } from 'react-bootstrap'
+import './BookCard.css'
 
 /**
  * Componente que representa um 
@@ -18,8 +19,8 @@ function BookCard(props) {
 
     // RENDER
     return (
-        <Card className="col-12 col-sm-4 col-md-3 col-lg-2 px-md-1"
-
+        <Card 
+            className="book-container col-12 col-sm-4 col-md-3 col-lg-2 px-md-1"
             id={cardId}
             data-toggle="tooltip" 
             data-placement="top" 

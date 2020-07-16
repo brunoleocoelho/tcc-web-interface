@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import { getAllAuthors, getSelectedAuthors, storeSelectedAuthors } from '../../services/AuthorService'
 import Separator from './Separator'
+import FilterActions from './FilterActions'
 
 /**
  * Componente que renderiza um filtro de autores
@@ -26,11 +27,32 @@ function AuthorFilter() {
         storeSelectedAuthors(newSelected)
     }
 
+    /** Limpa todos os itens marcados */
+    const cleanAllChecked = () => {
+        setSelected([])
+        storeSelectedAuthors([])
+    }
+
+    /** Marca todos os itens da lista */
+    const checkAllOptions = () => {
+        setSelected(autores)
+        storeSelectedAuthors(autores)
+    }
+
+
+    // Array de actions para os botões
+    const actions = [
+        { label: "Limpar", onClick: cleanAllChecked },
+        { label: "Selc.Todos", onClick: checkAllOptions },
+    ]
+
     return (
         <div style={styles.filterContainer}>
             <Separator />
             
             <h6>Autores</h6>
+
+            <FilterActions actions={actions} />
 
             { autores.map(autor => {
                 const idKey = `filter-author-${String(autor).replace(' ','_')}`

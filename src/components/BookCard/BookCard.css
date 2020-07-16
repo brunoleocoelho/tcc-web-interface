@@ -1,0 +1,11 @@
+
+.book-container {
+    border: 1px solid rgba(0,0,0,.4) !important;
+    background-color: black;
+  }
+  
+  @media (min-width: 1200px) {
+    .book-container {
+        max-width: 10rem !important;
+    }
+  }
