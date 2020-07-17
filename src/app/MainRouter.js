@@ -11,18 +11,36 @@ import {
 /**
  * Componente responsável por definir as rotas principais da aplicação
  */
-function MainRouter() {
-    const usrLogged = getUser()
-    console.log("MainRouter usrLogged", usrLogged)
+function MainRouter(props) {
+    console.log("MainRouter props", props)
     return (
         <Switch>
-            {(usrLogged === null) && <LoginPage /> }
+            <Route exact path="/login" component={LoginPage} />
 
-            <Route exact path="/home" component={props => HomePage(props)} />
-            <Route path="/sobre" component={props => AboutPage(props)} />
+            <PrivateRoute exact path="/home" component={props => HomePage(props)} />
+            <PrivateRoute path="/sobre" component={props => AboutPage(props)} />
 
-            <Route exact path="/" render={props => <Redirect to="/home" {...props} />} />
+            <PrivateRoute exact path="/" component={props => HomePage(props)} />
         </Switch>
+    )
+}
+
+/**
+ * Rota customizada que avalia se usuário está autenticado
+ */
+function PrivateRoute(props) {
+    const isUserLogged = getUser()
+    console.log("PrivateRoute isUserLogged", isUserLogged)
+
+    const { component: Component, ...rest } = props
+    return (
+        <Route {...rest} 
+            render={ props => (
+                (isUserLogged) 
+                    ? <Component {...props} />
+                    : <Redirect to="/login" />
+            )} 
+        />
     )
 }
 

@@ -3,30 +3,37 @@ import { Container } from 'react-bootstrap'
 
 import FormBuilder from '../components/FormBuilder'
 import AlertCustom from '../components/AlertCustom'
-import { setAuthUser, validateUser } from '../services/AuthenticationService'
+import { setAuthUser, validateUser, getUser } from '../services/AuthenticationService'
+import { Redirect } from 'react-router-dom'
 
 /**
  * Tela para login dos usuários estudante e profissional de biblioteca
  */
-function Login() {
+function Login(props) {
 
+    // STATE
     const [userName, setUserName] = useState('')
     const [pwd, setPwd] = useState('')
 
+    // Se já estiver logado, redireciona a home
+    const isUsrLgd = getUser()
+    if (isUsrLgd) return <Redirect to={"/home"} />
+
     /** Envia os dados de login */
     const doLogin = () => {
-        if (userName.length === 0 && pwd.length === 0) return
+        const completed = (userName.length > 0 && pwd.length > 0)
+        if (!completed) return
         
         const userValid = validateUser(userName)
-        console.log('+++ validateUser', {userValid, userName, pwd})
-
         if (!userValid) {
             AlertCustom.show(true, 'Usuário e senha inválidos!', 'danger')
             return
         }
 
+        AlertCustom.show(true, `Seja bem-vindo(a) ${userValid.name}!`, 'success')
         setAuthUser(userValid)
-        window.history.pushState(null, null, '/')
+
+        props.history.push("/home")
     }
   
     // Objeto com propriedades do formulário de login
