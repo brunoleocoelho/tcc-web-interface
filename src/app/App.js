@@ -9,6 +9,7 @@ import { getNavbarData } from '../services/InterfaceService'
 import booksFull from '../assets/data/books.json';
 
 import Header from '../components/Header';
+import AlertCustom from '../components/AlertCustom';
 
 // Armazenando MOCK-UP DE LIVROS
 storeAllBooks(booksFull)
@@ -27,6 +28,8 @@ function App() {
                 <Header />
                 <MainRouter />
             </BrowserRouter>
+            
+            <AlertCustom />
         </div>
     );
 }
