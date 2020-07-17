@@ -1,0 +1,23 @@
+[
+    {
+        "id": "000001",
+        "userName": "bruno.coelho",
+        "name": "Bruno",
+        "lastName": "Coelho",
+        "role": "estudante"
+    },
+    {
+        "id": "000002",
+        "userName": "joao.silva",
+        "name": "João",
+        "lastName": "Silva",
+        "role": "estudante"
+    },
+    {
+        "id": "000003",
+        "userName": "maria.pereira",
+        "name": "Maria",
+        "lastName": "Pereira",
+        "role": "bibliotecária"
+    }
+]
