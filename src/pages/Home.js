@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import { getAllBooks } from '../services/StorageService'
+import { setTitleBarText } from '../services/InterfaceService';
 import ToastCustom from '../components/ToastCustom';
 import BookCard from '../components/BookCard';
 import BookFilters from '../components/BookFilters';
@@ -9,6 +10,7 @@ import BookFilters from '../components/BookFilters';
  * Representa a página inicial
  */
 function Home() {
+    setTitleBarText('Home')
     const { books } = getAllBooks()
 
     return (

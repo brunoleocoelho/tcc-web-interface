@@ -5,7 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
 
 import { storeAllBooks } from '../services/StorageService'
-import { getNavbarData } from '../services/InterfaceService'
+import { setTitleBarText } from '../services/InterfaceService'
 import booksFull from '../assets/data/books.json';
 
 import Header from '../components/Header';
@@ -15,8 +15,7 @@ import AlertCustom from '../components/AlertCustom';
 storeAllBooks(booksFull)
 
 // Atualizando título da página
-var tituloPrincipal = document.getElementById('titulo-principal');
-tituloPrincipal.innerHTML = getNavbarData().title;
+setTitleBarText()
 
 /**
  * Componente inicial que encapsula toda a aplicação

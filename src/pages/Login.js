@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 
 import FormBuilder from '../components/FormBuilder'
 import AlertCustom from '../components/AlertCustom'
 import { setAuthUser, validateUser, getUser } from '../services/AuthenticationService'
-import { Redirect } from 'react-router-dom'
+import { setTitleBarText } from '../services/InterfaceService'
 
 /**
  * Tela para login dos usuários estudante e profissional de biblioteca
  */
 function Login(props) {
+    setTitleBarText('Login')
 
     // STATE
     const [userName, setUserName] = useState('')
@@ -33,7 +35,7 @@ function Login(props) {
         AlertCustom.show(true, `Seja bem-vindo(a) ${userValid.name}!`, 'success')
         setAuthUser(userValid)
 
-        props.history.push("/home")
+        props.history.replace("/home")
     }
   
     // Objeto com propriedades do formulário de login
