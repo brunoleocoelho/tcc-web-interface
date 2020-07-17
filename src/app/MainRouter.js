@@ -1,6 +1,7 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 
+import { getUser } from '../services/AuthenticationService'
 import { 
     HomePage, 
     AboutPage, 
@@ -11,11 +12,17 @@ import {
  * Componente responsável por definir as rotas principais da aplicação
  */
 function MainRouter() {
+    const usrLogged = getUser()
+    console.log("MainRouter usrLogged", usrLogged)
     return (
-        <React.Fragment>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/sobre" component={AboutPage} />
-        </React.Fragment>
+        <Switch>
+            {(usrLogged === null) && <LoginPage /> }
+
+            <Route exact path="/home" component={props => HomePage(props)} />
+            <Route path="/sobre" component={props => AboutPage(props)} />
+
+            <Route exact path="/" render={props => <Redirect to="/home" {...props} />} />
+        </Switch>
     )
 }
 
