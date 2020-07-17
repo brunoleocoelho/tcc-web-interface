@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { getAllCategories, getSelectedCategories, storeSelectedCategories } from '../../services/CategoryService'
 import Separator from './Separator'

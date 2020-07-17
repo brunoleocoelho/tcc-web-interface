@@ -22,18 +22,16 @@ function Header() {
         expanded={isNavShown}
         onToggle={e => setIsNavShown(e)}
         >
-        <Container className="d-flex justify-content-start">
-            
+            <Container className="d-flex justify-content-start">
+                <NavToggle />
 
-            <NavToggle />
+                <NavBrand />
+                
+                <NavCollapse />
+                
+                <NavSearch />
 
-            <NavBrand />
-            
-            <NavCollapse />
-            
-            <NavSearch />
-
-        </Container>
+            </Container>
         </Navbar>
     )
 }
@@ -49,30 +47,6 @@ function NavToggle() {
             <i className="fa fa-bars"></i>
         </Navbar.Toggle>
     )
-}
-
-// ESTILOS CUSTOMIZADOS
-const styles = {
-    grow: {
-        flexGrow: 1,
-    },
-    navBrandText: {
-        fontSize: 22,
-    },
-    navLink: {
-        fontSize: '12pt',
-    },
-    inputCol: {
-        flexGrow:1
-    },
-    btnRegular: {
-        position: 'absolute',
-        right: 0,
-        top: 8,
-    },
-    btnShowInput : {
-        display: 'none'
-    },
 }
 
 export default Header

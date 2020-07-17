@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Container, Button, Row, Col, Form } from 'react-bootstrap';
+import React from 'react'
+import { Container, Button, Row, Col } from 'react-bootstrap';
 import { getAllBooks } from '../services/StorageService'
 import ToastCustom from '../components/ToastCustom';
 import BookCard from '../components/BookCard';
@@ -51,12 +51,6 @@ function HomeHeader() {
             </Container>
         </div>
     )
-}
-
-
-// ESTILOS
-const styles = {
-    headerHome: {}
 }
 
 export default Home

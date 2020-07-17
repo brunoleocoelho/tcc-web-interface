@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Form, Button, Row } from 'react-bootstrap'
+import { Container, Form, Button } from 'react-bootstrap'
 
 // tipos de campos e componentes aceitos
 const fieldTypes = [
@@ -25,7 +25,6 @@ function FormBuilder({ formProps }) {
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         const isFormValid = form.checkValidity()
-        console.log('=== handleSubmit', {isFormValid, event})
 
         event.preventDefault();
         if (isFormValid === false) {
