@@ -6,6 +6,7 @@ import FormBuilder from '../components/FormBuilder'
 import AlertCustom from '../components/AlertCustom'
 import { setAuthUser, validateUser, getUser } from '../services/AuthenticationService'
 import { setTitleBarText } from '../services/InterfaceService'
+import LibraryBackground from '../components/LibraryBackground'
 
 /**
  * Tela para login dos usuários estudante e profissional de biblioteca
@@ -84,30 +85,12 @@ function Login(props) {
 
     return (
         <Container className="py-3">
-            <div style={styles.bgStyle}></div>
+            <LibraryBackground />
             <FormBuilder formProps={formProps} />
 
             {/* <AlertCustom isShow={alertShow} message={erroMsg} type="danger" /> */}
         </Container>
     )
-}
-
-// ESTILOS
-const bgImg = require('../assets/img/library.jpg')
-const styles = {
-    bgStyle: {
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        content: "",
-        position: 'absolute',
-        backgroundImage: `url(${bgImg})`,
-        backgroundSize: 'cover',
-        backgroundAttachment: 'fixed',
-        opacity: 0.9,
-        filter: 'blur(4px)'
-    }
 }
 
 export default Login

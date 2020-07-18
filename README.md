@@ -2,7 +2,7 @@
 
 ## Resumo
 
-Projeto de interface de aplicação web de aplicação de biblioteca acadêmica para o Trabalho de Conclusão de Curso (TCC) de Tecnólogo em Tecnologia da Informação e Comunicação da FAETERJ Petrópolis (Faculdade de Educação Tecnológica do Estado do Rio de Janeiro, desenvolvido por Bruno Coelho com React.
+Projeto de interface web de aplicação de biblioteca acadêmica para o Trabalho de Conclusão de Curso (TCC) de Tecnólogo em Tecnologia da Informação e Comunicação da FAETERJ Petrópolis (Faculdade de Educação Tecnológica do Estado do Rio de Janeiro, desenvolvido por Bruno Coelho com React.
 
 
 ## Requisitos do projeto
