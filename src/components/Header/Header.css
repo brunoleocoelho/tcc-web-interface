@@ -2,3 +2,21 @@
 /* .search-input-col {
     transition: visibility 1s !important;
 } */
+
+/* máx.tamanho 'sm' */
+@media (max-width: 575.98px) {
+    #icon-ddi.menu-max-sm-width {
+        align-self: baseline;
+        margin-bottom: auto;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    #icon-ddi.mr-md-05r-n {
+        margin-right: -.5rem !important;
+    }
+    #icon-ddi.mb-md-05r-n {
+        margin-bottom: -.5rem;
+    }
+}

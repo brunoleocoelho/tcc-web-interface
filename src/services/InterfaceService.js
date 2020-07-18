@@ -1,4 +1,4 @@
-import { unsetAuthUser } from "./AuthenticationService";
+import { unsetAuthUser, getUser } from "./AuthenticationService";
 
 /**
  * Atualiza o título da página concateca 
@@ -18,17 +18,29 @@ function setTitleBarText(sufix = '') {
  * Função que retorna titulo e menus para as páginas
  */
 function getNavbarData() {
-    const headerData = {
-        title: 'Biblioteca',
-        items: [
-            { label: 'Livros', path: '/', icon: 'book' },
-            { label: 'Autores', path: '/', icon: 'users' },
-            { label: 'Estante', path: '/', icon: 'bookmark' },
-            { label: 'Sobre', path: '/sobre', icon: 'question' },
-            { label: 'Logoff', path: null, onClick: unsetAuthUser, icon: 'sign-out' },
-        ]
-    }
+    const title = 'Biblioteca'
+    const user = getUser() 
+
+    const items = [
+        { label: 'Livros', path: '/', icon: 'book', elemtype: 'link' },
+        { label: 'Autores', path: '/', icon: 'users', elemtype: 'link'  },
+        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link'  },
+
+        { label: ((user && user.name) || 'Usuário'), icon: 'user', elemtype: 'dropdown', items: [
+            { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
+            { label: '', elemtype:'divider' },
+            { label: 'Logoff', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
+        ] },
+    ]
+
+    const headerData = { title, items }
     return headerData;
+}
+
+/** Efeuta o logoff da aplicação redirecionando a tela de login */
+function doLogout() {
+    unsetAuthUser()
+    window.history.pushState(null, null, '/login')
 }
 
 export {

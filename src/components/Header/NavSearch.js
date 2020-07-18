@@ -18,12 +18,13 @@ function NavSearch() {
         setShowInput(!showInput)
     }
     
+    // componentDidUpdate
     useEffect(() => {
         if (!showInput) inputRef.current.focus()
     }, [showInput])
 
     // Em telas maiores que sm, input é mostrado, e botão de busca é oculto
-    // Em telas menoresde modo que o exibindo, a busca pode ser efetuada
+    // Em telas menores de modo que o exibindo, a busca pode ser efetuada
     const containerCss = [
         'm-0 order-2 order-lg-3 position-static',
         (showInput ? 'col-12' : ''),
