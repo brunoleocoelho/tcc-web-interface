@@ -12,7 +12,7 @@ import {
  * Componente responsável por definir as rotas principais da aplicação
  */
 function MainRouter(props) {
-    console.log("MainRouter props", props)
+    // console.log("MainRouter props", props)
     return (
         <Switch>
             <Route exact path="/login" component={LoginPage} />
@@ -29,15 +29,15 @@ function MainRouter(props) {
  * Rota customizada que avalia se usuário está autenticado
  */
 function PrivateRoute(props) {
-    const isUserLogged = getUser()
-    console.log("PrivateRoute isUserLogged", isUserLogged)
+    const userLogged = getUser()
+    // console.log("PrivateRoute userLogged", {props, userLogged})
 
     const { component: Component, ...rest } = props
     return (
         <Route {...rest} 
             render={ props => (
-                (isUserLogged) 
-                    ? <Component {...props} />
+                (userLogged) 
+                    ? <Component {...props} user={userLogged} />
                     : <Redirect to="/login" />
             )} 
         />

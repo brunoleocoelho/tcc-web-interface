@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+
 import { Navbar, Container } from 'react-bootstrap'
 import NavCollapse from './NavCollapse'
 import NavBrand from './NavBrand'
@@ -7,29 +9,43 @@ import NavSearch from './NavSearch'
 /** 
  * Menu header principal do topo da página
  */
-function Header() {
+function Header(props) {
+    // PROPS
+    const{ pathname } = props.location
+
     // STATE
     const [isNavShown, setIsNavShown] = useState(false)
+    const [isLoginPage, setIsLoginPage] = useState((pathname === '/login'))
+
+    useEffect(() => {
+        setIsLoginPage((pathname === '/login'))
+    }, [ pathname ])
 
     // 5 breakpoint sizes (xs, sm, md, large, and xl)
     return (
         <Navbar 
-        sticky="top" 
-        expand="md" 
-        bg="dark" 
-        variant="dark" 
-        collapseOnSelect
-        expanded={isNavShown}
-        onToggle={e => setIsNavShown(e)}
+            sticky="top" 
+            expand="md" 
+            bg="dark" 
+            variant="dark" 
+            collapseOnSelect
+            expanded={isNavShown}
+            onToggle={e => setIsNavShown(e)}
         >
             <Container className="d-flex justify-content-start">
-                <NavToggle />
+                
+                { (isLoginPage) 
+                    ? <NavBrand />
+                    : (<>
+                        <NavToggle />
 
-                <NavBrand />
+                        <NavBrand />
+                        <NavCollapse />
+                        <NavSearch />
+                    </>)
+                }
                 
-                <NavCollapse />
-                
-                <NavSearch />
+
 
             </Container>
         </Navbar>
@@ -49,7 +65,7 @@ function NavToggle() {
     )
 }
 
-export default Header
+export default withRouter(Header)
 
 
 /** Atua na busca de livros na API */

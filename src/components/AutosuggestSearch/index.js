@@ -19,6 +19,7 @@ function AutosuggestSearch({ value, placeholder, onChangeText, closeAction, inpu
                 <i className="fa fa-close" />
             </Button>
 
+            {/* class="form-control" */}
             <FormControl 
                 ref={inputRef}
                 type="text" 
