@@ -43,7 +43,7 @@ function AuthorFilter() {
     // Array de actions para os botões
     const actions = [
         { label: "Limpar", onClick: cleanAllChecked },
-        { label: "Selc.Todos", onClick: checkAllOptions },
+        { label: "Sel.Todos", onClick: checkAllOptions },
     ]
 
     return (
