@@ -55,9 +55,17 @@ function doLogout() {
     window.history.pushState(null, null, '/login')
 }
 
+
+/** Retorna avisos a serem mostrados na tela de login */
+function getLoginNews() {
+    const avisos = require('../assets/data/avisos.json')
+    return avisos
+}
+
 export {
     getNavbarData,
     setTitleBarText,
     exceptionPages,
-    doLogout
+    doLogout,
+    getLoginNews
 }

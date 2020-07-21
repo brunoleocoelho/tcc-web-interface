@@ -17,7 +17,7 @@ const styles = {
         left: 0,
         right: 0,
         content: "",
-        position: 'absolute',
+        position: 'fixed',
         backgroundImage: `url(${bgImg})`,
         backgroundSize: 'cover',
         backgroundAttachment: 'fixed',

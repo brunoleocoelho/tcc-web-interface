@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import FormBuilder from '../components/FormBuilder'
 import AlertCustom from '../components/AlertCustom'
 import { setAuthUser, validateUser, getUser } from '../services/AuthenticationService'
-import { setTitleBarText } from '../services/InterfaceService'
+import { setTitleBarText, getLoginNews } from '../services/InterfaceService'
 import LibraryBackground from '../components/LibraryBackground'
 
 /**
@@ -42,7 +42,7 @@ function Login(props) {
     // Objeto com propriedades do formulário de login
     const formProps = {
         title: 'Login de usuário',
-        classes: 'p-3 col-md-6 col-lg-4 mx-auto mx-lg-0 ml-lg-auto',
+        classes: 'p-3 ',
         style: { 
             border: '1px solid lightgrey', 
             borderRadius: 4,
@@ -86,9 +86,39 @@ function Login(props) {
     return (
         <Container className="py-3">
             <LibraryBackground />
-            <FormBuilder formProps={formProps} />
 
-            {/* <AlertCustom isShow={alertShow} message={erroMsg} type="danger" /> */}
+            <Row>
+                <Col className="py-2 p-md-2 col-12 col-md-6 col-lg-8 order-2 order-md-1" >
+                   <LoginNewsBoard />
+                </Col>
+                <Col className='py-2 p-md-2 col-md-6 col-lg-4 order-1 order-md-2'>
+                    <FormBuilder formProps={formProps} />
+                </Col>
+
+            </Row>
+        </Container>
+    )
+}
+
+/** Componente que serve para exibição de notícias na pagina de login */
+function LoginNewsBoard() {
+    const avisos = getLoginNews()
+
+    return (
+        <Container className="p-3 bg-light rounded-sm">
+            <h4 className="text-center">Notícias</h4>
+            { !avisos
+                ? (<h3>Não há avisos a serem exibidos</h3>)
+                : (
+                    avisos.map(noticia => (
+                        <div>
+                            <hr/>
+                            <h5>{ noticia.titulo }</h5>
+                            <p className="text-justify" dangerouslySetInnerHTML={{ __html: noticia.conteudo }}></p>
+                        </div>
+                    ))
+                )
+            }
         </Container>
     )
 }

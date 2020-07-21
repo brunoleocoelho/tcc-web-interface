@@ -131,7 +131,7 @@ function TextInputForm({ id, label, placeholder, type, description, onChange, fe
             }) }
 
             { description && 
-                <Form.Text className="text-muted">
+                <Form.Text className="text-justify text-muted">
                     { description }
                 </Form.Text>
             }
