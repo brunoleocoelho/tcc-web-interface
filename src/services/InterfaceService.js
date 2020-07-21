@@ -22,8 +22,7 @@ function getNavbarData() {
     const user = getUser() 
 
     const items = [
-        { label: 'Livros', path: '/', icon: 'book', elemtype: 'link' },
-        { label: 'Autores', path: '/', icon: 'users', elemtype: 'link'  },
+        { label: 'Livros', path: '/livros', icon: 'book', elemtype: 'link' },
         { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link', showNotLogged: true  },
 
         { label: ((user && user.name) || 'Usuário'), icon: 'user', elemtype: 'dropdown', items: [

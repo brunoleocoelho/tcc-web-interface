@@ -2,14 +2,13 @@ import React from 'react'
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import { getAllBooks } from '../services/StorageService'
 import { setTitleBarText } from '../services/InterfaceService';
-import ToastCustom from '../components/ToastCustom';
 import BookCard from '../components/BookCard';
 import BookFilters from '../components/BookFilters';
 
 /**
- * Representa a página inicial
+ * Representa a página de seleção e filtro de livros
  */
-function Home() {
+function Livros() {
     setTitleBarText('Home')
     const { books } = getAllBooks()
 
@@ -17,13 +16,7 @@ function Home() {
         <React.Fragment>
             <div className="p-3 bg-light">
                 <Container>
-                    <h3> Biblioteca Acadêmica </h3>
-
-                    <Button variant="success" href="/sobre">Sobre este site</Button>
-
-                    <ToastCustom>
-                        Hello Bootstrap Toast from Home!!!
-                    </ToastCustom>
+                    <h3> Biblioteca Acadêmica - Livros disponíveis </h3>
                 </Container>
             </div>
 
@@ -48,4 +41,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Livros
