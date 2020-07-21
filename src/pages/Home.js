@@ -18,7 +18,7 @@ function Home() {
             <HomeHeader />
 
             <Container fluid>
-                <Row>
+                <Row className="p-1">
                     <Col md={3} xl={2}>
                         <BookFilters />
                     </Col>
@@ -43,7 +43,7 @@ function HomeHeader() {
     return (
         <div className="p-3 bg-light">
             <Container>
-                <h2> Biblioteca Acadêmica </h2>
+                <h3> Biblioteca Acadêmica </h3>
 
                 <Button variant="success" href="/sobre">Sobre este site</Button>
 

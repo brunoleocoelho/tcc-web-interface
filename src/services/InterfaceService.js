@@ -24,12 +24,12 @@ function getNavbarData() {
     const items = [
         { label: 'Livros', path: '/', icon: 'book', elemtype: 'link' },
         { label: 'Autores', path: '/', icon: 'users', elemtype: 'link'  },
-        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link'  },
+        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link', showNotLogged: true  },
 
         { label: ((user && user.name) || 'Usuário'), icon: 'user', elemtype: 'dropdown', items: [
             { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
             { label: '', elemtype:'divider' },
-            { label: 'Logoff', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
+            { label: 'Sair', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
         ] },
     ]
 
@@ -37,7 +37,20 @@ function getNavbarData() {
     return headerData;
 }
 
-/** Efeuta o logoff da aplicação redirecionando a tela de login */
+/**
+ * Retorna as páginas que podem ser exeibidas mesmo
+ * que não tenha sido feito login
+ */
+function exceptionPages() {
+    const { items } = getNavbarData()
+
+    const showNotLogged = items.filter( item => item.showNotLogged )
+    return showNotLogged
+}
+
+/**
+ * Efeuta o logoff da aplicação e redireciona a tela de login
+ */
 function doLogout() {
     unsetAuthUser()
     window.history.pushState(null, null, '/login')
@@ -45,5 +58,7 @@ function doLogout() {
 
 export {
     getNavbarData,
-    setTitleBarText
+    setTitleBarText,
+    exceptionPages,
+    doLogout
 }

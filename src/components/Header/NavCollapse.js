@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap'
 import { getNavbarData } from '../../services/InterfaceService'
+import { themes } from '../../services/Contants'
 
 import './Header.css'
 
@@ -8,22 +9,26 @@ import './Header.css'
  * Renderiza a lista de menus da Navbar que
  * pode ser 'collapsed' conforme tamanho de tela
  */
-function NavCollapse() {
-    const { items } = getNavbarData()
-
+function NavCollapse(props) {
+    const { isLoginPage, theme } = props
+    
+    let { items } = getNavbarData()
+    
     return (
-        <Navbar.Collapse id="responsive-navbar-nav" className="mx-2 order-2">
+        <Navbar.Collapse id="responsive-navbar-nav" className="mx-2 order-2" >
             <Nav className="ml-auto flex-sm-row justify-content-sm-between">
                 { items && (items.map(item => {
                     const key = `nav-${item.label.replace(' ', '').toLowerCase()}`
 
+                    if (isLoginPage && (!item.showNotLogged)) return null
+
                     switch (item.elemtype) {
                         case 'dropdown':
-                            return <NavItemDropdown key={key} {...item} />
+                            return <NavItemDropdown key={key} {...item} theme={theme} />
 
                         // case 'link':
                         default:
-                            return <NavItemLink key={key} {...item} />
+                            return <NavItemLink key={key} {...item} theme={theme} />
                     }
                 })) }
             </Nav>
@@ -34,7 +39,7 @@ function NavCollapse() {
 /**
  * Renderiza um item tipo dropdown do menu da navbar
  */
-function NavItemDropdown({ label, items, icon, ...rest }) {
+function NavItemDropdown({ label, items, icon, theme, ...rest }) {
     // SATE
     const [isOpen, setIsOpen] = useState(false)
 
@@ -48,9 +53,10 @@ function NavItemDropdown({ label, items, icon, ...rest }) {
 
     const classIconSpan = [
         'mr-0 mr-md-05r-n mb-md-05r-n mb-lg-0',
-        (isOpen ? 'menu-max-sm-width' : '' )
+        (isOpen ? 'menu-max-sm-width' : '' ),
+        // (theme === 'dark' ? 'bg-dark text-light': '')
     ].join(' ')
-
+    
     return (
         <Nav.Item className={classNavItem} style={styles.navItemDD}>
 
@@ -58,15 +64,15 @@ function NavItemDropdown({ label, items, icon, ...rest }) {
                 <span 
                     id="icon-ddi" 
                     className={classIconSpan} 
-                    style={(isOpen ? styles.navDdIcon : {})}
+                    style={styles.navTheme[theme]}
                 >
                     <i className={`fa fa-fw fa-${icon}`}></i>
                 </span>
             )}
             
             <NavDropdown 
-                style={styles.navDd}
                 className="p-0 absolute d-md-flex"
+                style={{...styles.navDd, ...styles.navTheme[theme]}}
                 title={label}
                 id={id} 
                 active
@@ -107,13 +113,19 @@ function NavItemDropdown({ label, items, icon, ...rest }) {
 /**
  * Renderiza um item do menu da navbar
  */
-function NavItemLink({ label, path, icon, ...rest }) {
+function NavItemLink({ label, path, icon, theme, ...rest }) {
+    const customStyle = {...styles.navLink, ...styles.navTheme[theme]}
+    
+    // removendo propriedades não aceitas pelo Nav.Link
+    const rmUnsetProps = ({showNotLogged, ...rest}) => rest
+    const otherProps = rmUnsetProps(rest)
+    
     return (
         <Nav.Link 
+        style={customStyle}
             className="text-md-center my-auto"
-            style={styles.navLink}
             href={path} 
-            {...rest}
+            {...otherProps}
         >
             {icon && <i className={'fa fa-fw fa-' + icon}></i>}
             <span>{ label }</span>
@@ -131,11 +143,9 @@ const styles = {
         flexGrow: 1
     },
     navItemDD: {
-        // display: 'flex',
-        // flexDirection: 'row',
         alignItems: 'center',
-        color: '#ffffff80'
     },
+    navTheme: {...themes}
 }
 
 export default NavCollapse

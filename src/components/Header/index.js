@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 
+// import HeaderContext, { HeaderContextProvider } from './HeaderContext'
 import { Navbar, Container } from 'react-bootstrap'
 import NavCollapse from './NavCollapse'
 import NavBrand from './NavBrand'
@@ -16,9 +17,12 @@ function Header(props) {
     // STATE
     const [isNavShown, setIsNavShown] = useState(false)
     const [isLoginPage, setIsLoginPage] = useState((pathname === '/login'))
+    const [theme, setTheme] = useState('dark')
 
+    // componentDidUpdate
     useEffect(() => {
-        setIsLoginPage((pathname === '/login'))
+        const isLgIn = (pathname === '/login')
+        setIsLoginPage(isLgIn)
     }, [ pathname ])
 
     // 5 breakpoint sizes (xs, sm, md, large, and xl)
@@ -26,8 +30,8 @@ function Header(props) {
         <Navbar 
             sticky="top" 
             expand="md" 
-            bg="dark" 
-            variant="dark" 
+            bg={theme} 
+            variant={theme} 
             collapseOnSelect
             expanded={isNavShown}
             onToggle={e => setIsNavShown(e)}
@@ -35,18 +39,18 @@ function Header(props) {
             <Container className="d-flex justify-content-start">
                 
                 { (isLoginPage) 
-                    ? <NavBrand />
+                    ? (<>
+                        <NavBrand />
+                        <NavCollapse isLoginPage theme={theme} {...props} />
+                    </>)
                     : (<>
                         <NavToggle />
-
                         <NavBrand />
-                        <NavCollapse />
-                        <NavSearch />
+                        <NavCollapse theme={theme}/>
+                        <NavSearch theme={theme}/>
                     </>)
                 }
                 
-
-
             </Container>
         </Navbar>
     )

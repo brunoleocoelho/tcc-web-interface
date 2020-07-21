@@ -11,15 +11,15 @@ function AutosuggestSearch({ value, placeholder, onChangeText, closeAction, inpu
     return (
         <React.Fragment>
             
-            <Button variant="light" 
-                className="mr-1 d-md-none"
+            <Button /* variant="light"  */
+                className="d-md-none"
                 style={styles.btnClose} 
                 onClick={closeAction}
             >
                 <i className="fa fa-close" />
             </Button>
 
-            {/* class="form-control" */}
+            {/* o mesmo que imput class="form-control" */}
             <FormControl 
                 ref={inputRef}
                 type="text" 
@@ -36,7 +36,11 @@ function AutosuggestSearch({ value, placeholder, onChangeText, closeAction, inpu
 const styles = {
     btnClose: {
         position:'absolute', 
-        right:0,
+        right: 2,
+        margin: '2px 4px',
+        border: 'none',
+        backgroundColor: 'white',
+        color: 'gray'
     }
 }
 

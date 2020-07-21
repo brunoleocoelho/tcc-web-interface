@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Form, Col, Button } from 'react-bootstrap'
 import AutosuggestSearch from '../AutosuggestSearch'
 
-function NavSearch() {
+function NavSearch(props) {
+    // PROPS
+    const { theme } = props
+
+    // STATE
     const [showInput, setShowInput] = useState(false)
     const [term, setTerm] = useState('')
 
@@ -47,7 +51,7 @@ function NavSearch() {
                 <Form.Row>
                     <Col xs={2} className={btnColCss} style={btnColStyle}>
                         <Button 
-                            variant="dark" 
+                            variant={theme} 
                             onClick={handleShowInput}
                         >
                             <i className="fa fa-search"></i>
