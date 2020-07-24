@@ -29,11 +29,21 @@ function Login(props) {
         
         const userValid = validateUser(userName)
         if (!userValid) {
-            AlertCustom.show(true, 'Usuário e senha inválidos!', 'danger')
+            AlertCustom.show({
+                show: true, 
+                message: 'Usuário e senha inválidos!', 
+                icon: 'frown-o',
+                type: 'danger'
+            })
             return
         }
 
-        AlertCustom.show(true, `Seja bem-vindo(a) ${userValid.name}!`, 'success')
+        AlertCustom.show({
+            show: true, 
+            message: `Seja bem-vindo(a) ${userValid.name}!`,
+            icon: 'smile-o',
+            type: 'success'
+        })
         setAuthUser(userValid)
 
         props.history.replace("/home")
@@ -55,6 +65,7 @@ function Login(props) {
                 placeholder: 'Digite o nome de usuário',
                 description: 'Utilize o e-mail institucional da FAETERJ Petrópolis.',
                 type: 'text',
+                autocapitalize: 'off',
                 value: userName,
                 required: true,
                 feedback: { invalid: 'Nome de usuário obrigatório.' },
@@ -78,7 +89,8 @@ function Login(props) {
                 label: 'Entrar',
                 style: 'success',
                 block: true,
-                onClick: doLogin
+                onClick: doLogin,
+                disabled: !(userName.length > 0 && pwd.length > 0)
             }
         ]
     }

@@ -21,7 +21,8 @@ function AlertCustom() {
     // Se 'alertState' null, não renderizar
     if (!alertState) return null;
 
-    const { show, message, type, title, onCloseAction, closeable } = alertState
+    const { show, message, type, title, icon, onCloseAction, closeable } = alertState
+    
     return ( 
         <Alert 
             show={show} 
@@ -31,9 +32,17 @@ function AlertCustom() {
             style={styles.alertStyle}
             transition
         >
-            { title && <Alert.Heading>{ title }</Alert.Heading> }
+            { title && (
+                <Alert.Heading>
+                    { title }
+                </Alert.Heading>) 
+            }
             
-            <p>{ message || 'TESTE' }</p>
+            <p>
+                {icon && <i className={`fa fa-${icon}`}></i>}
+                &nbsp;
+                { message || 'TESTE' }
+            </p>
         </Alert>
     )
 }
@@ -42,14 +51,15 @@ function AlertCustom() {
  * Atua na exibição do AlertCustom 
  * @param {boolean} show 
  * @param {string} message 
+ * @param {string} icon Fontawesome icon
  * @param {'success'|'danger'|'warning'|'info'} type 
  * @param {string} title 
  * @param {function} onCloseAction 
  * @param {boolean} closeable 
  */
-AlertCustom.show = function(show, message, type, title = null, onCloseAction, closeable = false) {
+AlertCustom.show = function({show, message, icon, type, title = null, onCloseAction, closeable = false}) {
     changeAlertState({
-        show, message, type, title, onCloseAction, closeable
+        show, message, icon, type, title, onCloseAction, closeable
     })
 
     setTimeout(() => {
@@ -67,9 +77,9 @@ const styles = {
         position: 'absolute',
         width: 'fit-content',
         margin: 'auto',
-        bottom: 20,
-        right: 0,
-        left: 0,
+        boxShadow: '4px 4px 12px lightgrey',
+        bottom: 12,
+        right: 12,
         zIndex: 9999,
     }
 }
