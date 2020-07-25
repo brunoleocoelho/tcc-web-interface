@@ -40,11 +40,18 @@ function Home(props) {
     return (
         <Container className="p-0" fluid>
 
-            <UserSummaryHeader />
+            <div className="d-none d-md-block" >
+                <UserSummaryHeader key="user-summary-1" />
+            </div>
             
             <Row className="m-0 text-md-left">
 
+                {/* SIDE MENU COLLAPSE AND COL-MD-2 */}
                 <div className={`side-menu p-2 col-md-2 ${showSide ? 'side-hide' : ''}`}>
+                    <div className="d-block d-md-none" >
+                        <UserSummaryHeader key="user-summary-2" />
+                    </div>
+
                     <Button 
                         variant="outline" 
                         title="fechar" 
@@ -70,6 +77,7 @@ function Home(props) {
                     </Nav>
                 </div>
 
+                {/* MAIN HOME DASHBOARD */}
                 <div className="p-2 text-md-left col">
                     <Button 
                         variant="outline" 

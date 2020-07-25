@@ -46,7 +46,7 @@ function SectionSubject(props) {
     return (
         <Col xs={12} lg={6} className="p-0 mb-2 sectionContainer">
         
-            <Row className="p-2 m-0 text-light section-title" style={titStyle}>
+            <Row className="p-2 m-0 section-title" style={titStyle}>
                 
                 <ButtonGroup aria-label="Layout change" className="subject-layout-icon" >
                     { dispOptions.map( opt => {
@@ -56,7 +56,7 @@ function SectionSubject(props) {
                             <Button 
                                 key={keyBtn}
                                 size="sm"
-                                className="text-light"
+                                className=""
                                 disabled={isActive ? true : false}
                                 variant="outline"
                                 active={isActive}
