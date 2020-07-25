@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap'
 import { getNavbarData } from '../../services/InterfaceService'
-import { themes } from '../../services/Contants'
+import { themes } from '../../services/Constants'
 
 import './Header.css'
 

@@ -1,10 +1,7 @@
 import React from 'react'
-import { Row, Badge } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import { getAllBooks } from '../../services/StorageService'
-import UltmosLivros from './UltmosLivros'
-import EntregaLivros from './EntregaLivros'
 import SectionSubject from './SectionSubject'
-import SectionBook from './SectionBook'
 
 /**
  * Componente que renderiza um pequeno dashboard
@@ -46,9 +43,6 @@ function UserDashboardSection() {
                         />
                     )
                 }) }
-
-                {/* <UltmosLivros />
-                <EntregaLivros /> */}
             </Row>
         </>
     )

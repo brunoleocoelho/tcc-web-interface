@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Button } from 'react-bootstrap';
-import { setTitleBarText } from '../services/InterfaceService';
-import LibraryBackground from '../components/LibraryBackground';
+import { setTitleBarText } from '../../services/InterfaceService';
+import LibraryBackground from '../../components/LibraryBackground';
 
 
 /**

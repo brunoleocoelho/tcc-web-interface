@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container, Button, Row, Col } from 'react-bootstrap';
-import { getAllBooks } from '../services/StorageService'
-import { setTitleBarText } from '../services/InterfaceService';
-import BookCard from '../components/BookCard';
-import BookFilters from '../components/BookFilters';
+import { getAllBooks } from '../../services/StorageService'
+import { setTitleBarText } from '../../services/InterfaceService';
+import BookCard from '../../components/BookCard';
+import BookFilters from '../../components/BookFilters';
 
 /**
  * Representa a página de seleção e filtro de livros

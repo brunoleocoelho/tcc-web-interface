@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 
-import FormBuilder from '../components/FormBuilder'
-import AlertCustom from '../components/AlertCustom'
-import { setAuthUser, validateUser, getUser } from '../services/AuthenticationService'
-import { setTitleBarText, getLoginNews } from '../services/InterfaceService'
-import LibraryBackground from '../components/LibraryBackground'
+import FormBuilder from '../../components/FormBuilder'
+import AlertCustom from '../../components/AlertCustom'
+import { setAuthUser, validateUser, getUser } from '../../services/AuthenticationService'
+import { setTitleBarText, getLoginNews } from '../../services/InterfaceService'
+import LibraryBackground from '../../components/LibraryBackground'
 
 /**
  * Tela para login dos usuários estudante e profissional de biblioteca

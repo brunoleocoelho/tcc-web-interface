@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Container, Button, Row, Col, Badge, Navbar, Nav } from 'react-bootstrap';
-import { getAllBooks } from '../services/StorageService'
-import { setTitleBarText } from '../services/InterfaceService';
+import { Container, Button, Row, Nav } from 'react-bootstrap';
+
+import { setTitleBarText } from '../../services/InterfaceService';
 import { Redirect } from 'react-router-dom';
-import Avatar from '../components/Avatar';
-import UserSummaryHeader from '../components/UserSummaryHeader';
-import UserDashboardSection from '../components/UserDashboardSection';
+
+import UserSummaryHeader from '../../components/UserSummaryHeader';
+import UserDashboardSection from '../../components/UserDashboardSection';
 
 import './Home.css'
 
