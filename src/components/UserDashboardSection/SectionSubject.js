@@ -38,6 +38,13 @@ function SectionSubject(props) {
     const contentStyle = {
         ...(bodyStyle ? bodyStyle : {})
     }
+    const titleCont = {
+        alignItems:'center'
+    }
+    const iconStyle = {
+        fontSize: '1.4rem',
+        color: iconColor
+    }
 
     return (
         <Col xs={12} lg={6} className="p-0 mb-2 sectionContainer">
@@ -65,8 +72,8 @@ function SectionSubject(props) {
                     }) }
                 </ButtonGroup>
 
-                <div className="m-0 row" style={{alignItems:'center'}}>
-                    <i className={`fa fa-${icon}`} style={{color: iconColor}} ></i> 
+                <div className="m-0 row" style={titleCont}>
+                    <i className={`fa fa-${icon}`} style={iconStyle}></i> 
                     &nbsp;
                     <h5 className="m-0">
                         { title }
@@ -91,6 +98,5 @@ function SectionSubject(props) {
         </Col>
     )
 }
-
 
 export default SectionSubject

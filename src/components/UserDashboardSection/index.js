@@ -18,7 +18,7 @@ function UserDashboardSection() {
             items: [...books], note: ['há', 'dias'], variant: 'success'
         },
         { 
-            title:'Entregas', icon:'warning', iconColor: 'orange',
+            title:'Entregas', icon:'warning', iconColor: 'darkorange',
             items: [...books], note: ['em', 'dias'], variant: 'warning'
         },
         { 

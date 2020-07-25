@@ -14,6 +14,12 @@
     box-shadow: 2px 0px 10px;
 }
 
+.side-content {
+    overflow-y: scroll;
+    height: 85%;
+    margin-bottom: 1rem;
+}
+
 .side-hide {
     margin-left: 0 !important;
 }

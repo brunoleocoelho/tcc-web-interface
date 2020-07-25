@@ -48,33 +48,36 @@ function Home(props) {
 
                 {/* SIDE MENU COLLAPSE AND COL-MD-2 */}
                 <div className={`side-menu p-2 col-md-2 ${showSide ? 'side-hide' : ''}`}>
-                    <div className="d-block d-md-none" >
-                        <UserSummaryHeader key="user-summary-2" />
+
+                    <div className="side-content">
+                        <div className="d-block d-md-none" >
+                            <UserSummaryHeader key="user-summary-2" />
+                        </div>
+                        
+                        <Nav className="flex-column">
+                            { sideMenus.map((mn, idx) => {
+                                const key = `${idx}-${String(mn.title).replace(' ', '-')}`
+                                return (
+                                    <Nav.Link key={key} href={mn.href} className="p-2" >
+                                        <i className={`fa fa-${mn.icon}`}></i>
+                                        &nbsp;
+                                        { mn.title }
+                                    </Nav.Link>
+                                )
+                            })}
+                        </Nav>
                     </div>
 
                     <Button 
                         variant="outline" 
                         title="fechar" 
-                        className="side-btn-close mx-0 d-block d-md-none" 
+                        className="bg-light side-btn-close mx-0 d-block d-md-none" 
                         onClick={toggleSide} 
                     >
                         <i className="fa fa-close"></i>
                         &nbsp; 
                         Fechar
                     </Button>
-
-                    <Nav className="flex-column">
-                        { sideMenus.map((mn, idx) => {
-                            const key = `${idx}-${String(mn.title).replace(' ', '-')}`
-                            return (
-                                <Nav.Link key={key} href={mn.href} className="p-2" >
-                                    <i className={`fa fa-${mn.icon}`}></i>
-                                    &nbsp;
-                                    { mn.title }
-                                </Nav.Link>
-                            )
-                        })}
-                    </Nav>
                 </div>
 
                 {/* MAIN HOME DASHBOARD */}
