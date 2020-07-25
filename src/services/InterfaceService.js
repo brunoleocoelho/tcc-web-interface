@@ -21,9 +21,10 @@ function getNavbarData() {
     const title = 'Biblioteca'
     const user = getUser() 
 
+    // Formato: label: "", path: "", icon: "", elemtype: "", showNotLogged: false, items: []
     const items = [
         { label: 'Livros', path: '/livros', icon: 'book', elemtype: 'link' },
-        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link', showNotLogged: true  },
+        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link'/* , showNotLogged: true */  },
 
         { label: ((user && user.name) || 'Usuário'), icon: 'user', elemtype: 'dropdown', items: [
             { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },

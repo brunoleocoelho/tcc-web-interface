@@ -1,51 +1,102 @@
-import React from 'react'
-import { Container, Button, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react'
+import { Container, Button, Row, Col, Badge, Navbar, Nav } from 'react-bootstrap';
 import { getAllBooks } from '../services/StorageService'
 import { setTitleBarText } from '../services/InterfaceService';
-import ToastCustom from '../components/ToastCustom';
-import BookCard from '../components/BookCard';
-import BookFilters from '../components/BookFilters';
+import { Redirect } from 'react-router-dom';
+import Avatar from '../components/Avatar';
+import UserSummaryHeader from '../components/UserSummaryHeader';
+import UserDashboardSection from '../components/UserDashboardSection';
+
+import './Home.css'
 
 /**
  * Representa a página inicial
  */
-function Home() {
+function Home(props) {
+    console.log("HOME", props)
     setTitleBarText('Home')
-    const { books } = getAllBooks()
+    
+    // props
+    const { user } = props
+
+    // state
+    const [showSide, setShowSide] = useState(false)
+
+    // functions
+    const toggleSide = () => setShowSide(!showSide)
+
+    // se não há user redireciona login
+    if (!user) return <Redirect to="/login" />
+
+    const sideMenus = [
+        { title: "Resumo", icon: "bookmark", href:"" },
+        { title: "Leituras", icon: "glass", href:"" },
+        { title: "Entregas", icon: "warning", href:"" },
+        { title: "Reservas", icon: "book", href:"" },
+        { title: "Favoritos", icon: "star", href:"" },
+        { title: "Histórico", icon: "history", href:"" },
+    ]
 
     return (
-        <React.Fragment>
-            <div className="p-3 bg-light">
-                <Container>
-                    <h3> Biblioteca Acadêmica </h3>
+        <Container className="p-0" fluid>
 
-                    <Button variant="success" href="/sobre">Sobre este site</Button>
+            <UserSummaryHeader />
+            
+            <Row className="m-0 text-md-left">
 
-                    <ToastCustom>
-                        Hello Bootstrap Toast from Home!!!
-                    </ToastCustom>
-                </Container>
-            </div>
+                <div className={`side-menu p-2 col-md-2 ${showSide ? 'side-hide' : ''}`}>
+                    <Button 
+                        variant="outline" 
+                        title="fechar" 
+                        className="side-btn-close mx-0 d-block d-md-none" 
+                        onClick={toggleSide} 
+                    >
+                        <i className="fa fa-close"></i>
+                        &nbsp; 
+                        Fechar
+                    </Button>
 
-            <Container fluid>
-                <Row className="p-1">
-                    <Col md={3} xl={2}>
-                        <BookFilters />
-                    </Col>
+                    <Nav className="flex-column">
+                        { sideMenus.map((mn, idx) => {
+                            const key = `${idx}-${String(mn.title).replace(' ', '-')}`
+                            return (
+                                <Nav.Link key={key} href={mn.href} className="p-2" >
+                                    <i className={`fa fa-${mn.icon}`}></i>
+                                    &nbsp;
+                                    { mn.title }
+                                </Nav.Link>
+                            )
+                        })}
+                    </Nav>
+                </div>
 
-                    <Col>
-                        <Row className="p-md-2 p-xl-4">
-                            {(books.length > 0) && 
-                                books.map(bk => {
-                                    return <BookCard key={bk.id} book={bk} />
-                                })
-                            }
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
-        </React.Fragment>
+                <div className="p-2 text-md-left col">
+                    <Button 
+                        variant="outline" 
+                        title="Opções" 
+                        className="position-absolute d-md-none" 
+                        onClick={toggleSide} 
+                    >
+                        <i className="fa fa-bars"></i>
+                    </Button>
+
+                    <UserDashboardSection />
+                    
+                </div>
+            </Row>
+        </Container>
     )
 }
 
+// ESTILOS
+const styles = {
+    sideMenuContainer : {
+        display: 'flex', 
+        flexDirection: 'column'
+    },
+    sideMenuItem: {
+        marginBottom: 4, 
+        marginTop: 4
+    }
+}
 export default Home

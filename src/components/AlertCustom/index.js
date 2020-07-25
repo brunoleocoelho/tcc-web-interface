@@ -77,7 +77,7 @@ const styles = {
         position: 'absolute',
         width: 'fit-content',
         margin: 'auto',
-        boxShadow: '4px 4px 12px lightgrey',
+        boxShadow: '4px 4px 12px black',
         bottom: 12,
         right: 12,
         zIndex: 9999,

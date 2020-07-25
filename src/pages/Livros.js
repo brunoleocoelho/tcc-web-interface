@@ -9,7 +9,7 @@ import BookFilters from '../components/BookFilters';
  * Representa a página de seleção e filtro de livros
  */
 function Livros() {
-    setTitleBarText('Home')
+    setTitleBarText('Livros')
     const { books } = getAllBooks()
 
     return (

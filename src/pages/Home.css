@@ -1,0 +1,51 @@
+
+.side-menu {
+    background-color: whitesmoke;
+    position: fixed !important;
+    width: 70% !important;
+    height: 100%;
+    top: 0px;
+    margin-left: -1000px;
+    z-index: 1999;
+    transition-property: margin;
+    transition-duration: 0.6s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    box-shadow: 2px 0px 10px;
+}
+
+.side-hide {
+    margin-left: 0 !important;
+}
+
+.side-btn-close {
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+    padding: 1rem !important;
+}
+
+/* Tamanho de tela 'sm' */
+@media (min-width: 576px) {
+    .side-menu {
+        width: 50% !important;
+    }
+}
+
+/* Tamanho de tela 'md' */
+@media (min-width: 768px) {
+    .side-menu {
+        position: relative !important;
+        width: initial !important;
+        height: initial;
+        top: initial;
+        margin-left: 0;
+        box-shadow: none;
+    }
+}    
+
+/* Tamanho de tela 'lg' */
+@media (min-width: 992px) {
+  
+}    
+
