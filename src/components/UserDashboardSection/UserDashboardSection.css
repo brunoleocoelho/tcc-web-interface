@@ -2,7 +2,6 @@
     position: absolute !important;
     right: 4px;
     top: 5px;
-    /* color: whitesmoke !important; */
 }
 
 .sectionContainer {
@@ -20,12 +19,21 @@
     background-color: ghostwhite !important;
 }
 
+.section-book {
+    transition-property: all;
+    transition-duration: .2s;
+    transition-timing-function: linear;
+    /* transition-delay: -0.06s; */
+}
+
 .listImg {
-    overflow: hidden
+    overflow: hidden;
+    width: 30px;
 }
 
 .gridImg {
     height: 7rem;
+    width: auto;
     max-width: 90%;
 }
 

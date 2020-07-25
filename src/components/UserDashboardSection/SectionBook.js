@@ -9,16 +9,54 @@ import './UserDashboardSection.css'
 function SectionBook(props) {
     console.log("SectionBook", props)
     // PROPS
-    const { disposition } = props
+    const { disposition: dsp, book, noteMark } = props
 
-    if (disposition === 'list')
-        return <ListStyleSectionBook {...props} />
+    const css = {
+        list: {
+            container: 'col-12',
+            noteMark: 'float-right',
+            bookCont: 'text-center',
+            bookBody: 'p-1 row',
+            bookImg: 'listImg',
+            bookTitle: 'col-10 text-wrap'
+        },
+        grid: {
+            container: 'col-3',
+            noteMark: 'position-absolute',
+            bookCont: 'text-center',
+            bookBody: '',
+            bookImg: 'listImg gridImg',
+            bookTitle: 'small text-center px-1'
+        }
+    }
+    
+    return (
+        <div className={'section-book p-0 '+ css[dsp].container}>
 
-    return <GridStyleSectionBook {...props} />
+            { noteMark &&
+                <div className={css[dsp].noteMark} >
+                    { noteMark }
+                </div>
+            }
+
+            <div className={css[dsp].bookBody}>
+
+                <div className={css[dsp].bookCont}>
+                    <img src={book.image_url} className={css[dsp].bookImg} />
+                </div>
+                
+                <div className={css[dsp].bookTitle}>
+                    { book.title }
+                </div>
+
+            </div>
+        </div>
+    )
 }
 
 /**
- * Apresenta em formato de item de grade
+ * **DEPRECATED** Apresenta em formato de item de grade
+ * @deprecated mudança de layout feita agora direto no CSS
  */
 function GridStyleSectionBook({ book, noteMark }) {
     return (
@@ -43,7 +81,8 @@ function GridStyleSectionBook({ book, noteMark }) {
 
 
 /**
- * Apresenta em formato de item de lista
+ * **DEPRECATED** Apresenta em formato de item de lista
+* @deprecated mudança de layout feita agora direto no CSS
  */
 function ListStyleSectionBook({ book, noteMark }) {
     return (

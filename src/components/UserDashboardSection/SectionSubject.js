@@ -13,7 +13,7 @@ function SectionSubject(props) {
     ]
     
     // PROPS
-    const { title, icon, items, note, variant, headerStyle, bodyStyle } = props
+    const { title, icon, iconColor, items, note, variant, bodyStyle } = props
     
     // STATE
     const [layout, setLayout] = useState(dispOptions[1].layout)
@@ -35,10 +35,6 @@ function SectionSubject(props) {
     )
     
     // Variáveis de estilos
-    const titStyle = {
-        ...(headerStyle ? headerStyle : {})
-    }
-
     const contentStyle = {
         ...(bodyStyle ? bodyStyle : {})
     }
@@ -46,7 +42,7 @@ function SectionSubject(props) {
     return (
         <Col xs={12} lg={6} className="p-0 mb-2 sectionContainer">
         
-            <Row className="p-2 m-0 section-title" style={titStyle}>
+            <Row className="p-2 m-0 section-title">
                 
                 <ButtonGroup aria-label="Layout change" className="subject-layout-icon" >
                     { dispOptions.map( opt => {
@@ -70,7 +66,7 @@ function SectionSubject(props) {
                 </ButtonGroup>
 
                 <div className="m-0 row" style={{alignItems:'center'}}>
-                    <i className={`fa fa-${icon}`}></i> 
+                    <i className={`fa fa-${icon}`} style={{color: iconColor}} ></i> 
                     &nbsp;
                     <h5 className="m-0">
                         { title }

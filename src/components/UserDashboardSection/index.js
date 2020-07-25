@@ -14,19 +14,19 @@ function UserDashboardSection() {
 
     const sections = [
         { 
-            title:'Últimos Lidos', headerStyle: {}, icon:'binoculars',
+            title:'Últimos Lidos', icon:'binoculars', iconColor: 'darkolivegreen',
             items: [...books], note: ['há', 'dias'], variant: 'success'
         },
         { 
-            title:'Entregas', headerStyle: {}, icon:'warning',
+            title:'Entregas', icon:'warning', iconColor: 'orange',
             items: [...books], note: ['em', 'dias'], variant: 'warning'
         },
         { 
-            title:'Reservas', headerStyle: {}, icon:'book',
+            title:'Reservas', icon:'book', iconColor: 'darkcyan',
             items: [...books], note: ['há', 'dias'], variant: 'info'
         },
         { 
-            title:'Favoritos', headerStyle: {}, icon:'star',
+            title:'Favoritos', icon:'star', iconColor: 'royalblue',
             items: [...books], note: ['*****'], variant: null
         }
     ]
