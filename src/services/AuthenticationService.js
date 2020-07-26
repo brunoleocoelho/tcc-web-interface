@@ -19,10 +19,11 @@ function getUser() {
  *   name:string,
  *   lastName:string,
  *   role:string
+ *   profileImg:string
  * }} user o usuário autenticado
  */
-function setAuthUser({ id, userName, name, lastName, role }) {
-    localStorage.setItem(userAuth, JSON.stringify({ id, userName, name, lastName, role }))
+function setAuthUser({ id, userName, name, lastName, role, profileImg }) {
+    localStorage.setItem(userAuth, JSON.stringify({ id, userName, name, lastName, role, profileImg }))
     return true
 }
 
