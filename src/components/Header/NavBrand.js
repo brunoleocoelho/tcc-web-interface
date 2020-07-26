@@ -19,21 +19,11 @@ function NavBrand() {
                 width="30"
                 height="30"
             />
-            <span style={styles.navBrandText} >
+            <span className="navbartext">
                 { title || 'Biblioteca' }
             </span>
         </Navbar.Brand>
     )
-}
-
-// ESTILOS CUSTOMIZADOS
-const styles = {
-    grow: {
-        flexGrow: 1,
-    },
-    navBrandText: {
-        fontSize: 22,
-    },
 }
 
 export default NavBrand

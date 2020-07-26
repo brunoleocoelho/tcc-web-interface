@@ -1,0 +1,34 @@
+/* Estilos CSS para componetes do NavCollapse */
+
+.nav-dd {
+    flex-grow: 1;
+    /* color: initial !important; */
+}
+
+#icon-ddi.dd-icon {
+    margin-left: -0.75rem !important;
+    margin-right: .5rem !important;
+}
+
+
+/* para tamanho 'sm' */
+@media (min-width: 576px) {
+    .nav-dd {
+        flex-grow: 0;
+    }
+    .dropdown-menu {
+        right: 0 !important;
+        left: auto !important;
+        position: absolute !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .dropdown-menu {
+        right: initial !important;
+    }
+    .nav-dd {
+        margin-right: 1rem;
+        margin-left: auto;
+    }
+}

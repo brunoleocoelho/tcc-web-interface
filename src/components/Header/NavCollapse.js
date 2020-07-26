@@ -1,147 +1,115 @@
 import React, { useState } from 'react'
-import { Nav, NavDropdown, Navbar } from 'react-bootstrap'
-import { getNavbarData } from '../../services/InterfaceService'
+import { Nav, NavDropdown, Navbar, Form, FormControl, Button } from 'react-bootstrap'
+import { getNavbarData, getUserMenu } from '../../services/InterfaceService'
 import { themes } from '../../services/Constants'
-
-import './Header.css'
-import Avatar from '../Avatar'
 import { getUser } from '../../services/AuthenticationService'
+import Avatar from '../Avatar'
+
+import './NavCollapse.css'
 
 /**
  * Renderiza a lista de menus da Navbar que
  * pode ser 'collapsed' conforme tamanho de tela
  */
 function NavCollapse(props) {
-    const { isLoginPage, theme } = props
+    const { isLoginPage, toggleId, theme } = props
     
     let { items } = getNavbarData()
     
     return (
-        <Navbar.Collapse id="responsive-navbar-nav" className="mx-2 order-md-2" >
-            <Nav className="ml-auto flex-sm-row justify-content-sm-between">
-                { items && (items.map(item => {
-                    const key = `nav-${item.label.replace(' ', '').toLowerCase()}`
+        <React.Fragment>
 
-                    if (isLoginPage && (!item.showNotLogged)) return null
+            <Navbar.Collapse id={toggleId} className="order-md-3" >
+                <Nav>
+                    { items && (items.map(item => {
+                        if (isLoginPage && (!item.showNotLogged)) return null
+                        
+                        const key = `nav-${item.label.replace(' ', '').toLowerCase()}`
+                        return (
+                            <Nav.Link href={item.path}>
+                                { item.icon && 
+                                    <i className={'fa fa-fw fa-' + item.icon}></i>
+                                }
+                                <span>{ item.label }</span>
+                            </Nav.Link>
+                        )
+                    })) }
+                </Nav>
+    
+                <NavUserDropdown />
+            </Navbar.Collapse>
 
-                    switch (item.elemtype) {
-                        case 'dropdown':
-                            return <NavItemDropdown key={key} {...item} theme={theme} />
-
-                        // case 'link':
-                        default:
-                            return <NavItemLink key={key} {...item} theme={theme} />
-                    }
-                })) }
-            </Nav>
-        </Navbar.Collapse>
+        </React.Fragment>
     )
 }
 
 /**
  * Renderiza um item tipo dropdown do menu da navbar
  */
-function NavItemDropdown({ label, items, icon, theme, ...rest }) {
+function NavUserDropdown({ theme, ...rest }) {
     // SATE
     const [isOpen, setIsOpen] = useState(false)
 
-    const id = `nav-dropdown-${String(label).replace(' ','')}`
-    
-    const classNavItem = [
-        'd-flex flex-md-column flex-lg-row',
-        'mt-md-2 mt-lg-auto',
-        'text-md-center my-auto'
-    ].join(' ')
+    const usr = getUser()
+    const { label, items, icon, elemtype } = getUserMenu()
+    const imgDft = require('../../assets/img/no-image-profile.jpg')
 
-    const classIconSpan = [
-        'mr-0 mr-md-05r-n mb-md-05r-n mb-lg-0',
-        (isOpen ? 'menu-max-sm-width' : '' ),
-        // (theme === 'dark' ? 'bg-dark text-light': '')
-    ].join(' ')
+    const id = `nav-dropdown-${String(label).replace(' ','')}`
 
     // Renderiza o ícone
-    const renderDdLabelIcon = () => {
-        const renderImg = () => {
-            const isUser = (icon === 'user')
-            const usr = isUser && getUser()
-            console.log("renderDdLabelIcon", {isUser, usr})
-            return isUser
-                ? (<Avatar 
-                    width={24} 
-                    userImg={usr && usr.profileImg}
-                    style={{display:'unset'}} 
-                />)
-                : <i className={`fa fa-fw fa-${icon}`}></i>
-        }
-
-        return ( 
+    const renderDdLabelIcon = () => (
+        <React.Fragment>
             <span 
                 id="icon-ddi" 
-                className={classIconSpan} 
-                style={styles.navTheme[theme]}
+                className="mr-0 mb-lg-0 dd-icon" 
             >
-                { icon && renderImg() }
-                <span className="d-md-none d-lg-inline mx-1">
-                    { label }
-                </span>
+                <Avatar 
+                    width={28} 
+                    userImg={usr ? usr.profileImg : imgDft}
+                    style={{display:'unset'}} 
+                />
             </span>
-        )
-    }
+            <span id="icon-ddi">{ label }</span>
+        </React.Fragment>
+    )
     
     return (
-        <React.Fragment>
+        <NavDropdown 
+            className="nav-dd order-3"
+            style={styles.navTheme[theme]}
+            title={ renderDdLabelIcon() }
+            id={id} 
+            active
+            onClick={() => setIsOpen(!isOpen)}
+        >
+                { items && items.map( (item, idx) => {
+                    const { elemtype } = item
+                    
+                    switch (elemtype) {
+                        case 'link':
+                            const { label, path, icon, onClick } = item
+                            const keyItem = `ddi-${elemtype}-${icon}-${String(label).replace(' ','')}`
+                            return (
+                                <NavDropdown.Item 
+                                    key={keyItem} 
+                                    eventKey={idx} 
+                                    onClick={onClick} 
+                                    href={path && path}
+                                    active={false}
+                                >
+                                    { icon && <i className={`fa fa-fw fa-${icon}`}></i> }
+                                    { label }
+                                </NavDropdown.Item>
+                            )
 
-        {/* <Nav.Item className={classNavItem} style={styles.navItemDD}> */}
+                        // case 'divider':
+                        default:
+                            const keyDiv = `ddd-${elemtype}-${idx}`
+                            return <NavDropdown.Divider key={keyDiv} />
 
-            {/* { icon && ( 
-                <span 
-                    id="icon-ddi" 
-                    className={classIconSpan} 
-                    style={styles.navTheme[theme]}
-                >
-                    <i className={`fa fa-fw fa-${icon}`}></i>
-                </span>
-            )} */}
-            
-            <NavDropdown 
-                
-                className="nav-dd p-0 absolute d-md-flex"
-                style={styles.navTheme[theme]}
-                title={renderDdLabelIcon()}
-                id={id} 
-                active
-                onClick={() => setIsOpen(!isOpen)}
-            >
-                    { items && items.map( (item, idx) => {
-                        const { elemtype } = item
-                        
-                        switch (elemtype) {
-                            case 'link':
-                                const { label, path, icon, onClick } = item
-                                const keyItem = `ddi-${elemtype}-${icon}-${String(label).replace(' ','')}`
-                                return (
-                                    <NavDropdown.Item 
-                                        key={keyItem} 
-                                        eventKey={idx} 
-                                        onClick={onClick} 
-                                        href={path && path}
-                                        active={false}
-                                    >
-                                        { icon && <i className={`fa fa-fw fa-${icon}`}></i> }
-                                        { label }
-                                    </NavDropdown.Item>
-                                )
-
-                            // case 'divider':
-                            default:
-                                const keyDiv = `ddd-${elemtype}-${idx}`
-                                return <NavDropdown.Divider key={keyDiv} />
-    
-                        }
-                    })}
-            </NavDropdown>
-        {/* </Nav.Item> */}
-        </React.Fragment>
+                    }
+                })}
+        </NavDropdown>
     )
 }
 
@@ -158,7 +126,7 @@ function NavItemLink({ label, path, icon, theme, ...rest }) {
     return (
         <Nav.Link 
         style={customStyle}
-            className="text-md-center my-auto"
+            // className="text-md-center my-auto"
             href={path} 
             {...otherProps}
         >

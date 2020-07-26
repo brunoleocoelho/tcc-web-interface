@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 
-// import HeaderContext, { HeaderContextProvider } from './HeaderContext'
-import { Navbar, Container } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap'
 import NavCollapse from './NavCollapse'
 import NavBrand from './NavBrand'
 import NavSearch from './NavSearch'
+import NavToggle from './NavToggle'
+
+import './Header.css'
 
 /** 
  * Menu header principal do topo da página
@@ -17,7 +19,9 @@ function Header(props) {
     // STATE
     const [isNavShown, setIsNavShown] = useState(false)
     const [isLoginPage, setIsLoginPage] = useState((pathname === '/login'))
-    const [theme, setTheme] = useState('dark')
+    const [theme, setTheme] = useState('light')
+
+    const toggleId = "responsive-navbar"
 
     // componentDidUpdate
     useEffect(() => {
@@ -35,71 +39,30 @@ function Header(props) {
             collapseOnSelect
             expanded={isNavShown}
             onToggle={e => setIsNavShown(e)}
+            className="navbartop"
         >
-            <Container className="d-flex">
-                
-                { (isLoginPage) 
-                    ? (<>
+            {(isLoginPage) 
+                ? (
+                    <React.Fragment>
                         <NavBrand />
-                        <NavCollapse isLoginPage theme={theme} {...props} />
-                    </>)
-                    : (<>
+                        <NavCollapse isLoginPage={false} theme={theme} {...props} />
+                    </React.Fragment>
+                )
+                : (
+                    <React.Fragment>
                         <NavBrand />
-                        <NavToggle />
-                        <NavCollapse theme={theme}/>
+                        {/* <Form inline>
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                            <Button variant="outline-success">Search</Button>
+                        </Form> */}
                         <NavSearch theme={theme}/>
-                    </>)
-                }
-                
-            </Container>
+                        <NavToggle toggleId={toggleId} />
+                        <NavCollapse toggleId={toggleId} theme={theme}/>
+                    </React.Fragment>
+                )
+            }
         </Navbar>
     )
 }
 
-/** Renderiza o botão de acesso ao menu */
-function NavToggle() {
-    return (
-        <Navbar.Toggle 
-            className="p-2 m-0"
-            style={{ border:'none' }}
-            label="Menu" 
-            aria-controls="responsive-navbar-nav"
-        >
-            <i className="fa fa-ellipsis-v"></i>
-        </Navbar.Toggle>
-    )
-}
-
 export default withRouter(Header)
-
-
-/** Atua na busca de livros na API */
-// const searchBook = () => {
-//     const { searchInput, isSearched } = this.state
-//     if (!isSearched) {
-//     if (searchInput.length >= 3) {
-//         BibliotecaApi.getSearchOfBooks(searchInput).then(response => {
-//         this.setState({ books: [...response.books], isSearched: true })
-//         })
-//     }
-//     }
-//     else {
-//     this.setState({ searchInput: '', pageStart: 1, isSearched: false, books: [] }, () => {
-//         this.loadBooks()
-//     })
-//     }
-// }
-
-// {/* INPUT DE BUSCA */}
-// <div className="nav-item">
-//     {/* <i className={'fa fa-fw fa-search'}></i> */}
-//     <InputField type='text'
-//         className='input-search'
-//         placeholder='Buscar livro...'
-//         value={''}
-//         onChange={() => { }} />
-//     <Button title=''
-//         className="button-action"
-//         onClick={() => {/* this.searchBook() */ }}
-//         icon={/* isSearched ? 'close': */'search'} />
-// </div>

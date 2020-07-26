@@ -19,22 +19,31 @@ function setTitleBarText(sufix = '') {
  */
 function getNavbarData() {
     const title = 'Biblioteca'
-    const user = getUser() 
 
-    // Formato: label: "", path: "", icon: "", elemtype: "", showNotLogged: false, items: []
+    // Formato: label: "", path: "", icon: "", elemtype: "", items: []
     const items = [
         { label: 'Livros', path: '/livros', icon: 'book', elemtype: 'link' },
-        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link'/* , showNotLogged: true */  },
-
-        { label: (user? user.name : ''), icon: 'user', elemtype: 'dropdown', items: [
-            { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
-            { label: '', elemtype:'divider' },
-            { label: 'Sair', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
-        ] },
+        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link' },
     ]
 
     const headerData = { title, items }
     return headerData;
+}
+
+function getUserMenu() {
+    const user = getUser() 
+    // Formato: label: "", path: "", icon: "", elemtype: "", items: []
+    const menu = { 
+        label: (user? user.name : ''), 
+        icon: 'user', 
+        elemtype: 'dropdown', 
+        items: [
+            { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
+            { label: '', elemtype: 'divider' },
+            { label: 'Sair', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
+        ] 
+    }
+    return menu
 }
 
 /**
@@ -68,5 +77,6 @@ export {
     setTitleBarText,
     exceptionPages,
     doLogout,
-    getLoginNews
+    getLoginNews,
+    getUserMenu
 }

@@ -4,7 +4,7 @@ export const themes = {
         color: 'rgba(255,255,255,.5)'
     },
     light: {
-        backgroundColor: '#f8f9fa', // light
+        backgroundColor: 'whitesmoke',//'#f8f9fa', // light
         color: 'rgba(0,0,0,.9)'
     }
 }
