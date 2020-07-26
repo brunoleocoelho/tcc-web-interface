@@ -40,13 +40,9 @@ function Home(props) {
     return (
         <Container className="p-0" fluid>
 
-            <div className="d-none d-md-block" >
-                <UserSummaryHeader key="user-summary-1" />
-            </div>
-            
             <Row className="m-0 text-md-left">
 
-                {/* SIDE MENU COLLAPSE AND COL-MD-2 */}
+                {/* START OF SIDE MENU COLLAPSE AND COL-MD-2 */}
                 <div className={`side-menu p-0 col-md-2 ${showSide ? 'side-hide' : ''}`}>
 
                     <div className="side-content">
@@ -83,7 +79,7 @@ function Home(props) {
                     </Button>
                 </div>
 
-                {/* MAIN HOME DASHBOARD */}
+                {/* HOME DASHBOARD BODY */}
                 <div className="p-2 text-md-left col">
                     <Button 
                         variant="outline" 

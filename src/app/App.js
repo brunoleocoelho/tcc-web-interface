@@ -10,6 +10,7 @@ import booksFull from '../assets/data/books.json';
 
 import Header from '../components/Header';
 import AlertCustom from '../components/AlertCustom';
+import Footer from '../components/Footer';
 
 // Armazenando MOCK-UP DE LIVROS
 storeAllBooks(booksFull)
@@ -26,6 +27,7 @@ function App() {
             <BrowserRouter>
                 <Header />
                 <MainRouter />
+                <Footer />
             </BrowserRouter>
             
             <AlertCustom />

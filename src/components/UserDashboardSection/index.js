@@ -2,6 +2,7 @@ import React from 'react'
 import { Row } from 'react-bootstrap'
 import { getAllBooks } from '../../services/StorageService'
 import SectionSubject from './SectionSubject'
+import UserSummaryHeader from '../UserSummaryHeader'
 
 /**
  * Componente que renderiza um pequeno dashboard
@@ -29,7 +30,11 @@ function UserDashboardSection() {
     ]
 
     return (
-        <>
+        <div className="">
+            <div className="d-none d-md-block" >
+                <UserSummaryHeader key="user-summary-1" />
+            </div>
+
             <div className="p-2 text-center text-md-left">
                 <h5>Resumo de suas atividades</h5>
             </div>
@@ -44,7 +49,7 @@ function UserDashboardSection() {
                     )
                 }) }
             </Row>
-        </>
+        </div>
     )
 }
 

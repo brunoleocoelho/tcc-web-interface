@@ -3,7 +3,7 @@
     background-color: whitesmoke;
     position: fixed !important;
     width: 70% !important;
-    height: 100%;
+    height: 100vh !important;
     top: 0px;
     margin-left: -500px;
     z-index: 1999;
@@ -27,7 +27,7 @@
 .side-btn-close {
     position: absolute;
     bottom: 0;
-    width: 95%;
+    width: 100%;
     padding: 0.7rem !important;
 }
 
