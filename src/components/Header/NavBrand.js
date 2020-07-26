@@ -12,7 +12,7 @@ function NavBrand() {
     const { title } = getNavbarData()
 
     return (
-        <Navbar.Brand className="mx-2 order-1" href="/">
+        <Navbar.Brand className="mx-2" href="/">
             <img
                 src={logo}
                 alt={'logo'}

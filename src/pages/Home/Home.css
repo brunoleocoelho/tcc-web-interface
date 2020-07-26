@@ -15,7 +15,7 @@
 }
 
 .side-content {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 85%;
     margin-bottom: 1rem;
 }
@@ -28,7 +28,29 @@
     position: absolute;
     bottom: 0;
     width: 95%;
-    padding: 1rem !important;
+    padding: 0.7rem !important;
+}
+
+.side-item {
+    display: flex !important;
+    flex-direction: row;
+}
+
+.side-item:active {
+    background-color: silver;
+    transition-duration: 0.8s;
+}
+
+
+.side-item-icon {
+    padding: 0.25rem;
+    width: 15%;
+    text-align: center;
+}
+
+.side-item-text {
+    padding: 0.25rem;
+    width: 85%;
 }
 
 /* Tamanho de tela 'sm' */

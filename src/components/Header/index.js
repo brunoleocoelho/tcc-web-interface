@@ -36,7 +36,7 @@ function Header(props) {
             expanded={isNavShown}
             onToggle={e => setIsNavShown(e)}
         >
-            <Container className="d-flex justify-content-start">
+            <Container className="d-flex">
                 
                 { (isLoginPage) 
                     ? (<>
@@ -44,8 +44,8 @@ function Header(props) {
                         <NavCollapse isLoginPage theme={theme} {...props} />
                     </>)
                     : (<>
-                        <NavToggle />
                         <NavBrand />
+                        <NavToggle />
                         <NavCollapse theme={theme}/>
                         <NavSearch theme={theme}/>
                     </>)
@@ -61,10 +61,11 @@ function NavToggle() {
     return (
         <Navbar.Toggle 
             className="p-2 m-0"
+            style={{ border:'none' }}
             label="Menu" 
             aria-controls="responsive-navbar-nav"
         >
-            <i className="fa fa-bars"></i>
+            <i className="fa fa-ellipsis-v"></i>
         </Navbar.Toggle>
     )
 }

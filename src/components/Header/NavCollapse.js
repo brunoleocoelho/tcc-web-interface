@@ -4,6 +4,8 @@ import { getNavbarData } from '../../services/InterfaceService'
 import { themes } from '../../services/Constants'
 
 import './Header.css'
+import Avatar from '../Avatar'
+import { getUser } from '../../services/AuthenticationService'
 
 /**
  * Renderiza a lista de menus da Navbar que
@@ -15,7 +17,7 @@ function NavCollapse(props) {
     let { items } = getNavbarData()
     
     return (
-        <Navbar.Collapse id="responsive-navbar-nav" className="mx-2 order-2" >
+        <Navbar.Collapse id="responsive-navbar-nav" className="mx-2 order-md-2" >
             <Nav className="ml-auto flex-sm-row justify-content-sm-between">
                 { items && (items.map(item => {
                     const key = `nav-${item.label.replace(' ', '').toLowerCase()}`
@@ -56,11 +58,42 @@ function NavItemDropdown({ label, items, icon, theme, ...rest }) {
         (isOpen ? 'menu-max-sm-width' : '' ),
         // (theme === 'dark' ? 'bg-dark text-light': '')
     ].join(' ')
+
+    // Renderiza o ícone
+    const renderDdLabelIcon = () => {
+        const renderImg = () => {
+            const isUser = (icon === 'user')
+            const usr = isUser && getUser()
+            console.log("renderDdLabelIcon", {isUser, usr})
+            return isUser
+                ? (<Avatar 
+                    width={24} 
+                    userImg={usr && usr.profileImg}
+                    style={{display:'unset'}} 
+                />)
+                : <i className={`fa fa-fw fa-${icon}`}></i>
+        }
+
+        return ( 
+            <span 
+                id="icon-ddi" 
+                className={classIconSpan} 
+                style={styles.navTheme[theme]}
+            >
+                { icon && renderImg() }
+                <span className="d-md-none d-lg-inline mx-1">
+                    { label }
+                </span>
+            </span>
+        )
+    }
     
     return (
-        <Nav.Item className={classNavItem} style={styles.navItemDD}>
+        <React.Fragment>
 
-            { icon && ( 
+        {/* <Nav.Item className={classNavItem} style={styles.navItemDD}> */}
+
+            {/* { icon && ( 
                 <span 
                     id="icon-ddi" 
                     className={classIconSpan} 
@@ -68,12 +101,13 @@ function NavItemDropdown({ label, items, icon, theme, ...rest }) {
                 >
                     <i className={`fa fa-fw fa-${icon}`}></i>
                 </span>
-            )}
+            )} */}
             
             <NavDropdown 
-                className="p-0 absolute d-md-flex"
-                style={{...styles.navDd, ...styles.navTheme[theme]}}
-                title={label}
+                
+                className="nav-dd p-0 absolute d-md-flex"
+                style={styles.navTheme[theme]}
+                title={renderDdLabelIcon()}
                 id={id} 
                 active
                 onClick={() => setIsOpen(!isOpen)}
@@ -106,7 +140,8 @@ function NavItemDropdown({ label, items, icon, theme, ...rest }) {
                         }
                     })}
             </NavDropdown>
-        </Nav.Item>
+        {/* </Nav.Item> */}
+        </React.Fragment>
     )
 }
 

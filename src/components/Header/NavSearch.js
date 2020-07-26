@@ -36,11 +36,11 @@ function NavSearch(props) {
     ].join(' ')
     
     // CSS Button
-    const btnColStyle = {...styles.btnRegular, ...(showInput ? styles.btnShowInput : {})}
+    // const btnColStyle = (showInput ? styles.btnShowInput : {})
     const btnColCss = [
-        'text-center mx-0 px-0 d-md-none',
-        (showInput ? 'col-0' : '')
-    ]
+        'btn-search-regular text-center mx-0 px-0 d-md-none',
+        (showInput ? 'btn-search-hide' : '')
+    ].join(' ')
     
     // CSS Input
     const inputColCss = `d-md-flex ${showInput ? 'w-100' : 'd-none'}`
@@ -49,16 +49,16 @@ function NavSearch(props) {
         <div className={containerCss} >
             <Form>
                 <Form.Row>
-                    <Col xs={2} className={btnColCss} style={btnColStyle}>
+                    <div className={btnColCss} /* style={btnColStyle} */>
                         <Button 
                             variant={theme} 
                             onClick={handleShowInput}
                         >
                             <i className="fa fa-search"></i>
                         </Button>
-                    </Col>
+                    </div>
 
-                    <Col className={inputColCss} style={styles.inputCol}>
+                    <Col xs={12} className={inputColCss} style={styles.inputCol}>
                         <AutosuggestSearch
                             inputRef={inputRef}
                             value={term}
@@ -78,8 +78,8 @@ const styles = {
     },
     btnRegular: {
         position: 'absolute',
-        right: 0,
-        top: 8,
+        right: '2.5rem',
+        top: 10,
     },
     btnShowInput : {
         display: 'none'

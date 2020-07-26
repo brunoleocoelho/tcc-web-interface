@@ -26,7 +26,7 @@ function getNavbarData() {
         { label: 'Livros', path: '/livros', icon: 'book', elemtype: 'link' },
         { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link'/* , showNotLogged: true */  },
 
-        { label: ((user && user.name) || 'Usuário'), icon: 'user', elemtype: 'dropdown', items: [
+        { label: (user? user.name : ''), icon: 'user', elemtype: 'dropdown', items: [
             { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
             { label: '', elemtype:'divider' },
             { label: 'Sair', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },

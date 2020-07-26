@@ -11,7 +11,7 @@ function UserSummaryHeader() {
     const user = getUser()
 
     return (
-        <Row className="p-3 m-0 bg-light">
+        <Row className="p-2 m-0 bg-light">
             <Col xs={3} md={1} >
                 <Avatar />
             </Col>
