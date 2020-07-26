@@ -22,15 +22,15 @@ function UserSummaryHeader() {
 
             <Col className="d-flex justify-content-between">
                 <div className="text-muted">
-                    <i className="fa fa-bookmark"></i>{' '}
+                    <i className="text-success fa fa-bookmark"></i>{' '}
                     <strong className="text-success">Lidos: 8</strong>
                 </div>
                 <div className="text-muted">
-                    <i className="fa fa-warning"></i>{' '}
+                    <i className="text-warning fa fa-warning"></i>{' '}
                     <strong className="text-warning">Entregar: 8</strong>
                 </div>
                 <div className="text-muted">
-                    <i className="fa fa-star"></i>{' '}
+                    <i className="text-info fa fa-star"></i>{' '}
                     <strong className="text-info">Favoritos: 8</strong>
                 </div>
             </Col>
