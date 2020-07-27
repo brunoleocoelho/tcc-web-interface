@@ -11,6 +11,7 @@ import booksFull from '../assets/data/books.json';
 import Header from '../components/Header';
 import AlertCustom from '../components/AlertCustom';
 import Footer from '../components/Footer';
+import { CustomThemeProvider } from '../services/CustomThemeContext'
 
 // Armazenando MOCK-UP DE LIVROS
 storeAllBooks(booksFull)
@@ -25,9 +26,13 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <Header />
-                <MainRouter />
-                <Footer />
+                <CustomThemeProvider>
+                    
+                    <Header />
+                    <MainRouter />
+                    <Footer />
+
+                </CustomThemeProvider>
             </BrowserRouter>
             
             <AlertCustom />
