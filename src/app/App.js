@@ -24,7 +24,7 @@ setTitleBarText()
  */
 function App() {
     return (
-        <div className="App">
+        <div className="App full-height">
             <BrowserRouter>
                 <CustomThemeProvider>
                     

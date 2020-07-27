@@ -1,28 +1,32 @@
+div {
+    transition-delay: 0;
+    transition-property: color, background-color;
+    transition-duration: 200ms ;
+}
+  
 .subject-layout-icon {
     position: absolute !important;
-    right: 4px;
-    top: 5px;
+    right: 1rem;
+    top: 1rem;
 }
 
 .sectionContainer {
-    border: 1px solid silver;
+    /* border: 1px solid silver; */
     /* border-radius: 6px; */
     overflow: hidden;
 }
 
-.section-title {
-    background-color: lightgray;
-}
+/* .section-title {} */
 
 .section-content {
     justify-content: space-between;
-    background-color: ghostwhite !important;
+    /* background-color: ghostwhite !important; */
 }
 
 .section-book {
-    transition-property: all;
-    transition-duration: .2s;
-    transition-timing-function: linear;
+    /* transition-property: all; */
+    /* transition-duration: 0.1s; */
+    /* transition-timing-function: linear; */
     /* transition-delay: -0.06s; */
 }
 

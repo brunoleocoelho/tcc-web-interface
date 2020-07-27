@@ -8,6 +8,7 @@ import NavSearch from './NavSearch'
 import NavToggle from './NavToggle'
 
 import './Header.css'
+import CustomThemeContext from '../../services/CustomThemeContext'
 
 /** 
  * Menu header principal do topo da página
@@ -19,9 +20,12 @@ function Header(props) {
     // STATE
     const [isNavShown, setIsNavShown] = useState(false)
     const [isLoginPage, setIsLoginPage] = useState((pathname === '/login'))
-    const [theme, setTheme] = useState('light')
+    // const [theme, setTheme] = useState('light')
+
+    const { theme: th } = useContext(CustomThemeContext)
 
     const toggleId = "responsive-navbar"
+    const theme = th.themeName
 
     // componentDidUpdate
     useEffect(() => {

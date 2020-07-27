@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Container, Button, Row, Nav } from 'react-bootstrap';
 
 import { setTitleBarText } from '../../services/InterfaceService';
 import { Redirect } from 'react-router-dom';
 
+import CustomThemeContext from '../../services/CustomThemeContext';
 import UserSummaryHeader from '../../components/UserSummaryHeader';
 import UserDashboardSection from '../../components/UserDashboardSection';
-
 import './Home.css'
 
 /**
@@ -21,6 +21,9 @@ function Home(props) {
 
     // state
     const [showSide, setShowSide] = useState(false)
+
+    // CONTEXT
+    const { theme, changeTheme } = useContext(CustomThemeContext)
 
     // functions
     const toggleSide = () => setShowSide(!showSide)
@@ -37,14 +40,33 @@ function Home(props) {
         { title: "Histórico", icon: "history", href:"" },
     ]
 
+    // theme para botão de alteração de tema geral
+    const btnTheme = (theme.themeName ==='light') ? 'dark' : 'light'
+
     return (
-        <Container className="p-0" fluid>
+        <Container id="home-student" className="p-0 full-height" fluid>
 
-            <Row className="m-0 text-md-left">
-
+            <Row id="home-content" className="m-0 text-md-left">
                 {/* START OF SIDE MENU COLLAPSE AND COL-MD-2 */}
-                <div className={`side-menu p-0 col-md-2 ${showSide ? 'side-hide' : ''}`}>
+                <div 
+                    id="home-sidemenu"
+                    style={theme.fourth} 
+                    className={`side-menu p-0 col-md-3 col-lg-2 ${showSide ? 'side-hide' : ''}`}
+                >
 
+                    {/* BUTTON PARA FECHAR SIDE MENU */}
+                    <Button 
+                        variant="outline" 
+                        title="fechar" 
+                        className="side-btn-close mx-0 d-block d-md-none"
+                        onClick={toggleSide} 
+                        style={theme.second}
+                    >
+                        <i className="fa fa-close"></i>
+                        &nbsp; 
+                        Fechar
+                    </Button>
+                    
                     <div className="side-content">
                         <div className="d-block d-md-none" >
                             <UserSummaryHeader key="user-summary-2" />
@@ -66,33 +88,34 @@ function Home(props) {
                             })}
                         </Nav>
                     </div>
-
-                    <Button 
-                        variant="outline" 
-                        title="fechar" 
-                        className="side-btn-close bg-light mx-0 d-block d-md-none" 
-                        onClick={toggleSide} 
-                    >
-                        <i className="fa fa-close"></i>
-                        &nbsp; 
-                        Fechar
-                    </Button>
                 </div>
 
                 {/* HOME DASHBOARD BODY */}
-                <div className="p-2 text-md-left col">
+                <div id="home-body" className="p-0 text-md-left col">
+                    {/* BUTTON PARA ABRIR SIDE MENU */}
                     <Button 
                         variant="outline" 
                         title="Opções" 
-                        className="position-absolute d-md-none" 
+                        className="btn-menu" 
                         onClick={toggleSide} 
+                        style={theme.second}
                     >
                         <i className="fa fa-bars"></i>
                     </Button>
-
                     <UserDashboardSection />
-                    
                 </div>
+
+                {/* FLOAT BUTTON PARA MUDANÇA DE TEMA DE CORES */}
+                <Button 
+                    id="btn-change-theme"
+                    title={`Alterar para tema '${btnTheme}'`}
+                    className="btn-theme" 
+                    onClick={() => changeTheme(btnTheme)}
+                    variant={btnTheme}
+                >
+                    <i className="fa fa-adjust"></i>
+                </Button>
+
             </Row>
         </Container>
     )
@@ -107,6 +130,13 @@ const styles = {
     sideMenuItem: {
         marginBottom: 4, 
         marginTop: 4
-    }
+    },
+    // themeButton: {
+    //     position:'fixed',
+    //     right:'0.75rem',
+    //     top:'16%',
+    //     border: '1px solid',
+    //     zIndex:999
+    // }
 }
 export default Home

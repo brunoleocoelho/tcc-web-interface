@@ -7,7 +7,6 @@ import './UserDashboardSection.css'
  * um section do dashboard de estudante
  */
 function SectionBook(props) {
-    console.log("SectionBook", props)
     // PROPS
     const { disposition: dsp, book, noteMark } = props
 

@@ -1,5 +1,8 @@
 import { unsetAuthUser, getUser } from "./AuthenticationService";
 
+// Chaves de informações localStorage
+const themeApplied = 'theme-applied'
+
 /**
  * Atualiza o título da página concateca 
  * o titulo principal com um sufixo
@@ -72,11 +75,24 @@ function getLoginNews() {
     return avisos
 }
 
+/** Armazena o tema visual escolhido pelo usuário */
+function setThemeToApply(theme) {
+    localStorage.setItem(themeApplied, JSON.stringify(theme))
+}
+
+/** Retorna o tema visual armazenado */
+function getThemeApplied() {
+    const thm = JSON.parse(localStorage.getItem(themeApplied))
+    return thm
+}
+
 export {
     getNavbarData,
     setTitleBarText,
     exceptionPages,
     doLogout,
     getLoginNews,
-    getUserMenu
+    getUserMenu,
+    setThemeToApply,
+    getThemeApplied
 }

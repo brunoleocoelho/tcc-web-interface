@@ -1,0 +1,17 @@
+
+.status-one {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+@media (min-width: 576px) {
+    .status-one {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .qtd-status {
+        font-size: 1.3rem;
+    }
+}

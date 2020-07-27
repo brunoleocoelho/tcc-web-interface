@@ -11,7 +11,7 @@ function Footer() {
     return (
         <div 
             id="app-footer" 
-            style={themes[thm]}
+            style={themes[thm].first}
             // className=""
         >
 
