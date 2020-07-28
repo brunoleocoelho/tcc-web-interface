@@ -1,0 +1,8 @@
+/* ---------- SECTION WRAPPER ---------- */
+.section-wrapper {
+    overflow: hidden;
+}
+
+.section-inner {
+    height: 100%;
+}

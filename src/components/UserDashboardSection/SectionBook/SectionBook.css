@@ -1,0 +1,35 @@
+/* ----- SECTION BOOKS ----- */
+/* .section-book {} */
+
+/* ----- IMAGES ----- */
+.listImg {
+    overflow: hidden;
+    width: 30px;
+}
+.gridImg {
+    height: 7rem;
+    width: auto;
+    max-width: 90%;
+}
+
+/* Tamanho de tela 'sm' */
+@media (min-width: 576px) {
+    .gridImg {
+        height: 10rem;
+    }
+}
+
+/* Tamanho de tela 'md' */
+@media (min-width: 768px) {
+    .gridImg {
+        height: 11rem;
+    }    
+}    
+
+/* Tamanho de tela 'lg' */
+@media (min-width: 992px) {
+    .gridImg {
+        height: 8rem;
+    }    
+}    
+

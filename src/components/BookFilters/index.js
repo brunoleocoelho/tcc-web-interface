@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Container, Button, Modal } from 'react-bootstrap'
 import AuthorFilter from './AuthorFilter'
 import CategoryFilter from './CategoryFilter';
+import './BookFilters.css'
 
 /**
  * Componente que renderiza a barra de filtros de livros

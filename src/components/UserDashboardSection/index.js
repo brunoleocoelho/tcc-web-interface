@@ -45,10 +45,11 @@ function UserDashboardSection() {
 
             <Row id="user-dashboard-sections" className="p-2 m-0">
                 { sections.map((sct, idxSct) => {
+                    const key = `${idxSct}-${sct.title.replace(' ','')}`
                     return (
                         <SectionSubject 
-                            key={`${idxSct}-${sct.title.replace(' ','')}`} 
-                            theme={theme}
+                            key={key} 
+                            theme={theme} 
                             {...sct}
                         />
                     )

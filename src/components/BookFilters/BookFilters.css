@@ -1,0 +1,21 @@
+/* ----- ALL FILTERS ----- */
+
+.filter-container {
+    margin-bottom: 28px;
+}
+
+.checkbox-style {
+    font-size: 12px; 
+    cursor: pointer;
+    padding: 4px 0px;
+}
+
+.trucated-bar {
+    background: linear-gradient(0deg, #fff, rgba(255,255,255,0) 100%);
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 60;
+    width: 100%;
+}

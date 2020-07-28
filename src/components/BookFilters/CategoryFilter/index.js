@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
-import { getAllCategories, getSelectedCategories, storeSelectedCategories } from '../../services/CategoryService'
-import Separator from './Separator'
-import FilterActions from './FilterActions'
+import { getAllCategories, getSelectedCategories, storeSelectedCategories } from '../../../services/CategoryService'
+import Separator from '../Separator'
+import FilterActions from '../FilterActions'
+import '../BookFilters.css'
 
 /**
  * Componente que renderiza um filtro de categorias
@@ -46,7 +47,7 @@ function CategoryFilter() {
     ]
 
     return (
-        <div style={styles.filterContainer}>
+        <div className="filter-container">
             <Separator />
 
             <h6>Categorias</h6>
@@ -54,18 +55,18 @@ function CategoryFilter() {
             <FilterActions actions={actions}/>
 
             { categorias.map(category => {
-                const idKey = `filter-category-${String(category).replace(' ','_')}`
+                const idChk = `filter-category-${String(category).replace(' ','_')}`
                 const isChecked = selected.includes(category)
                 
                 return (
                     <Form.Check 
-                        key={'key-'+ idKey}
+                        key={'key-'+ idChk}
+                        id={idChk}
                         type="checkbox"
-                        id={'id-'+ idKey}
                         label={category}
                         value={category}
                         custom
-                        style={styles.checkboxStyle}
+                        className="checkbox-style"
                         onChange={handleCategoryChecked}
                         checked={isChecked}
                     />
@@ -75,23 +76,4 @@ function CategoryFilter() {
     )
 }
 
-const styles = {
-    filterContainer: {
-        marginBottom: 28
-    },
-    checkboxStyle: {
-        fontSize: 12, 
-        cursor: 'pointer',
-        padding: '4px 0px',
-    },
-    trucatedBar: {
-        'background': 'linear-gradient(0deg,#fff,rgba(255,255,255,0) 100%)',
-        content: "",
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        height: 60,
-        width: '100%',
-    }
-}
 export default CategoryFilter

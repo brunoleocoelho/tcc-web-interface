@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Form, Col, Button } from 'react-bootstrap'
-import AutosuggestSearch from '../AutosuggestSearch'
+import AutosuggestSearch from '../../AutosuggestSearch'
 import './NavSearch.css'
 
 function NavSearch(props) {

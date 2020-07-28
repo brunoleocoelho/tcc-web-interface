@@ -1,11 +1,19 @@
-
+/* ------ BOOK CARD ------ */
 .book-container {
     border: 1px solid rgba(0,0,0,.4) !important;
-    background-color: black;
-  }
-  
-  @media (min-width: 1200px) {
+}
+
+.book-header {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* .book-actions {} */
+
+@media (min-width: 1200px) {
     .book-container {
         max-width: 10rem !important;
     }
-  }
+}

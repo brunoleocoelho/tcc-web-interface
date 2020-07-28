@@ -1,0 +1,16 @@
+/* ----- LIBRARY BACKGORUND IMAGE ----- */
+
+.bg-img-library {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "";
+    position: fixed;
+    background-image: url(../../assets/img/library.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.9;
+    filter: blur(4px);
+    z-index: -1;
+}

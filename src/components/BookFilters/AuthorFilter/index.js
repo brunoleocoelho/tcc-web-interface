@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
-import { getAllAuthors, getSelectedAuthors, storeSelectedAuthors } from '../../services/AuthorService'
-import Separator from './Separator'
-import FilterActions from './FilterActions'
+import { getAllAuthors, getSelectedAuthors, storeSelectedAuthors } from '../../../services/AuthorService'
+import Separator from '../Separator'
+import FilterActions from '../FilterActions'
+import '../BookFilters.css'
 
 /**
  * Componente que renderiza um filtro de autores
@@ -13,7 +14,7 @@ function AuthorFilter() {
     const [selected, setSelected] = useState( getSelectedAuthors() )
     
     // FUNCTIONS
-    const handleAuthorChecked = e => {
+    const handleAuthorChecked = (e) => {
         const autor = e.target.value
         let newSelected = []
 
@@ -39,7 +40,6 @@ function AuthorFilter() {
         storeSelectedAuthors(autores)
     }
 
-
     // Array de actions para os botões
     const actions = [
         { label: "Limpar", onClick: cleanAllChecked },
@@ -47,26 +47,26 @@ function AuthorFilter() {
     ]
 
     return (
-        <div style={styles.filterContainer}>
+        <div id="author-filters" className="filter-container">
             <Separator />
             
             <h6>Autores</h6>
 
             <FilterActions actions={actions} />
 
-            { autores.map(autor => {
-                const idKey = `filter-author-${String(autor).replace(' ','_')}`
+            { autores.map( autor => {
+                const idAuthor = `filter-author-${String(autor).replace(' ','')}`
                 const isChecked = selected.includes(autor)
 
                 return (
                     <Form.Check 
-                        key={'key-'+idKey}
+                        key={'key-'+idAuthor}
+                        id={idAuthor}
                         type="checkbox"
-                        id={'id-'+idKey}
                         label={autor}
                         value={autor}
                         custom
-                        style={styles.checkboxStyle}
+                        className="checkbox-style"
                         onChange={handleAuthorChecked}
                         checked={isChecked}
                     />
@@ -76,23 +76,4 @@ function AuthorFilter() {
     )
 }
 
-const styles = {
-    filterContainer: {
-        marginBottom: 28
-    },
-    checkboxStyle: {
-        fontSize: 12, 
-        cursor: 'pointer',
-        padding: '4px 0px',
-    },
-    trucatedBar: {
-        'background': 'linear-gradient(0deg,#fff,rgba(255,255,255,0) 100%)',
-        content: "",
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        height: 60,
-        width: '100%',
-    }
-}
 export default AuthorFilter

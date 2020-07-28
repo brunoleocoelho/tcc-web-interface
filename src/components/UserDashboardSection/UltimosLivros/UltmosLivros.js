@@ -1,26 +1,29 @@
 import React from 'react'
 import { Badge } from 'react-bootstrap'
-import { getAllBooks } from '../../services/StorageService'
-import SectionSubject from './SectionSubject'
+import SectionSubject from '../SectionSubject'
+import { getAllBooks } from '../../../services/StorageService'
 
-function EntregaLivros() {
+/**
+ * Componente que renderiza os últimos livros lidos pelo usuário
+ */
+function UltmosLivros(props) {
     const { books } = getAllBooks()
 
-    console.log("EntregaLivros", books)
+    console.log("UltimosLivros", books)
     return (
         <SectionSubject
-            title="Livros para entregar"
-            headerStyle={{ backgroundColor: 'orange' }}
+            title="Últimas leituras"
+            headerStyle={{ backgroundColor: 'darkolivegreen' }}
         >
             {(books.length > 0) && 
                 books.map((bk, idx)=> {
                     if (idx >= 4) return null
                     return (
                         <div className='p-0 col-12' key={bk.id}>
-                            <Badge className="float-right" variant="warning">em {idx} dias</Badge>
+                            <Badge className="float-right" variant="success">há {idx} dias</Badge>
                             <div className="p-1 row">
                                 <img src={bk.image_url} width={30} style={{ overflow:'hidden' }} />
-                                <span className="col-10 text-wrap">{bk.title}</span>
+                                <span className="col-10 text-break">{bk.title}</span>
                             </div>
                         </div>
                     )
@@ -30,4 +33,4 @@ function EntregaLivros() {
     )
 }
 
-export default EntregaLivros
+export default UltmosLivros

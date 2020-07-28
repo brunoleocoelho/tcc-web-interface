@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button } from 'react-bootstrap'
-import { getNavbarData, getUserMenu } from '../../services/InterfaceService'
-import { getUser } from '../../services/AuthenticationService'
-import Avatar from '../Avatar'
+import { getNavbarData, getUserMenu } from '../../../services/InterfaceService'
+import { getUser } from '../../../services/AuthenticationService'
+import Avatar from '../../Avatar'
 
 import './NavCollapse.css'
 
@@ -54,7 +54,7 @@ function NavUserDropdown({ user, theme = {} }) {
 
     const { label, items } = getUserMenu()
     const idNavuser = `nav-dropdown-${String(label).replace(' ','')}`
-    const imgDft = require('../../assets/img/no-image-profile.jpg')
+    const imgDft = require('../../../assets/img/no-image-profile.jpg')
 
     // Renderiza o ícone
     const renderDdLabelIcon = () => {

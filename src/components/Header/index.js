@@ -20,12 +20,9 @@ function Header(props) {
     // STATE
     const [isNavShown, setIsNavShown] = useState(false)
     const [isLoginPage, setIsLoginPage] = useState((pathname === '/login'))
-    // const [theme, setTheme] = useState('light')
 
+    // CONTEXT
     const { theme } = useContext(CustomThemeContext)
-
-    const toggleId = "responsive-navbar"
-    const themeApply = theme.fourth
 
     // componentDidUpdate
     useEffect(() => {
@@ -33,6 +30,9 @@ function Header(props) {
         setIsLoginPage(isLgIn)
     }, [ pathname ])
 
+    const themeApply = theme.fourth
+    const toggleId = "responsive-navbar"
+    
     // 5 breakpoint sizes (xs, sm, md, large, and xl)
     return (
         <Navbar 
