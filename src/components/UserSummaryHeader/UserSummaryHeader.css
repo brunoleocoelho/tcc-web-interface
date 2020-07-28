@@ -6,6 +6,7 @@
     align-items: center;
 }
 
+/* tamanho de tela 'sm' */
 @media (min-width: 576px) {
     .status-one {
         flex-direction: column;
@@ -13,5 +14,13 @@
     }
     .qtd-status {
         font-size: 1.3rem;
+    }
+}
+
+/* tamanho de tela 'xl' */
+@media (min-width: 1200px) {
+    .status-one {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }

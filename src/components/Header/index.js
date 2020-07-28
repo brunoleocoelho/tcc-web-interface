@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 import NavCollapse from './NavCollapse'
 import NavBrand from './NavBrand'
 import NavSearch from './NavSearch'
@@ -22,10 +22,10 @@ function Header(props) {
     const [isLoginPage, setIsLoginPage] = useState((pathname === '/login'))
     // const [theme, setTheme] = useState('light')
 
-    const { theme: th } = useContext(CustomThemeContext)
+    const { theme } = useContext(CustomThemeContext)
 
     const toggleId = "responsive-navbar"
-    const theme = th.themeName
+    const themeApply = theme.fourth
 
     // componentDidUpdate
     useEffect(() => {
@@ -38,30 +38,27 @@ function Header(props) {
         <Navbar 
             sticky="top" 
             expand="md" 
-            bg={theme} 
-            variant={theme} 
+            bg={theme.themeName} 
+            variant={theme.themeName} 
             collapseOnSelect
             expanded={isNavShown}
             onToggle={e => setIsNavShown(e)}
             className="navbartop"
+            // style={themeApply}
         >
             {(isLoginPage) 
                 ? (
                     <React.Fragment>
                         <NavBrand />
-                        <NavCollapse isLoginPage={false} theme={theme} {...props} />
+                        <NavCollapse isLoginPage={false} theme={themeApply} {...props} />
                     </React.Fragment>
                 )
                 : (
                     <React.Fragment>
                         <NavBrand />
-                        {/* <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button variant="outline-success">Search</Button>
-                        </Form> */}
-                        <NavSearch theme={theme}/>
+                        <NavSearch theme={themeApply}/>
                         <NavToggle toggleId={toggleId} />
-                        <NavCollapse toggleId={toggleId} theme={theme}/>
+                        <NavCollapse toggleId={toggleId} theme={themeApply}/>
                     </React.Fragment>
                 )
             }

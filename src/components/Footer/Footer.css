@@ -1,5 +1,7 @@
 
-#app-footer {
-    height: 3rem;
+/* #app-footer {
+    display: flex;
+    height: fit-content;
     bottom: 0 !important;
-}
+    margin: none;
+} */

@@ -35,17 +35,13 @@ function UserDashboardSection() {
     ]
 
     return (
-        <div id="user-dashboard-container" className="" style={theme.first} >
+        <div id="user-dashboard-container" className="dashboard-container" style={theme.first} >
             
             <div id="user-dashboard-summary" className="d-none d-md-block" >
                 <UserSummaryHeader key="user-summary-1" />
             </div>
 
-            <div 
-                id="user-dashboard-title"
-                className="p-2 mb-2 text-center text-md-left" 
-                style={theme.second}
-            >
+            <div id="user-dashboard-title" className="p-2 mb-2 text-center text-md-left" style={theme.second}>
                 <h5>Resumo de suas atividades</h5>
             </div>
 

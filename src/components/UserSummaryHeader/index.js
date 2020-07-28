@@ -15,8 +15,14 @@ function UserSummaryHeader() {
     // CONTEXT
     const { theme } = useContext(CustomThemeContext)
 
+    const itens = [
+        { label: 'Lidos', qtd: 8, color: 'success', icon: 'bookmark' },
+        { label: 'Entregar', qtd: 8, color: 'danger', icon: 'warning' },
+        { label: 'Favoritos', qtd: 8, color: 'info', icon: 'star' },
+    ]
+
     return (
-        <Row className="p-2 m-0" style={theme.fourth}>
+        <Row id="user-summary" className="p-2 m-0" style={theme.primary}>
             <Col xs={3} md={1} >
                 <Avatar />
             </Col>
@@ -26,30 +32,31 @@ function UserSummaryHeader() {
             </Col>
 
             <Col className="d-flex justify-content-between align-items-center">
-                <div className="status-one text-muted">
-                    <strong className="qtd-status order-2 order-md-1 text-success">8</strong>
-                    <div className="order-1 order-md-2 m-1 flex-column flex-md-row">
-                        <i className="text-success fa fa-bookmark"></i>{' '}
-                        <strong className="d-none d-md-inline text-success">Lidos</strong>
-                    </div>
-                </div>
-                <div className="status-one text-muted">
-                    <strong className="qtd-status order-2 order-md-1 text-warning">8</strong>
-                    <div className="order-1 order-md-2 m-1 flex-column flex-md-row">
-                        <i className="text-warning fa fa-warning"></i>{' '}
-                        <strong className="d-none d-md-inline text-warning">Entregar</strong>
-                    </div>
-                </div>
-                <div className="status-one text-muted">
-                    <strong className="qtd-status order-2 order-md-1 text-info">8</strong>
-                    <div className="order-1 order-md-2 m-1 flex-column flex-md-row">
-                        <i className="text-info fa fa-star"></i>{' '}
-                        <strong className="d-none d-md-inline text-info">Favoritos</strong>
-                    </div>
-                </div>
-            </Col>
-            
+                { itens.map( item => {
+                    const keyItem = `key-status-${item.label.replace(" ","-")}`
+                    const idItem = `status-one-${item.label.replace(" ","-")}`
+
+                    return <StatusOneUser key={keyItem} id={idItem} {...item} />
+                }) }
+            </Col>            
         </Row>
+    )
+}
+
+function StatusOneUser({ id, label, icon, qtd, color }) {
+    return (
+        <div id={id} className="status-one text-muted">
+            <strong className={`qtd-status order-2 order-md-1 order-xl-2 text-${color}`}>
+                { qtd }
+            </strong>
+            <div className="order-1 order-md-2 order-xl-1 m-1 flex-column flex-md-row">
+                <i className={`text-${color} fa fa-${icon}`}></i>
+                {' '}
+                <strong className={`d-none d-md-inline text-${color}`}>
+                    { label }
+                </strong>
+            </div>
+        </div>
     )
 }
 

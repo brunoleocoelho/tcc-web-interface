@@ -13,7 +13,7 @@ import './Home.css'
  * Representa a página inicial
  */
 function Home(props) {
-    console.log("HOME", props)
+    // console.log("HOME", props)
     setTitleBarText('Home')
     
     // props
@@ -40,20 +40,16 @@ function Home(props) {
         { title: "Histórico", icon: "history", href:"" },
     ]
 
-    // theme para botão de alteração de tema geral
-    const btnTheme = (theme.themeName ==='light') ? 'dark' : 'light'
-
     return (
         <Container id="home-student" className="p-0 full-height" fluid>
 
-            <Row id="home-content" className="m-0 text-md-left">
+            <Row id="home-content" className="m-0 text-md-left full-height">
+                
                 {/* START OF SIDE MENU COLLAPSE AND COL-MD-2 */}
-                <div 
-                    id="home-sidemenu"
-                    style={theme.fourth} 
+                <div id="home-sidemenu" 
+                    style={theme.third} 
                     className={`side-menu p-0 col-md-3 col-lg-2 ${showSide ? 'side-hide' : ''}`}
                 >
-
                     {/* BUTTON PARA FECHAR SIDE MENU */}
                     <Button 
                         variant="outline" 
@@ -71,7 +67,6 @@ function Home(props) {
                         <div className="d-block d-md-none" >
                             <UserSummaryHeader key="user-summary-2" />
                         </div>
-                        
                         <Nav className="flex-column">
                             { sideMenus.map((mn, idx) => {
                                 const key = `${idx}-${String(mn.title).replace(' ', '-')}`
@@ -91,7 +86,7 @@ function Home(props) {
                 </div>
 
                 {/* HOME DASHBOARD BODY */}
-                <div id="home-body" className="p-0 text-md-left col">
+                <div id="home-body" className="home-boddy p-0 text-md-left col">
                     {/* BUTTON PARA ABRIR SIDE MENU */}
                     <Button 
                         variant="outline" 
@@ -104,18 +99,6 @@ function Home(props) {
                     </Button>
                     <UserDashboardSection />
                 </div>
-
-                {/* FLOAT BUTTON PARA MUDANÇA DE TEMA DE CORES */}
-                <Button 
-                    id="btn-change-theme"
-                    title={`Alterar para tema '${btnTheme}'`}
-                    className="btn-theme" 
-                    onClick={() => changeTheme(btnTheme)}
-                    variant={btnTheme}
-                >
-                    <i className="fa fa-adjust"></i>
-                </Button>
-
             </Row>
         </Container>
     )
@@ -131,12 +114,5 @@ const styles = {
         marginBottom: 4, 
         marginTop: 4
     },
-    // themeButton: {
-    //     position:'fixed',
-    //     right:'0.75rem',
-    //     top:'16%',
-    //     border: '1px solid',
-    //     zIndex:999
-    // }
 }
 export default Home

@@ -27,11 +27,12 @@ function SectionSubject(props) {
     }
 
     const idSection = "section-subject-"+ title.replace(" ","-")
+    const idInner = "section-inner-"+ title.replace(" ","-")
 
     return (
         <Col id={idSection} xs={12} lg={6} className="p-2 mb-2 sectionContainer" >
 
-            <div className="p-2" style={theme.fourth}>
+            <div id={idInner} className="section-inner p-2" style={theme.fourth}>
                 <HeaderSection {...{
                     ...props, 
                     changeLayout, 
@@ -64,7 +65,7 @@ function HeaderSection({ title, icon, iconColor, layout, changeLayout, theme }) 
     const idHeader = "section-header-"+ title.replace(" ","-")
 
     return (
-        <Row id={idHeader} className="p-2 m-0 section-title">
+        <Row id={idHeader} className="section-header p-2 m-0">
             <ButtonGroup
                 aria-label="Layout change" 
                 className="subject-layout-icon" 

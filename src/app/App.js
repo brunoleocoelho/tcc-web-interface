@@ -8,10 +8,11 @@ import { storeAllBooks } from '../services/StorageService'
 import { setTitleBarText } from '../services/InterfaceService'
 import booksFull from '../assets/data/books.json';
 
+import { CustomThemeProvider } from '../services/CustomThemeContext'
 import Header from '../components/Header';
 import AlertCustom from '../components/AlertCustom';
 import Footer from '../components/Footer';
-import { CustomThemeProvider } from '../services/CustomThemeContext'
+import ThemeButton from '../components/ThemeButton';
 
 // Armazenando MOCK-UP DE LIVROS
 storeAllBooks(booksFull)
@@ -24,12 +25,13 @@ setTitleBarText()
  */
 function App() {
     return (
-        <div className="App full-height">
+        <div className="App">
             <BrowserRouter>
                 <CustomThemeProvider>
                     
                     <Header />
                     <MainRouter />
+                    <ThemeButton />
                     <Footer />
 
                 </CustomThemeProvider>

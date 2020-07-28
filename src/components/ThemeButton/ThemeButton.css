@@ -1,0 +1,17 @@
+
+.btn-theme {
+    position: fixed;
+    right: 0.5rem;
+    top: 8%;
+    border: 1px solid;
+    z-index: 999;
+    transition: top 0.2s ease-in-out;
+}
+
+/* Tamanho de tela 'md' */
+@media (min-width: 768px) {
+    .btn-theme {
+        top: initial;
+        bottom: 1rem;
+    }
+}    

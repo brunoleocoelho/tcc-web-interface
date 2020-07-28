@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button } from 'react-bootstrap'
 import { getNavbarData, getUserMenu } from '../../services/InterfaceService'
-import { themes } from '../../services/Constants'
 import { getUser } from '../../services/AuthenticationService'
 import Avatar from '../Avatar'
 
@@ -12,8 +11,11 @@ import './NavCollapse.css'
  * pode ser 'collapsed' conforme tamanho de tela
  */
 function NavCollapse(props) {
-    const { isLoginPage, toggleId, theme } = props
-    
+    // Menu só exibido com usuário
+    const user = getUser()
+    if (!user) return null
+
+    const { isLoginPage, toggleId, theme = {} } = props
     let { items } = getNavbarData()
     
     return (
@@ -36,7 +38,7 @@ function NavCollapse(props) {
                     })) }
                 </Nav>
     
-                <NavUserDropdown />
+                <NavUserDropdown user={user} theme={theme} />
             </Navbar.Collapse>
 
         </React.Fragment>
@@ -46,41 +48,40 @@ function NavCollapse(props) {
 /**
  * Renderiza um item tipo dropdown do menu da navbar
  */
-function NavUserDropdown({ theme, ...rest }) {
-    // SATE
+function NavUserDropdown({ user, theme = {} }) {
+    // STATE
     const [isOpen, setIsOpen] = useState(false)
 
-    const usr = getUser()
-    const { label, items, icon, elemtype } = getUserMenu()
+    const { label, items } = getUserMenu()
+    const idNavuser = `nav-dropdown-${String(label).replace(' ','')}`
     const imgDft = require('../../assets/img/no-image-profile.jpg')
 
-    const id = `nav-dropdown-${String(label).replace(' ','')}`
-
     // Renderiza o ícone
-    const renderDdLabelIcon = () => (
-        <React.Fragment>
-            <span 
-                id="icon-ddi" 
-                className="mr-0 mb-lg-0 dd-icon" 
-            >
-                <Avatar 
-                    width={28} 
-                    userImg={usr ? usr.profileImg : imgDft}
-                    style={{display:'unset'}} 
-                />
-            </span>
-            <span id="icon-ddi">{ label }</span>
-        </React.Fragment>
-    )
+    const renderDdLabelIcon = () => {
+        const color = theme.color;
+        return (
+            <React.Fragment>
+                <span id="icon-ddi" className="mr-0 mb-lg-0 dd-icon" >
+                    <Avatar 
+                        width={28} 
+                        userImg={user ? user.profileImg : imgDft}
+                        style={{display:'unset'}} 
+                    />
+                </span>
+                <span id="icon-ddi" style={{color}}>
+                    { label }
+                </span>
+            </React.Fragment>
+        )
+    }
     
     return (
         <NavDropdown 
-            className="nav-dd order-3"
-            style={styles.navTheme[theme]}
+            id={idNavuser} 
             title={ renderDdLabelIcon() }
-            id={id} 
-            active
             onClick={() => setIsOpen(!isOpen)}
+            className="nav-dd order-3"
+            active
         >
                 { items && items.map( (item, idx) => {
                     const { elemtype } = item
@@ -106,7 +107,6 @@ function NavUserDropdown({ theme, ...rest }) {
                         default:
                             const keyDiv = `ddd-${elemtype}-${idx}`
                             return <NavDropdown.Divider key={keyDiv} />
-
                     }
                 })}
         </NavDropdown>
@@ -117,7 +117,7 @@ function NavUserDropdown({ theme, ...rest }) {
  * Renderiza um item do menu da navbar
  */
 function NavItemLink({ label, path, icon, theme, ...rest }) {
-    const customStyle = {...styles.navLink, ...styles.navTheme[theme]}
+    const customStyle = {...styles.navLink, ...theme}
     
     // removendo propriedades não aceitas pelo Nav.Link
     const rmUnsetProps = ({showNotLogged, ...rest}) => rest
@@ -136,7 +136,6 @@ function NavItemLink({ label, path, icon, theme, ...rest }) {
     )
 }
 
-
 // ESTILOS CUSTOMIZADOS
 const styles = {
     navLink: {
@@ -148,7 +147,6 @@ const styles = {
     navItemDD: {
         alignItems: 'center',
     },
-    navTheme: {...themes}
 }
 
 export default NavCollapse
