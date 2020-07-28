@@ -1,0 +1,40 @@
+/* Estilos CSS para Input de busca */
+
+.btn-search-regular {
+    position: absolute;
+    right: 2.8rem;
+    top: 10px;
+    transition: 0.5s;
+}
+
+.btn-search-hide {
+    display: none;
+}
+
+#search-suggest {
+    transition: all .2s ease-in-out;
+}
+
+
+@media (max-width: 767px) {
+    .input-search-show {
+        position: fixed;
+        top: 0.6rem;
+        left: 0.6rem;
+        right: 3.1rem;
+        width: initial;
+    }
+    .input-search-hide {
+        width: 0;
+        display: none;
+    }
+
+}
+
+/* para tamanho 'sm' */
+@media (min-width: 576px) {
+    .btn-search-regular {
+        right: 2.8rem;
+    }
+}
+

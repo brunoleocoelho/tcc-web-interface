@@ -96,14 +96,16 @@ function Login(props) {
     }
 
     return (
-        <Container className="py-3">
+        <Container id="login-page" className="py-3">
             <LibraryBackground />
 
-            <Row>
-                <Col className="py-2 p-md-2 col-12 col-md-6 col-lg-8 order-2 order-md-1" >
+            <Row id="login-content">
+                
+                <Col id="login-news-col" className="py-2 p-md-2 col-12 col-md-6 col-lg-8 order-2 order-md-1" >
                    <LoginNewsBoard />
                 </Col>
-                <Col className='py-2 p-md-2 col-md-6 col-lg-4 order-1 order-md-2'>
+
+                <Col id="login-form-col" className='py-2 p-md-2 col-md-6 col-lg-4 order-1 order-md-2'>
                     <FormBuilder formProps={formProps} />
                 </Col>
 

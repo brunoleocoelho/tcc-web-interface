@@ -1,36 +1,45 @@
-.subject-layout-icon {
-    position: absolute !important;
-    right: 4px;
-    top: 5px;
+div {
+    transition-delay: 0;
+    transition-property: color, background-color;
+    transition-duration: 200ms ;
 }
 
+.dashboard-container {
+    height: inherit;
+}
+
+/* Container principal e interno em SectionSubject */
 .sectionContainer {
-    border: 1px solid silver;
-    /* border-radius: 6px; */
     overflow: hidden;
 }
-
-.section-title {
-    background-color: lightgray;
+.section-inner {
+    height: 100%;
 }
 
+/* Header e buttonGroup do header em SectionSubject */
+/* .section-header {} */
+.subject-layout-icon {
+    position: absolute !important;
+    right: 1rem;
+    top: 1rem;
+}
+
+/* Body em SectionSubject */
 .section-content {
     justify-content: space-between;
-    background-color: ghostwhite !important;
 }
 
-.section-book {
+/* SectionBook container e lista e grid */
+/* .section-book {
     transition-property: all;
-    transition-duration: .2s;
+    transition-duration: 0.1s;
     transition-timing-function: linear;
-    /* transition-delay: -0.06s; */
-}
-
+    transition-delay: -0.06s;
+} */
 .listImg {
     overflow: hidden;
     width: 30px;
 }
-
 .gridImg {
     height: 7rem;
     width: auto;

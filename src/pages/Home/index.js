@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Container, Button, Row, Nav } from 'react-bootstrap';
 
 import { setTitleBarText } from '../../services/InterfaceService';
 import { Redirect } from 'react-router-dom';
 
+import CustomThemeContext from '../../services/CustomThemeContext';
 import UserSummaryHeader from '../../components/UserSummaryHeader';
 import UserDashboardSection from '../../components/UserDashboardSection';
-
 import './Home.css'
 
 /**
  * Representa a página inicial
  */
 function Home(props) {
-    console.log("HOME", props)
+    // console.log("HOME", props)
     setTitleBarText('Home')
     
     // props
@@ -21,6 +21,9 @@ function Home(props) {
 
     // state
     const [showSide, setShowSide] = useState(false)
+
+    // CONTEXT
+    const { theme, changeTheme } = useContext(CustomThemeContext)
 
     // functions
     const toggleSide = () => setShowSide(!showSide)
@@ -38,22 +41,32 @@ function Home(props) {
     ]
 
     return (
-        <Container className="p-0" fluid>
+        <Container id="home-student" className="p-0 full-height" fluid>
 
-            <div className="d-none d-md-block" >
-                <UserSummaryHeader key="user-summary-1" />
-            </div>
-            
-            <Row className="m-0 text-md-left">
-
-                {/* SIDE MENU COLLAPSE AND COL-MD-2 */}
-                <div className={`side-menu p-0 col-md-2 ${showSide ? 'side-hide' : ''}`}>
-
+            <Row id="home-content" className="m-0 text-md-left full-height">
+                
+                {/* START OF SIDE MENU COLLAPSE AND COL-MD-2 */}
+                <div id="home-sidemenu" 
+                    style={theme.third} 
+                    className={`side-menu p-0 col-md-3 col-lg-2 ${showSide ? 'side-hide' : ''}`}
+                >
+                    {/* BUTTON PARA FECHAR SIDE MENU */}
+                    <Button 
+                        variant="outline" 
+                        title="fechar" 
+                        className="side-btn-close mx-0 d-block d-md-none"
+                        onClick={toggleSide} 
+                        style={theme.second}
+                    >
+                        <i className="fa fa-close"></i>
+                        &nbsp; 
+                        Fechar
+                    </Button>
+                    
                     <div className="side-content">
                         <div className="d-block d-md-none" >
                             <UserSummaryHeader key="user-summary-2" />
                         </div>
-                        
                         <Nav className="flex-column">
                             { sideMenus.map((mn, idx) => {
                                 const key = `${idx}-${String(mn.title).replace(' ', '-')}`
@@ -70,32 +83,21 @@ function Home(props) {
                             })}
                         </Nav>
                     </div>
-
-                    <Button 
-                        variant="outline" 
-                        title="fechar" 
-                        className="side-btn-close bg-light mx-0 d-block d-md-none" 
-                        onClick={toggleSide} 
-                    >
-                        <i className="fa fa-close"></i>
-                        &nbsp; 
-                        Fechar
-                    </Button>
                 </div>
 
-                {/* MAIN HOME DASHBOARD */}
-                <div className="p-2 text-md-left col">
+                {/* HOME DASHBOARD BODY */}
+                <div id="home-body" className="home-boddy p-0 text-md-left col">
+                    {/* BUTTON PARA ABRIR SIDE MENU */}
                     <Button 
                         variant="outline" 
                         title="Opções" 
-                        className="position-absolute d-md-none" 
+                        className="btn-menu" 
                         onClick={toggleSide} 
+                        style={theme.second}
                     >
                         <i className="fa fa-bars"></i>
                     </Button>
-
                     <UserDashboardSection />
-                    
                 </div>
             </Row>
         </Container>
@@ -111,6 +113,6 @@ const styles = {
     sideMenuItem: {
         marginBottom: 4, 
         marginTop: 4
-    }
+    },
 }
 export default Home

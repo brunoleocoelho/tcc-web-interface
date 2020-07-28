@@ -1,5 +1,8 @@
 import { unsetAuthUser, getUser } from "./AuthenticationService";
 
+// Chaves de informações localStorage
+const themeApplied = 'theme-applied'
+
 /**
  * Atualiza o título da página concateca 
  * o titulo principal com um sufixo
@@ -19,22 +22,31 @@ function setTitleBarText(sufix = '') {
  */
 function getNavbarData() {
     const title = 'Biblioteca'
-    const user = getUser() 
 
-    // Formato: label: "", path: "", icon: "", elemtype: "", showNotLogged: false, items: []
+    // Formato: label: "", path: "", icon: "", elemtype: "", items: []
     const items = [
         { label: 'Livros', path: '/livros', icon: 'book', elemtype: 'link' },
-        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link'/* , showNotLogged: true */  },
-
-        { label: (user? user.name : ''), icon: 'user', elemtype: 'dropdown', items: [
-            { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
-            { label: '', elemtype:'divider' },
-            { label: 'Sair', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
-        ] },
+        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link' },
     ]
 
     const headerData = { title, items }
     return headerData;
+}
+
+function getUserMenu() {
+    const user = getUser() 
+    // Formato: label: "", path: "", icon: "", elemtype: "", items: []
+    const menu = { 
+        label: (user? user.name : ''), 
+        icon: 'user', 
+        elemtype: 'dropdown', 
+        items: [
+            { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
+            { label: '', elemtype: 'divider' },
+            { label: 'Sair', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
+        ] 
+    }
+    return menu
 }
 
 /**
@@ -63,10 +75,24 @@ function getLoginNews() {
     return avisos
 }
 
+/** Armazena o tema visual escolhido pelo usuário */
+function setThemeToApply(theme) {
+    localStorage.setItem(themeApplied, JSON.stringify(theme))
+}
+
+/** Retorna o tema visual armazenado */
+function getThemeApplied() {
+    const thm = JSON.parse(localStorage.getItem(themeApplied))
+    return thm
+}
+
 export {
     getNavbarData,
     setTitleBarText,
     exceptionPages,
     doLogout,
-    getLoginNews
+    getLoginNews,
+    getUserMenu,
+    setThemeToApply,
+    getThemeApplied
 }
