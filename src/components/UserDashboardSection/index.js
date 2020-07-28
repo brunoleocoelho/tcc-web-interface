@@ -3,8 +3,6 @@ import { Row } from 'react-bootstrap'
 import { getAllBooks } from '../../services/StorageService'
 import SectionSubject from './SectionSubject'
 import UserSummaryHeader from '../UserSummaryHeader'
-
-// import { themes } from '../../services/Constants'
 import CustomThemeContext from '../../services/CustomThemeContext'
 
 /**

@@ -1,11 +1,15 @@
 import React, { useState, createContext, useEffect } from 'react'
-import { themes } from '../services/Constants'
+import { themes } from '../utils/constants'
 import { getThemeApplied, setThemeToApply } from './InterfaceService'
 
-/** Context para gerenciamento de tema da aplicação */
+/**
+ * Context para gerenciamento de tema da aplicação
+ */
 const CustomThemeContext = createContext({theme: themes.light})
 
-/** Provider dos valores de tema */
+/**
+ * Provider dos valores de tema
+ */
 export const CustomThemeProvider = ({ children }) => {
     const themeApplied = getThemeApplied()
 
