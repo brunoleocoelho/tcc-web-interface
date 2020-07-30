@@ -1,23 +1,29 @@
 // Do mais CLARO para o mais ESCURO
 // fundos claros
-const white = "#FFFFFF";
-const steel = "#EEF1F5";
-const grey = "#DFDFDF";
-const dust = "#E5E5E5";
+export const white = "#FFFFFF";
+export const steel = "#EEF1F5";
+export const grey = "#D5D5D5";
+export const dust = "#E5E5E5";
 
 // fundos escuros
-const greymint = "#232729";
-const darker = "#1e2225";
-const ebonyclay = "#1a1c1d";
-const almost = "#161616";
-const black = "#000000";
+export const greymint = "#343a40";
+export const darker = "#1e2225";
+export const ebonyclay = "#1a1c1d";
+export const graphite = "#1a1a1a";
+export const black = "#000000";
+
+// Cores linhas HR
+export const lineLight = "#0000002a";
+export const lineDark = "#ffffff2a";
+
 
 // REPRESENTA OS ESTILOS PARA TEMA ESCURO
 // fundos claros, fontes escuras
 const dark = {
     themeName: 'dark',
-    first: {
-        backgroundColor: almost,
+    line: lineDark,
+    primary: {
+        backgroundColor: graphite,
         color: steel,
     },
     second: {
@@ -26,7 +32,7 @@ const dark = {
     },
     third: {
         backgroundColor: darker,
-        color: steel,
+        color: white,
     },
     fourth: {
         backgroundColor: greymint,
@@ -38,21 +44,22 @@ const dark = {
 // fundos escuros, fontes claras
 const light = {
     themeName: 'light',
-    fourth: {
-        backgroundColor: white,
-        color: almost,
-    },
-    third: {
+    line: lineLight,
+    primary: {
         backgroundColor: steel,
-        color: darker,
+        color: black,
     },
     second: {
         backgroundColor: grey,
-        color: almost,
+        color: graphite,
     },
-    first: {
+    third: {
         backgroundColor: dust,
-        color: black,
+        color: darker,
+    },
+    fourth: {
+        backgroundColor: white,
+        color: graphite,
     },
 }
 
