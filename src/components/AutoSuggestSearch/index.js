@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FormControl, Button } from 'react-bootstrap'
+import CustomThemeContext from '../../services/CustomThemeContext'
+
+import './AutoSuggestSearch.css'
 
 /** 
  * Componente para renderizar o campo de busca
  */
-function AutosuggestSearch({ value, placeholder, onChangeText, closeAction, inputRef }) {
+function AutoSuggestSearch({ value, placeholder, onChangeText, closeAction, inputRef }) {
 
     const phText = placeholder ? placeholder : 'Buscar livro...' 
+
+    // CONTEXT
+    const { theme } = useContext(CustomThemeContext)
 
     return (
         <React.Fragment>
             
-            <Button /* variant="light"  */
-                className="d-md-none"
-                style={styles.btnClose} 
+            <Button
+                variant={theme.themeName}
                 onClick={closeAction}
+                className="btn-input-close"
             >
                 <i className="fa fa-close" />
             </Button>
@@ -26,22 +32,12 @@ function AutosuggestSearch({ value, placeholder, onChangeText, closeAction, inpu
                 placeholder={phText} 
                 value={value} 
                 onChange={onChangeText} 
+                className="auto-suggest-input"
             />
 
         </React.Fragment>
     )
 }
 
-// ESTILO
-const styles = {
-    btnClose: {
-        position:'absolute', 
-        right: 2,
-        margin: '2px 4px',
-        border: 'none',
-        backgroundColor: 'white',
-        color: 'gray'
-    }
-}
 
-export default AutosuggestSearch
+export default AutoSuggestSearch

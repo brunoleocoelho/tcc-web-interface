@@ -1,0 +1,44 @@
+/* ----- CONTENT WRAPPER ----- */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* height: 100vh; */
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.content-wrapper > header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+/* .content-wrapper > header h2 {} */
+
+.content-wrapper > header .action {
+    display: flex;
+    flex-direction: row;
+}
+
+/* .content-wrapper > section {
+    padding: 0.25rem;
+} */
+
+/* Tamanho de tela 'sm' */
+@media (min-width: 576px) {
+
+}
+
+/* Tamanho de tela 'md' */
+@media (min-width: 768px) {
+
+}    
+
+/* Tamanho de tela 'lg' */
+@media (min-width: 992px) {
+    .content-wrapper {
+        height: inherit;
+    }    
+}    
+

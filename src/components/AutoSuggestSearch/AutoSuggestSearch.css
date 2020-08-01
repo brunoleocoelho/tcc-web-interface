@@ -1,0 +1,18 @@
+/* ----- AUTO SUGGEST SEARCH */
+
+button.btn-input-close {
+    position: absolute; 
+    right: 1px;
+    margin: 1px 0px;
+    border: none;
+}
+
+input.auto-suggest-input {
+    padding-right: 2.8rem !important;
+}
+
+@media (min-width: 768px) {
+    button.btn-input-close {
+        display: none;
+    }
+}

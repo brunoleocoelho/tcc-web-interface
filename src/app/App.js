@@ -13,6 +13,7 @@ import Header from '../components/Header';
 import AlertCustom from '../components/AlertCustom';
 import Footer from '../components/Footer';
 import ThemeButton from '../components/ThemeButton';
+import MainWrapper from '../components/MainWrapper';
 
 // Armazenando MOCK-UP DE LIVROS
 storeAllBooks(booksFull)
@@ -30,14 +31,14 @@ function App() {
                 <CustomThemeProvider>
                     
                     <Header />
-                    <MainRouter />
-                    <ThemeButton />
-                    <Footer />
+                    <MainWrapper>
+                        <MainRouter />
+                        <ThemeButton />
+                    </MainWrapper>
 
+                    <AlertCustom />
                 </CustomThemeProvider>
             </BrowserRouter>
-            
-            <AlertCustom />
         </div>
     );
 }

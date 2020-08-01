@@ -25,8 +25,14 @@ function getNavbarData() {
 
     // Formato: label: "", path: "", icon: "", elemtype: "", items: []
     const items = [
-        { label: 'Livros', path: '/livros', icon: 'book', elemtype: 'link' },
-        { label: 'Sobre', path: '/sobre', icon: 'question', elemtype: 'link' },
+        { label: 'Livros', href: '/livros', icon: 'book', elemtype: 'link' },
+        { label: 'Sobre', href: '/sobre', icon: 'question', elemtype: 'link' },
+        { label: "Resumo", href:"", icon: "bookmark" },
+        { label: "Leituras", href:"", icon: "glass" },
+        { label: "Entregas", href:"", icon: "warning" },
+        { label: "Reservas", href:"", icon: "book" },
+        { label: "Favoritos", href:"", icon: "star" },
+        { label: "Histórico", href:"", icon: "history" },
     ]
 
     const headerData = { title, items }
@@ -35,15 +41,15 @@ function getNavbarData() {
 
 function getUserMenu() {
     const user = getUser() 
-    // Formato: label: "", path: "", icon: "", elemtype: "", items: []
+    // Formato: label: "", href: "", icon: "", elemtype: "", items: []
     const menu = { 
         label: (user? user.name : ''), 
         icon: 'user', 
         elemtype: 'dropdown', 
         items: [
-            { label: 'Estante', path: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
+            { label: 'Estante', href: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
             { label: '', elemtype: 'divider' },
-            { label: 'Sair', path: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
+            { label: 'Sair', href: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
         ] 
     }
     return menu

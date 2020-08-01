@@ -1,27 +1,19 @@
 import React, { useContext } from 'react'
 
-import Page from '../Page'
 import { themes } from '../../utils/constants';
 import Separator from '../BookFilters/Separator';
 
-const actions = [
-    {
-        label: 'Teste',
-        onClick: () => alert('Teste'),
-        icon: 'smile-o'
-    }
-] 
 
 /** Componente para exibir as cores dos temas dark e light */
 function ThemeColorSample() {
     const renderItems = (items) => {
         return (
             <>
-                { Object.keys(items).map( item => {
+                { Object.keys(items).map( (item, key) => {
                     if (typeof items[item] === 'string') return null;
         
                     return (
-                        <div className="col" style={{
+                        <div className="col" key={`color-${key}-${items[item].color}`} style={{
                             padding: 10, 
                             height: 100,
                         }}>
@@ -38,27 +30,32 @@ function ThemeColorSample() {
                 }) }
             </>
         )
-        
     }
 
     return (
-        <Page title="Sample de Cores dos Temas" actions={actions}>
-            { Object.keys(themes).reverse().map( chave => (
-                <div style={{
-                    boarder:'1px solid black',
-                    padding: 10
-                }}>
-                    <h3>{ chave }</h3>
-                    <Separator />
-                    <div className="row p-4" style={{
-                        color: themes[chave].primary.color,
-                        backgroundColor: themes[chave].primary.backgroundColor
+        <div style={{ padding: '1rem' }} >
+            { 
+                Object.keys(themes).reverse().map((chave, key) => (
+                    <div key={`theme-${key}-${chave}`} style={{
+                        boarder:'1px solid black',
+                        padding: 10
                     }}>
-                        { renderItems(themes[chave]) }
+                        
+                        <h3>{ chave }</h3>
+
+                        <Separator />
+                        
+                        <div className="row p-4" style={{
+                            color: themes[chave].primary.color,
+                            backgroundColor: themes[chave].primary.backgroundColor
+                        }}>
+                            { renderItems(themes[chave]) }
+                        </div>
+
                     </div>
-                </div>
-            )) }
-        </Page>
+                ))
+            }
+        </div>
     )
 }
 

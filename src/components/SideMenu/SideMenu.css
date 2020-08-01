@@ -1,0 +1,95 @@
+/* ----- SIDE MENU ----- */
+
+.side-menu {
+    background-color: whitesmoke;
+    position: fixed !important;
+    width: 70% !important;
+    height: initial !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    padding: 0 !important;
+    margin-left: -350px;
+    z-index: 1999;
+    transition: margin 0.3s, position 0s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    box-shadow: 2px 0px 10px black;
+}
+
+.side-content {
+    overflow-y: auto;
+    height: 82%;
+    padding-bottom: 50px;
+}
+
+.side-hide {
+    margin-left: 0 !important;
+}
+
+.side-btn-close {
+    position: absolute !important;
+    bottom: 0;
+    width: 100%;
+    margin: auto 0px !important;
+    padding: 0.7rem !important;
+    display: block !important;
+    z-index: 9;
+}
+
+.side-menu .side-item {
+    display: flex !important;
+    flex-direction: row;
+    color: inherit;
+}
+
+.side-menu .side-item.active {
+    /* opacity: 0.85; */
+    transition-duration: 0.8s;
+}
+
+.side-menu .side-item:hover {
+    color: inherit !important;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+.side-menu .side-item :focus {
+    background-color: white !important;
+}
+
+.side-menu .side-item-icon {
+    padding: 0.25rem;
+    width: 15%;
+    text-align: center;
+}
+
+.side-menu .side-item-text {
+    padding: 0.25rem;
+    width: 85%;
+}
+
+/* Tamanho de tela 'sm' */
+@media (min-width: 576px) {
+    .side-menu {
+        width: 50% !important;
+    }
+    .side-content {
+        padding-bottom: 0px !important;
+    }
+}
+
+/* Tamanho de tela 'md' */
+@media (min-width: 768px) {
+    .side-menu {
+        position: fixed !important;
+        top: 3.5rem !important;
+        height: initial;
+        margin-left: 0;
+        z-index: 999;
+        box-shadow: none;
+    }
+    .side-btn-close {
+        display: none !important;
+    }
+}    
+

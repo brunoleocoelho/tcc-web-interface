@@ -1,9 +1,10 @@
 // Do mais CLARO para o mais ESCURO
 // fundos claros
 export const white = "#FFFFFF";
+export const smoke = "#f5f5f5";
 export const steel = "#EEF1F5";
-export const grey = "#D5D5D5";
 export const dust = "#E5E5E5";
+export const grey = "#D5D5D5";
 
 // fundos escuros
 export const greymint = "#343a40";
@@ -46,15 +47,15 @@ const light = {
     themeName: 'light',
     line: lineLight,
     primary: {
-        backgroundColor: steel,
+        backgroundColor: dust,
         color: black,
     },
     second: {
-        backgroundColor: grey,
+        backgroundColor: steel,
         color: graphite,
     },
     third: {
-        backgroundColor: dust,
+        backgroundColor: smoke,
         color: darker,
     },
     fourth: {

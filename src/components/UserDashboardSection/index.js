@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { Row } from 'react-bootstrap'
 import { getAllBooks } from '../../services/StorageService'
 import SectionSubject from './SectionSubject'
-import UserSummaryHeader from '../UserSummaryHeader'
 import CustomThemeContext from '../../services/CustomThemeContext'
 
 /**
@@ -33,16 +32,10 @@ function UserDashboardSection() {
     ]
 
     return (
-        <div id="user-dashboard-container" className="dashboard-container" style={theme.first} >
-            
-            <div id="user-dashboard-summary" className="d-none d-md-block" >
-                <UserSummaryHeader key="user-summary-1" />
-            </div>
-
-            <div id="user-dashboard-title" className="p-2 mb-2 text-center text-md-left" style={theme.second}>
-                <h5>Resumo de suas atividades</h5>
-            </div>
-
+        <div id="user-dashboard-container" 
+            className="dashboard-container"
+            style={theme.primary}
+        >
             <Row id="user-dashboard-sections" className="p-2 m-0">
                 { sections.map((sct, idxSct) => {
                     const key = `${idxSct}-${sct.title.replace(' ','')}`

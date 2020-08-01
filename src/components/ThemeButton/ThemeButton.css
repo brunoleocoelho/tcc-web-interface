@@ -2,16 +2,17 @@
 .btn-theme {
     position: fixed;
     right: 0.5rem;
-    top: 8%;
-    border: 1px solid;
+    bottom: 1rem;
+    /* border: 1px solid; */
+    /* border-radius: 50% !important; */
     z-index: 999;
     transition: top 0.2s ease-in-out;
 }
 
 /* Tamanho de tela 'md' */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .btn-theme {
         top: initial;
         bottom: 1rem;
     }
-}    
+}     */

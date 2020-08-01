@@ -1,55 +1,56 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { Form, Col, Button } from 'react-bootstrap'
-import AutosuggestSearch from '../../AutosuggestSearch'
+import AutoSuggestSearch from '../../AutoSuggestSearch'
+import CustomThemeContext from '../../../services/CustomThemeContext'
 import './NavSearch.css'
 
 function NavSearch(props) {
-    // PROPS
-    const { theme } = props
+    // console.log('NavSearch', props)
 
     // STATE
     const [showInput, setShowInput] = useState(false)
     const [term, setTerm] = useState('')
 
+    // CONTEXT
+    const { theme } = useContext(CustomThemeContext)
+
+    // REF
     const inputRef = useRef()
 
+    // INTERNAL FUNCTIONS
     const handleSearch = (e) => {
         setTerm(e.target.value)
     }
 
     const handleShowInput = (e) => {
+        setTerm('')
         setShowInput(!showInput)
     }
     
     // componentDidUpdate
     useEffect(() => {
-        if (!showInput) inputRef.current.focus()
+        if (!showInput) 
+            inputRef.current.focus()
     }, [showInput])
-
-    // Em telas maiores que sm, input é mostrado, e botão de busca é oculto
-    // Em telas menores de modo que o exibindo, a busca pode ser efetuada
-    // const containerCss = [
-    //     'm-0 order-2 position-static',
-    //     (showInput ? 'col-12' : ''),
-    //     'col-md-5'
-    // ].join(' ')
     
     // CSS Button
-    // const btnColStyle = (showInput ? styles.btnShowInput : {})
     const btnColCss = [
-        'btn-search-regular text-center mx-0 px-0 d-md-none',
+        'btn-search-regular',
         (showInput ? 'btn-search-hide' : '')
     ].join(' ')
     
     // CSS Input
-    const inputColCss = `d-md-flex ${showInput ? 'input-search-show' : 'input-search-hide'}`
+    const inputColCss = [
+        'd-md-flex',
+        (showInput ? 'input-search-show' : 'input-search-hide')
+    ].join(' ')
 
     return (
         <Form className="order-md-4">
-            <Form.Row>
-                <div className={btnColCss} /* style={btnColStyle} */>
+            <Form.Row className="search-form-row">
+                <div className={btnColCss}>
                     <Button 
-                        variant={theme} 
+                        variant={theme.themeName} 
                         onClick={handleShowInput}
                     >
                         <i className="fa fa-search"></i>
@@ -57,7 +58,7 @@ function NavSearch(props) {
                 </div>
 
                 <div id="search-suggest" className={inputColCss}>
-                    <AutosuggestSearch
+                    <AutoSuggestSearch
                         inputRef={inputRef}
                         value={term}
                         onChangeText={handleSearch}
@@ -66,18 +67,6 @@ function NavSearch(props) {
             </Form.Row>
         </Form>
     )
-}
-
-// ESTILOS CUSTOMIZADOS
-const styles = {
-    btnRegular: {
-        position: 'absolute',
-        right: '2.5rem',
-        top: 10,
-    },
-    btnShowInput : {
-        display: 'none'
-    },
 }
 
 export default NavSearch

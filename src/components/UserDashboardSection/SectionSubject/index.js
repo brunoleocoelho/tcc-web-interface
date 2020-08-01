@@ -3,6 +3,8 @@ import { Col } from 'react-bootstrap'
 import HeaderSection from './HeaderSection'
 import BodySection from './BodySection'
 
+import './SectionSubject.css'
+
 // Modos de layout aplicados
 const dispOptions = [
     { layout: 'list', icon: 'list' }, 

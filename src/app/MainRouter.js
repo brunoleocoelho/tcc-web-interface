@@ -7,7 +7,9 @@ import {
     AboutPage, 
     LoginPage, 
     LivrosPage,
+    TemasCoresPage
 }from '../pages'
+
 
 /**
  * Componente responsável por definir as rotas principais da aplicação
@@ -18,11 +20,13 @@ function MainRouter(props) {
         <Switch>
             <Route exact path="/login" component={LoginPage} />
 
-            <PrivateRoute exact path="/home" component={props => HomePage(props)} />
+            <PrivateRoute exact path="/dashboard" component={props => HomePage(props)} />
             <PrivateRoute path="/livros" component={props => LivrosPage(props)} />
             <PrivateRoute path="/sobre" component={props => AboutPage(props)} />
+            <PrivateRoute path="/temas-cores" component={props => TemasCoresPage(props)} />
 
-            <PrivateRoute exact path="/" component={props => HomePage(props)} />
+            {/* <PrivateRoute exact path="/" component={props => HomePage(props)} /> */}
+            <Redirect from="/" to="/dashboard" component={props => HomePage(props)} />
         </Switch>
     )
 }

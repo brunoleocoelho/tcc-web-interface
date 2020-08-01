@@ -1,0 +1,11 @@
+/* ----- NAV SIDE TOGGLER ----- */
+.btn-menu {
+    position: relative;
+}
+
+/* Em tamanho de tela 'md' */
+@media (min-width: 768px) {
+    .btn-menu {
+        display: none !important;
+    }
+}    

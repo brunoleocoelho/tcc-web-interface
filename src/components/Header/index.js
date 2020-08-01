@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
+import { Navbar, Button } from 'react-bootstrap'
 
-import { Navbar } from 'react-bootstrap'
-import NavCollapse from './NavCollapse'
+import CustomThemeContext from '../../services/CustomThemeContext'
 import NavBrand from './NavBrand'
 import NavSearch from './NavSearch'
-import NavToggle from './NavToggle'
+import NavSideToggler from './NavSideToggler'
 
 import './Header.css'
-import CustomThemeContext from '../../services/CustomThemeContext'
 
 /** 
  * Menu header principal do topo da página
@@ -30,35 +29,27 @@ function Header(props) {
         setIsLoginPage(isLgIn)
     }, [ pathname ])
 
-    const themeApply = theme.fourth
     const toggleId = "responsive-navbar"
     
     // 5 breakpoint sizes (xs, sm, md, large, and xl)
     return (
         <Navbar 
             sticky="top" 
-            expand="md" 
             bg={theme.themeName} 
             variant={theme.themeName} 
-            collapseOnSelect
-            expanded={isNavShown}
-            onToggle={e => setIsNavShown(e)}
             className="navbartop"
-            // style={themeApply}
         >
             {(isLoginPage) 
                 ? (
                     <React.Fragment>
                         <NavBrand />
-                        <NavCollapse isLoginPage={false} theme={themeApply} {...props} />
                     </React.Fragment>
                 )
                 : (
                     <React.Fragment>
+                        <NavSideToggler />
                         <NavBrand />
-                        <NavSearch theme={themeApply}/>
-                        <NavToggle toggleId={toggleId} />
-                        <NavCollapse toggleId={toggleId} theme={themeApply}/>
+                        <NavSearch />
                     </React.Fragment>
                 )
             }

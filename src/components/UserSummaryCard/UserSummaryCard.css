@@ -1,0 +1,50 @@
+.user-summary {
+    margin: 0 !important;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: row !important;
+    box-shadow: transparent;
+    border: transparent !important;
+    justify-content: center;
+}
+
+.user-card .user-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: inherit;
+    background-color: inherit;
+}
+
+.user-card .user-body {
+    padding: 1rem;
+}
+
+.user-body {
+    padding-left: 0px !important;
+}
+
+.user-card .user-body > h5 {
+    margin: 0;
+}
+
+.user-card .user-body > small {
+    color: #6c757d!important;
+    text-transform: capitalize!important;
+}
+
+.user-statuses {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 0.5rem;
+}
+
+.status-one {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}

@@ -1,7 +1,26 @@
 
-/* #app-footer {
-    display: flex;
-    height: fit-content;
-    bottom: 0 !important;
-    margin: none;
-} */
+#app-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+}
+
+.row-footer {
+    padding: 1rem;
+    margin: 0 !important
+}
+
+.row-footer .link-footer {
+    margin: 0 1rem;
+    display: inline;
+}
+
+@media (min-width: 768px) {
+    .row-footer .link-footer {
+        display: block;
+    }
+}
