@@ -6,14 +6,11 @@ import './App.css';
 
 import { storeAllBooks } from '../services/StorageService'
 import { setTitleBarText } from '../services/InterfaceService'
-import booksFull from '../assets/data/books.json';
-
 import { CustomThemeProvider } from '../services/CustomThemeContext'
 import Header from '../components/Header';
 import AlertCustom from '../components/AlertCustom';
-import Footer from '../components/Footer';
-import ThemeButton from '../components/ThemeButton';
 import MainWrapper from '../components/MainWrapper';
+import booksFull from '../assets/data/books.json';
 
 // Armazenando MOCK-UP DE LIVROS
 storeAllBooks(booksFull)
@@ -33,7 +30,6 @@ function App() {
                     <Header />
                     <MainWrapper>
                         <MainRouter />
-                        <ThemeButton />
                     </MainWrapper>
 
                     <AlertCustom />

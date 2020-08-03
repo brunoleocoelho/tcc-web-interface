@@ -5,7 +5,7 @@
 }
 
 /* ADJUSTES DE OFFSET PARA FOOTER */
-#page-content.footer-offset {
+#main-page-content.footer-offset {
   padding-bottom: 150px !important;
 
 }
@@ -15,24 +15,21 @@
 
 /* Em Telas SM */
 @media (min-width: 576px) {
-  #page-content.footer-offset {
+  #main-page-content.footer-offset {
     padding-bottom: 100px !important;
-  
   }
   #app-footer.footer-offset {
     height: 100px !important; 
   }
-  
 }
 
 /* Em Telas MD */
 @media (min-width: 768px) {
-  #page-content.footer-offset {
+  #main-page-content.footer-offset {
     padding-bottom: 80px !important;
   
   }
   #app-footer.footer-offset {
     height: 80px !important; 
   }
-  
 }

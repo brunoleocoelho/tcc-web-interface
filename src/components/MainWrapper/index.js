@@ -7,16 +7,15 @@ import SideMenu from '../SideMenu'
 import EmptyContent from '../EmptyContent'
 import './MainWrapper.css'
 import Footer from '../Footer'
+import ThemeButton from '../ThemeButton'
 
 /**
- * Envolve toda a aplicação disponibilizando
- * recursos como `<SideMenu />`
+ * Envolve toda a parte principal da aplicação
+ * disponibilizando recursos como `<SideMenu/>` e `<Footer/>`
  */
 function MainWrapper(props) {
-    // console.log(props)
     const user = getUser()
-    
-    // CONTEXT
+
     const { theme } = useContext(CustomThemeContext)
 
     const pageContentCss = [
@@ -25,12 +24,17 @@ function MainWrapper(props) {
     ].join(' ')
 
     return (
-        <div id="main-wrapper" className="main-wrapper "/*  style={theme.primary} */>
+        <div id="main-wrapper" className="main-wrapper" style={user && theme.primary}>
             { user && <SideMenu {...props}/>}
-            <div id="page-content" className={pageContentCss} >
+            
+            <div id="main-page-content" className={pageContentCss} >
                 { props.children }
             </div>
-            <Footer />
+            
+            {user && <>
+                <ThemeButton />
+                <Footer />
+            </>}
         </div>
     )
 }

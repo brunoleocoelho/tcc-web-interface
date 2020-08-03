@@ -3,7 +3,7 @@
     display: flex;
 }
 
-#page-content {
+#main-page-content {
     width: -webkit-fill-available;
     width: fill-available;
 }
