@@ -1,6 +1,6 @@
 /* ----- FILTER BUTTON ACTIONS ----- */
 
 .btn-filter {
-    padding: 0px 2px;
-    font-size: 0.8rem;
+    padding: 0px 2px !important;
+    font-size: 0.8rem !important;
 }

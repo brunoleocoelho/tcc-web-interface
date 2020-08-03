@@ -46,13 +46,13 @@ function BookFilters() {
  */
 function FilterContainer({ title }) {
     return (
-        <Container fluid>
+        <div>
             <h5 className="d-none d-md-flex">{ title }</h5>
 
             <AuthorFilter />
             <CategoryFilter />
 
-        </Container>
+        </div>
     )
 }
 
