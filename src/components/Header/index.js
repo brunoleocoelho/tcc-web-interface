@@ -8,6 +8,7 @@ import NavSearch from './NavSearch'
 import NavSideToggler from './NavSideToggler'
 
 import './Header.css'
+import { getUser } from '../../services/AuthenticationService'
 
 /** 
  * Menu header principal do topo da página
@@ -29,14 +30,15 @@ function Header(props) {
         setIsLoginPage(isLgIn)
     }, [ pathname ])
 
-    const toggleId = "responsive-navbar"
+    const user = getUser()
+    const themeApply = user ? theme.themeName : 'dark'
     
     // 5 breakpoint sizes (xs, sm, md, large, and xl)
     return (
         <Navbar 
             sticky="top" 
-            bg={theme.themeName} 
-            variant={theme.themeName} 
+            bg={themeApply} 
+            variant={themeApply} 
             className="navbartop"
         >
             {(isLoginPage) 

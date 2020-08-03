@@ -7,7 +7,7 @@ function EmptyContent({ message, icon }) {
     const { theme } = useContext( CustomThemeContext )
 
     return (
-        <div className="empty-full" style={{color: theme.fourth.color}}>
+        <div className="empty-full" style={{ color: theme.fourth.color }}>
             <h4>
                 <i className={`fa fa-fw fa-${icon}`}></i>
                 { message }

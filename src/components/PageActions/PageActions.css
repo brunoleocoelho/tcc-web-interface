@@ -1,0 +1,7 @@
+/* ----- Page Header Actions ----- */
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
