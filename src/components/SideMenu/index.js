@@ -4,10 +4,10 @@ import { Link, NavLink } from 'react-router-dom'
 import { Nav, Button } from 'react-bootstrap'
 
 import { getNavData } from '../../services/NavigationService'
+import { doLogout } from '../../services/InterfaceService'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import UserSummaryCard from '../UserSummaryCard'
 import './SideMenu.css'
-import { doLogout } from '../../services/InterfaceService'
 
 // Helper para abrir o menu lateral
 let sideMenuToggle = null
@@ -73,7 +73,7 @@ function SideMenu(props) {
                         return (
                             <NavLink 
                                 key={key}
-                                to={mn.href || '/'}
+                                to={mn.href || '#'}
                                 onClick={() => navLinkDfltAction(mn.onClick)}
                                 className="side-item p-2"
                                 style={isActive ? theme.primary : {}}

@@ -12,6 +12,8 @@ function UserDashboardSection() {
     const { theme } = useContext(CustomThemeContext)
     
     const { books } = getAllBooks()
+    if (!books) return null
+
     const sections = [
         { 
             title:'Últimos Lidos', icon:'binoculars', iconColor: 'darkolivegreen',

@@ -1,32 +1,49 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import EmptyContent from '../EmptyContent'
 import './PageWrapper.css'
+import CustomThemeContext from '../../services/CustomThemeContext'
+import { getUser } from '../../services/AuthenticationService'
 
 /**
  * Container principal com layout default de uma página
  */
-function PageWrapper({ title, children }) {
-    const idPage = `page-${title.replace(' ','-').toLowerCase()}`
-    return (
-        <div id={idPage} className="page-wrapper">
+function PageWrapper({ title, applyTheme, children }) {
 
-            {/* <Breadcrumb > */}
-            <div style={{
-                display:"block",
-                // backgroundColor:"white",
-                fontFamily: 'monospace',
-                padding: 5
-            }}>
-                <small> {`Home > ${title}`} </small>
-            </div>
-            
+    const { theme } = useContext(CustomThemeContext)
+    const user = getUser()
+    const titLwr = String(title).replace(' ', '-').toLowerCase()
+    const idPage = `page-wrapper-${titLwr}`
+    const themeApply = applyTheme ? theme.primary : {}
+
+    return (
+        <div id={idPage} className="page-wrapper" style={user && themeApply}>
+            <BreadcrumbCustom
+                theme={theme.third} 
+                current={title}
+            />
             { children }
+        </div>
+    )
+}
+
+
+function BreadcrumbCustom({ current, theme }){
+    return (
+        <div style={{
+            display:"block",
+            // backgroundColor:"white",
+            fontFamily: 'monospace',
+            padding: '0.25rem 1rem',
+            ...(theme || {})
+        }}> 
+            <small> {`Home > ${current}`} </small>
         </div>
     )
 }
 
 PageWrapper.defaultProps = {
     title: 'Page', 
+    applyTheme: false, 
     children: <EmptyContent />
 }
 
