@@ -1,0 +1,17 @@
+/* ---- LIVROS PAGE ---- */
+
+.main-row {
+    padding: 0.25rem;
+}
+
+@media (min-width: 768px) {
+    .row-inner {
+        padding: 0.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .row-inner {
+        padding: 1rem;
+    }
+}

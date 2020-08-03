@@ -8,37 +8,58 @@ import CustomThemeContext from '../../services/CustomThemeContext';
 import ContentWrapper from '../../components/ContentWrapper';
 import PageWrapper from '../../components/PageWrapper';
 
+import './Livros.css'
+
 /**
  * Representa a página de seleção e filtro de livros
  */
 function Livros(props) {
 
     // CONTEXT
-    // const { theme, changeTheme } = useContext(CustomThemeContext)
+    const { theme } = useContext(CustomThemeContext)
     
     // props
     const { user } = props
     const { books } = getAllBooks()
 
-    return (
-        <PageWrapper title="livros">
-            
-            <ContentWrapper title="Livros" actions={[]} >
+    const actions = [
+        {
+            label: 'Teste1',
+            onClick: () => alert('Teste1'),
+            icon: 'smile-o',
+            // variant: 'primary'
+        },
+        {
+            label: 'Teste2',
+            onClick: () => alert('Teste2'),
+            icon: 'frown-o',
+            // variant: 'success'
+        },
+    ]
 
-                <Container fluid>
-                    <Row className="p-1">
+    return (
+        <PageWrapper title="Livros">
+            
+            <ContentWrapper title="Livros" actions={actions} >
+
+                <Container id="livros-container" fluid>
+                    <Row className="main-row">
                         <Col md={3} xl={2}>
                             <BookFilters />
                         </Col>
 
                         <Col>
-                            <Row className="p-md-2 p-xl-4">
+                            <div className="row-inner row">
                                 {(books.length > 0) && 
-                                    books.map(bk => {
-                                        return <BookCard key={bk.id} book={bk} />
-                                    })
+                                    books.map(bk => (
+                                        <BookCard 
+                                            key={bk.id} 
+                                            book={bk} 
+                                            theme={theme} 
+                                        />
+                                    ))
                                 }
-                            </Row>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
