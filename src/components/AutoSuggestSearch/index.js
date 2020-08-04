@@ -33,6 +33,7 @@ function AutoSuggestSearch({ value, placeholder, onChangeText, closeAction, inpu
                 value={value} 
                 onChange={onChangeText} 
                 className="auto-suggest-input"
+                style={theme.primary}
             />
 
         </React.Fragment>

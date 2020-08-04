@@ -46,7 +46,7 @@ function NavSearch(props) {
     ].join(' ')
 
     return (
-        <Form className="order-md-4">
+        <Form id="navserch-form" className="order-md-4">
             <Form.Row className="search-form-row">
                 <div className={btnColCss}>
                     <Button 
