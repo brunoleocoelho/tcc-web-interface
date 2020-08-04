@@ -61,6 +61,7 @@ function SideMenu(props) {
             style={theme.third} 
             className={sideMenuCss}
         >
+            <SideOverlay show={showSide} onClick={toggleSide} />
             <UserSummaryCard key="user-summary-2" />
             
             <div className="side-content">
@@ -105,7 +106,19 @@ function SideMenu(props) {
     )
 }
 
-/** Action para abrir SideMenu através de outros componentes */
+/** Renderiza o overlay sobreado de preenchimento quando sidemenu aberto */
+function SideOverlay({ show, onClick }) {
+    const cssClass = `side-overlay ${show ? 'show' : ''}`
+
+    return (
+        <div id="side-overlay" 
+            className={cssClass}
+            onClick={onClick}
+        ></div>
+    )
+}
+
+/** Action (static) para abrir SideMenu através de outros componentes */
 SideMenu.toggle = () => sideMenuToggle()
 
 export default withRouter(SideMenu)

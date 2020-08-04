@@ -16,6 +16,27 @@
     box-shadow: 2px 0px 10px black;
 }
 
+.side-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    display: block;
+    right: 0px;
+    height: 100%;
+    width: 30%;
+    transition: 0.1s ease;
+    transition-property: opacity, visibility;
+    opacity: 0;
+    visibility: collapse;
+    content: " ";
+}
+
+.side-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    transition: 0.2s ease 0.25s;
+    transition-property: opacity, visibility;
+}
+
 .side-content {
     overflow-y: auto;
     height: 82%;
@@ -70,11 +91,14 @@
 
 /* Tamanho de tela 'sm' */
 @media (min-width: 576px) {
-    .side-menu {
+    .side-menu, .side-overlay {
         width: 50% !important;
     }
     .side-content {
         padding-bottom: 0px !important;
+    }
+    .side-overlay.show {
+        transition-property: opacity, visibility;
     }
 }
 
@@ -87,6 +111,12 @@
         margin-left: 0;
         z-index: 999;
         box-shadow: none;
+    }
+    .side-overlay {
+        visibility: hidden;
+        opacity: 0 !important;
+        transition: 0.1s ease !important;
+        transition-property: opacity, visibility;
     }
     .side-btn-close {
         display: none !important;
