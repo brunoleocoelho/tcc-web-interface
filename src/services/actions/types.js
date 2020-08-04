@@ -1,0 +1,1 @@
+export const AUTHOR_SET_FILTER = 'AUTHOR_SET_FILTER'
