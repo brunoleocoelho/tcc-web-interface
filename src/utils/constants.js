@@ -65,3 +65,6 @@ const light = {
 }
 
 export const themes = { light, dark }
+
+// Formato de layout usado nas listas
+export const layouts = {grid:'grid', list:'list'}

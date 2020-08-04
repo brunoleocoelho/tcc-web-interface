@@ -1,6 +1,8 @@
 /* ------ BOOK CARD ------ */
 .book-container {
-    border: 1px solid rgba(0,0,0,.4) !important;
+    /* border: 1px solid rgba(0,0,0,.4) !important; */
+    transition-duration: .3s;
+    transition-timing-function: ease-in-out;
 }
 
 .book-header {
@@ -13,7 +15,10 @@
 /* .book-actions {} */
 
 @media (min-width: 1200px) {
-    .book-container {
+    .book-container.grid {
         max-width: 10rem !important;
+    }
+    .book-container {
+        max-width: 100% !important;
     }
 }

@@ -9,7 +9,7 @@ import PageActions from '../PageActions';
 /**
  * Envolve uma página da aplicação
  */
-function ContentWrapper({ title, actions, applyTheme, isLoading, children }) {
+function ContentWrapper({ title, subtitle, actions, applyTheme, isLoading, children }) {
     setTitleBarText(title)
 
     // CONTEXT
@@ -28,7 +28,10 @@ function ContentWrapper({ title, actions, applyTheme, isLoading, children }) {
         <div id={idwrapper} className="content-wrapper col" /* style={themeApply} */>
 
             <header id={idHeader}>
-                <h3>{ title }</h3> 
+                <div>
+                    <h3>{ title }</h3> 
+                    <h6 className="text-muted">{ subtitle }</h6>
+                </div>
                 <PageActions actions={actions} />
             </header>
             
@@ -42,6 +45,7 @@ function ContentWrapper({ title, actions, applyTheme, isLoading, children }) {
 
 ContentWrapper.defaultProps = {
     title: '',
+    subtitle: '',
     actions: [],
     applyTheme: false,
     isLoading: false,

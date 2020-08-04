@@ -94,9 +94,9 @@
     .side-menu, .side-overlay {
         width: 50% !important;
     }
-    .side-content {
+    /* .side-content {
         padding-bottom: 0px !important;
-    }
+    } */
     .side-overlay.show {
         transition-property: opacity, visibility;
     }
