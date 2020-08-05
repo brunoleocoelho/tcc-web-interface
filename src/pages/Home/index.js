@@ -28,13 +28,11 @@ function Home(props) {
             label: 'Teste1',
             onClick: () => alert('Teste1'),
             icon: 'smile-o',
-            // variant: 'primary'
         },
         {
             label: 'Teste2',
             onClick: () => alert('Teste2'),
             icon: 'frown-o',
-            // variant: 'success'
         },
     ]
 

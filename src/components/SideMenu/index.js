@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
-import { Link, NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link, NavLink, withRouter } from 'react-router-dom'
 import { Nav, Button } from 'react-bootstrap'
 
+import { setAllBooks } from '../../services/actions/BookActions'
 import { getNavData } from '../../services/NavigationService'
-import { doLogout } from '../../services/InterfaceService'
+import { getAllBooks } from '../../services/api/BookServiceApi'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import UserSummaryCard from '../UserSummaryCard'
 import './SideMenu.css'
@@ -16,7 +17,7 @@ let sideMenuToggle = null
  * Rendriza o menu lateral
  */
 function SideMenu(props) {
-    const { location } = props
+    const { location, books } = props
 
     // state
     const [showSide, setShowSide] = useState(false)
@@ -27,6 +28,7 @@ function SideMenu(props) {
     // functions
     const toggleSide = () => setShowSide(!showSide)
 
+    /** Action fecha o menu primeiro e executa ação associada */
     const navLinkDfltAction = (action) => {
         toggleSide()
         action && action()
@@ -34,6 +36,17 @@ function SideMenu(props) {
 
     // componentDidMount equivalente
     useEffect(() => {
+        const getBooks = async () => {
+            try {
+                const data = await getAllBooks()
+                console.log("[ OK ] SideMenu CDM", data, props)
+                props.setAllBooks(data)
+            }
+            catch (error) {
+                console.log("[ERRO] SideMenu CDM", error)
+            }
+        }
+        if (books.length === 0) getBooks()
         sideMenuToggle = toggleSide
     }, [])
 
@@ -41,14 +54,8 @@ function SideMenu(props) {
         ...getNavData(),
         { 
             label: "Trocar Tema", icon: "adjust", 
-            onClick: () => {
-                changeTheme(theme.themeName === 'light' ? 'dark':'light')
-            }
-        },
-        { 
-            label: "Sair", icon: "sign-out", onClick: doLogout
-        },
-        
+            onClick: () => changeTheme(theme.themeName === 'light' ? 'dark':'light')
+        }        
     ]
 
     const sideMenuCss = [
@@ -121,4 +128,13 @@ function SideOverlay({ show, onClick }) {
 /** Action (static) para abrir SideMenu através de outros componentes */
 SideMenu.toggle = () => sideMenuToggle()
 
-export default withRouter(SideMenu)
+// REDUX
+const mapStateToProps = ({ booksData }) => ({
+    books: booksData.books
+})
+
+const mapDispatchToProps = {
+    setAllBooks
+}
+
+export default withRouter( connect(mapStateToProps, mapDispatchToProps)(SideMenu) )
