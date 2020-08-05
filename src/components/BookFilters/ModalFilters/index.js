@@ -29,7 +29,7 @@ function ModalFilters(props) {
                         { actions.map((action, key) => {
                             return (
                                 <Button key={key}
-                                    variant={action.variant}
+                                    variant={action.variant ? action.variant : theme.themeName}
                                     onClick={action.onClick}
                                 >
                                     <i className={`fa fa-fw fa-${action.icon}`}></i>

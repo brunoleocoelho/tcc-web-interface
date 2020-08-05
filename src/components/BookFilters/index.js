@@ -34,8 +34,8 @@ function BookFilters(props) {
     // Renderiza em formato modal para telas pequenas
     if (innerWidth <= maxWidthScreen) {
         const modalActions = [
-            { label: 'Feito', variant: 'success', onClick: toggleShowModal, icon: 'check' },
-            { label: 'Limpar', variant: 'danger', onClick: props.cleanFilters, icon: 'eraser' },
+            { label: 'Feito', variant: '', onClick: toggleShowModal, icon: 'check' },
+            { label: 'Limpar', variant: '', onClick: props.cleanFilters, icon: 'eraser' },
         ]
 
         return (
