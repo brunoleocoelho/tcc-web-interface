@@ -88,8 +88,8 @@ function UserDashboardSection(props) {
     )
 }
 
-const mapStateToProps = ({ booksData }) => ({
-    books: booksData.books
+const mapStateToProps = ({ data }) => ({
+    books: data.books
 })
 
 const mapDispatchToProps = {

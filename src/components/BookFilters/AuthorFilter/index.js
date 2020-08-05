@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Form } from 'react-bootstrap'
 
-import { setAuthorFilter } from '../../../services/actions'
-import { getAllAuthors } from '../../../services/AuthorService'
+import { setAuthorFilter } from '../../../services/actions/BookFilterActions'
+import { setAllAuthors } from '../../../services/actions/BookActions'
+import { getAllAuthors } from '../../../services/api/BookServiceApi'
 import Separator from '../Separator'
 import FilterActions from '../FilterActions'
 import '../BookFilters.css'
+import LoadingLocal from '../../LoadingLocal'
 
 /**
- * Componente que renderiza um filtro de autores
+ * Componente que renderiza um filtro de authors
  */
 function AuthorFilter(props) {
     // console.log('AuthorFilters', props)
+    // PROPS
+    const { authorsFilter } = props.filters
+    const { authors } = props.data
 
     // STATE
-    const [autores] = useState( getAllAuthors() )
-    const [selected, setSelected] = useState( props.bookFilters.authors )
+    const [selected, setSelected] = useState( authorsFilter )
     
     // FUNCTIONS
     /** Atua na marcação do item de filtros */
@@ -39,10 +43,20 @@ function AuthorFilter(props) {
         }
     }
 
+    //componentDidMount
+    useEffect(() => {
+        const getAutores = async () => {
+            const data = await getAllAuthors()
+            props.setAllAuthors(data)
+        }
+        
+        if (authors.length === 0) getAutores()
+    }, [])
+
     // componentDidUpdate
     useEffect(() => {
-        setSelected(props.bookFilters.authors)
-    }, [props.bookFilters.authors])
+        setSelected(authorsFilter)
+    }, [authorsFilter])
 
     // Array de actions para os botões
     const actions = [
@@ -56,37 +70,43 @@ function AuthorFilter(props) {
             
             <h6>Autores</h6>
 
-            <FilterActions actions={actions} />
+            { (authors.length === 0)
+                ? <LoadingLocal />
+                : (<>
+                    <FilterActions actions={actions} />
 
-            { autores.sort().map( autor => {
-                const idAuthor = `filter-author-${String(autor).replace(' ','')}`
-                const isChecked = selected.includes(autor)
+                    { authors.sort().map( autor => {
+                        const idAuthor = `filter-author-${String(autor).replace(' ','')}`
+                        const isChecked = selected.includes(autor)
 
-                return (
-                    <Form.Check 
-                        key={'key-'+idAuthor}
-                        id={idAuthor}
-                        type="checkbox"
-                        label={autor}
-                        value={autor}
-                        custom
-                        className="checkbox-style"
-                        onChange={handleAuthorChecked}
-                        checked={isChecked}
-                    />
-                )
-            }) }
+                        return (
+                            <Form.Check 
+                                key={'key-'+idAuthor}
+                                id={idAuthor}
+                                type="checkbox"
+                                label={autor}
+                                value={autor}
+                                custom
+                                className="checkbox-style"
+                                onChange={handleAuthorChecked}
+                                checked={isChecked}
+                            />
+                        )
+                    }) }
+                </>)
+            }
         </div>
     )
 }
 
 // REDUX
-const mapStateToProps = ({ bookFilters }) => ({
-    bookFilters
+const mapStateToProps = ({ filters, data }) => ({
+    filters,
+    data
 })
 
 const mapDispatchToProps = {
-    setAuthorFilter,
+    setAuthorFilter, setAllAuthors
 }
 
 // export default AuthorFilter

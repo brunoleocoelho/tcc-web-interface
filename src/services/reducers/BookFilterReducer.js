@@ -4,25 +4,25 @@ import {
     CLEAN_FILTERS
 } from '../actions/types'
 
-// Valores iniciais do store
+// Valores iniciais do store 'filters'
 const INITIAL = {
-    authors: [],
-    categories: []
+    authorsFilter: [],
+    categoriesFilter: []
 }
 
-/** Reducer para filtros de livros */
+/** Reducer para filtros de livros. Store: 'filters' */
 function BookFilterReducer(state = INITIAL, action) {
     switch (action.type) {
         case AUTHOR_SET_FILTER:
             return {
                 ...state,
-                authors: action.authors
+                authorsFilter: action.authorsFilter
             }
         
         case CATEGORY_SET_FILTER:
             return {
                 ...state,
-                categories: action.categories
+                categoriesFilter: action.categoriesFilter
             }
         
         case CLEAN_FILTERS:

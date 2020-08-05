@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { connect } from 'react-redux'
 import { Container, Button, Modal } from 'react-bootstrap'
 
-import { cleanFilters } from '../../services/actions';
+import { cleanFilters } from '../../services/actions/BookFilterActions';
 import AuthorFilter from './AuthorFilter'
 import CategoryFilter from './CategoryFilter';
 import ModalFilters from './ModalFilters';
@@ -75,8 +75,8 @@ function FilterContainer({ title }) {
 BookFilters.showModal = () => showModal()
 
 // REDUX
-const mapStateToProps = ({ bookFilters }) => ({
-    bookFilters
+const mapStateToProps = ({ filters }) => ({
+    filters
 })
 
 const mapDispatchToProps = {

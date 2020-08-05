@@ -12,10 +12,6 @@ import { CustomThemeProvider } from '../services/CustomThemeContext'
 import Header from '../components/Header';
 import AlertCustom from '../components/AlertCustom';
 import MainWrapper from '../components/MainWrapper';
-import booksFull from '../assets/data/books.json';
-
-// Armazenando MOCK-UP DE LIVROS
-storeAllBooks(booksFull)
 
 // Atualizando título da página
 setTitleBarText()

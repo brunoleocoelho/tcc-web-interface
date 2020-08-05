@@ -3,8 +3,8 @@ import BookFilterReducer from "./BookFilterReducer";
 import BooksReducer from './BooksReducer'
 
 const reducers = combineReducers({
-    bookFilters: BookFilterReducer,
-    booksData: BooksReducer,
+    filters: BookFilterReducer,
+    data: BooksReducer,
 })
 
 export default reducers;

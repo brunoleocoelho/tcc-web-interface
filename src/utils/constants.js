@@ -9,7 +9,7 @@ export const grey = "#D5D5D5";
 // fundos escuros
 export const greymint = "#343a40";
 export const darker = "#1e2225";
-export const ebonyclay = "#1a1c1d";
+export const ebony = "#1a1c1d";
 export const graphite = "#1a1a1a";
 export const black = "#000000";
 
@@ -17,9 +17,8 @@ export const black = "#000000";
 export const lineLight = "#0000002a";
 export const lineDark = "#ffffff2a";
 
-
 // REPRESENTA OS ESTILOS PARA TEMA ESCURO
-// fundos claros, fontes escuras
+// fundos escuros, fontes claras
 const dark = {
     themeName: 'dark',
     line: lineDark,
@@ -28,7 +27,7 @@ const dark = {
         color: steel,
     },
     second: {
-        backgroundColor: ebonyclay,
+        backgroundColor: ebony,
         color: steel,
     },
     third: {
@@ -42,7 +41,7 @@ const dark = {
 }
 
 // REPRESENTA OS ESTILOS PARA TEMA CLARO
-// fundos escuros, fontes claras
+// fundos claros, fontes escuras
 const light = {
     themeName: 'light',
     line: lineLight,

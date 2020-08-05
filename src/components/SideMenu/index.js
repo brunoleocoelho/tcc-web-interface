@@ -39,7 +39,6 @@ function SideMenu(props) {
         const getBooks = async () => {
             try {
                 const data = await getAllBooks()
-                console.log("[ OK ] SideMenu CDM", data, props)
                 props.setAllBooks(data)
             }
             catch (error) {
@@ -129,8 +128,8 @@ function SideOverlay({ show, onClick }) {
 SideMenu.toggle = () => sideMenuToggle()
 
 // REDUX
-const mapStateToProps = ({ booksData }) => ({
-    books: booksData.books
+const mapStateToProps = ({ data }) => ({
+    books: data.books
 })
 
 const mapDispatchToProps = {

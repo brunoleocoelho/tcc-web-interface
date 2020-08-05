@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Form } from 'react-bootstrap'
 
-import { setCategoryrFilter } from '../../../services/actions'
-import { getAllCategories, getSelectedCategories, storeSelectedCategories } from '../../../services/CategoryService'
+import { setCategoryrFilter } from '../../../services/actions/BookFilterActions'
+import { setAllCategories } from '../../../services/actions/BookActions'
+import { getAllCategories } from '../../../services/api/BookServiceApi'
 import Separator from '../Separator'
 import FilterActions from '../FilterActions'
 import '../BookFilters.css'
+import LoadingLocal from '../../LoadingLocal'
 
 /**
- * Componente que renderiza um filtro de categorias
+ * Componente que renderiza um filtro de categories
  */
 function CategoryFilter(props) {
+    // PROPS
+    const { categoriesFilter } = props.filters
+    const { categories } = props.data
+
     // STATE
-    const [categorias] = useState( getAllCategories() )
-    const [selected, setSelected] = useState( props.bookFilters.categories )
+    const [selected, setSelected] = useState( categoriesFilter )
     
     // FUNCTIONS
     const handleCategoryChecked = e => {
@@ -34,10 +39,20 @@ function CategoryFilter(props) {
         props.setCategoryrFilter([])
     }
 
+    // componentDidMount
+    useEffect(() => {
+        const getCategs = async () => {
+            const data = await getAllCategories()
+            props.setAllCategories(data)
+        }
+
+        if (categories.length === 0) getCategs()
+    }, [])
+
     // componentDidupdate
     useEffect(() => {
-        setSelected(props.bookFilters.categories)
-    }, [props.bookFilters.categories])
+        setSelected(categoriesFilter)
+    }, [categoriesFilter])
 
     // Array de actions para os botões
     const actions = [
@@ -51,36 +66,42 @@ function CategoryFilter(props) {
 
             <h6>Categorias</h6>
 
-            <FilterActions actions={actions}/>
+            { (categories.length === 0) 
+                ? <LoadingLocal />
+                : (<>
+                    <FilterActions actions={actions}/>
 
-            { categorias.map(category => {
-                const idChk = `filter-category-${String(category).replace(' ','_')}`
-                const isChecked = selected.includes(category)
-                
-                return (
-                    <Form.Check 
-                        key={'key-'+ idChk}
-                        id={idChk}
-                        type="checkbox"
-                        label={category}
-                        value={category}
-                        custom
-                        className="checkbox-style"
-                        onChange={handleCategoryChecked}
-                        checked={isChecked}
-                    />
-                )
-            }) }
+                    { categories.sort().map(category => {
+                        const idChk = `filter-category-${String(category).replace(' ','_')}`
+                        const isChecked = selected.includes(category)
+                        
+                        return (
+                            <Form.Check 
+                                key={'key-'+ idChk}
+                                id={idChk}
+                                type="checkbox"
+                                label={category}
+                                value={category}
+                                custom
+                                className="checkbox-style"
+                                onChange={handleCategoryChecked}
+                                checked={isChecked}
+                            />
+                        )
+                    }) }
+                </>)
+            }
         </div>
     )
 }
 
-const mapStateToProps = ({ bookFilters }) => ({
-    bookFilters
+const mapStateToProps = ({ filters, data }) => ({
+    filters,
+    data
 })
 
 const mapDispatchToProps = {
-    setCategoryrFilter
+    setCategoryrFilter, setAllCategories
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryFilter)

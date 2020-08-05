@@ -4,12 +4,13 @@ import { Container, Button, Row, Col, Badge } from 'react-bootstrap';
 
 import { getAllBooks } from '../../services/StorageService'
 import CustomThemeContext from '../../services/CustomThemeContext';
-import { cleanFilters } from '../../services/actions'
+import { cleanFilters } from '../../services/actions/BookFilterActions'
 import BookCard from '../../components/BookCard';
 import BookFilters from '../../components/BookFilters';
 import ContentWrapper from '../../components/ContentWrapper';
 import PageWrapper from '../../components/PageWrapper';
 import EmptyContent from '../../components/EmptyContent';
+import LoadingLocal from '../../components/LoadingLocal';
 import { layouts } from '../../utils/constants'
 
 import './Livros.css'
@@ -21,15 +22,15 @@ function Livros(props) {
     // CONTEXT
     const { theme } = useContext(CustomThemeContext)
     
-    console.log("Livros", props)
     // PROPS
-    const { user, bookFilters } = props
-    const { authors, categories } = bookFilters
-    const { books } = getAllBooks()
+    const { user, filters, data } = props
+    const { authorsFilter, categoriesFilter } = filters
+    const { books } = data
 
     // STATE
     const [layout, setLayout] = useState(layouts.grid)
-    const [filterdBooks, setFilteredBooks] = useState(books)
+    const [filteredBooks, setFilteredBooks] = useState([])
+    const [qtdFiltered, setQtdFiltered] = useState(filteredBooks.length)
 
     // Aplicando filtros sobre os livros
     const handleBookFilters = () => {
@@ -37,9 +38,9 @@ function Livros(props) {
         
         newBookCollection = books.filter(item => {
             // autores
-            const isFromAuthor = authors.includes(item.author)
-            // categories
-            const isFromCategories = categories.includes(item.category)
+            const isFromAuthor = authorsFilter.includes(item.author)
+            // categoriesFilter
+            const isFromCategories = categoriesFilter.includes(item.category)
 
             return (isFromAuthor || isFromCategories)
         }) 
@@ -54,7 +55,14 @@ function Livros(props) {
     // componentDidUpdate
     useEffect(() => {
         handleBookFilters()
-    }, [bookFilters])
+    }, [filters])
+
+    useEffect(() => {
+        if (qtdFiltered === 0 && books.length > 0) {
+            setFilteredBooks(books)
+            setQtdFiltered(books.length)
+        }
+    }, [books])
 
     const actions = [
         {
@@ -96,7 +104,8 @@ function Livros(props) {
     ]
 
     const title = "Livros"
-    const subtitle = `Total ${filterdBooks.length} livros.`
+    const subtitle = qtdFiltered > 0 ? `Total ${qtdFiltered} livros.` : '...'
+    const isFiltered = (authorsFilter.length > 0 || categoriesFilter.length > 0)
 
     return (
         <PageWrapper title={title}>
@@ -105,8 +114,8 @@ function Livros(props) {
 
                 <Container id="livros-container" fluid>
 
-                    { (authors.length > 0 || categories.length > 0) && 
-                        <FilteredBadges items={[...authors, ...categories]} />
+                    { isFiltered && 
+                        <FilteredBadges items={[...authorsFilter, ...categoriesFilter]} />
                     }
 
                     <div className="main-row row">
@@ -115,27 +124,33 @@ function Livros(props) {
                         </Col>
 
                         <Col className="livros-col-content">
-                            <div className="row-inner row">
-                                {(filterdBooks.length > 0)
-                                    ? ( filterdBooks
-                                        .sort((a,b) => {
-                                            if (a.title < b.title) return -1;
-                                            if (a.title > b.title) return 1;
-                                            return 0
-                                        })
-                                        .map(bk => (
-                                        <BookCard 
-                                            key={bk.id} 
-                                            book={bk} 
-                                            theme={theme} 
-                                            layout={layout}
-                                        />
-                                    )) ) 
-                                    : <EmptyContent />
-                                }
-                            </div>
+                            { (qtdFiltered === 0) 
+                                ? <LoadingLocal message="Carregando livros..." /> 
+                                : (
+                                    <div className="row-inner row">
+                                        {(qtdFiltered > 0)
+                                            ? ( filteredBooks
+                                                .sort((a,b) => {
+                                                    if (a.title < b.title) return -1;
+                                                    if (a.title > b.title) return 1;
+                                                    return 0
+                                                })
+                                                .map(bk => (
+                                                <BookCard 
+                                                    key={bk.id} 
+                                                    book={bk} 
+                                                    theme={theme} 
+                                                    layout={layout}
+                                                />
+                                            )) ) 
+                                            : <EmptyContent />
+                                        }
+                                    </div>
+                                )
+                            }
                         </Col>
                     </div>
+
                 </Container>
                 
             </ContentWrapper>
@@ -169,8 +184,9 @@ function FilteredBadges({ items }) {
 }
 
 // REDUX
-const mapStateToProps = ({ bookFilters }) => ({
-    bookFilters
+const mapStateToProps = ({ filters, data }) => ({
+    filters,
+    data
 })
 
 const mapDispatchToProps = {
