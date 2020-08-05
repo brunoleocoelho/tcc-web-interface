@@ -8,6 +8,11 @@
     margin: 0 !important;
 } */
 
+.page-actions {
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
+}
+
 @media (min-width: 768px) {
     .row-inner {
         padding: 0.5rem;

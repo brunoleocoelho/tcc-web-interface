@@ -1,5 +1,10 @@
-import { AUTHOR_SET_FILTER } from '../actions/types'
+import { 
+    AUTHOR_SET_FILTER,
+    CATEGORY_SET_FILTER,
+    CLEAN_FILTERS
+} from '../actions/types'
 
+// Valores iniciais do store
 const INITIAL = {
     authors: [],
     categories: []
@@ -9,14 +14,26 @@ const INITIAL = {
 function BookFilterReducer(state = INITIAL, action) {
     switch (action.type) {
         case AUTHOR_SET_FILTER:
+            return {
+                ...state,
+                authors: action.authors
+            }
+        
+        case CATEGORY_SET_FILTER:
+            return {
+                ...state,
+                categories: action.categories
+            }
+        
+        case CLEAN_FILTERS:
             console.log({state, action})
-            return {...state, authors: action.authors}
-            break;
-    
+            return {
+                ...INITIAL
+            }
+
         default:
-            console.log({state, action})
+            // console.log({state, action})
             return state
-            break;
     }
 
 }

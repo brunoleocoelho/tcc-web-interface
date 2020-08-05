@@ -11,7 +11,6 @@ export function configureStore(initialState) {
         composeEnhacers()
     )
 
-    console.log(store)
     return store
 }
 

@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Form } from 'react-bootstrap'
+
+import { setCategoryrFilter } from '../../../services/actions'
 import { getAllCategories, getSelectedCategories, storeSelectedCategories } from '../../../services/CategoryService'
 import Separator from '../Separator'
 import FilterActions from '../FilterActions'
@@ -8,10 +11,10 @@ import '../BookFilters.css'
 /**
  * Componente que renderiza um filtro de categorias
  */
-function CategoryFilter() {
+function CategoryFilter(props) {
     // STATE
     const [categorias] = useState( getAllCategories() )
-    const [selected, setSelected] = useState( getSelectedCategories() )
+    const [selected, setSelected] = useState( props.bookFilters.categories )
     
     // FUNCTIONS
     const handleCategoryChecked = e => {
@@ -22,28 +25,24 @@ function CategoryFilter() {
             newSelected = ([...selected, categ])
         else 
             newSelected = (selected.filter(cat => cat !== categ))
-        
-        newSelected.sort()
-        setSelected(newSelected)
-        storeSelectedCategories(newSelected)
+
+        props.setCategoryrFilter(newSelected)
     }
 
     /** Limpa todos os itens marcados */
     const cleanAllChecked = () => {
-        setSelected([])
-        storeSelectedCategories([])
+        props.setCategoryrFilter([])
     }
 
-    /** Marca todos os itens da lista */
-    const checkAllOptions = () => {
-        setSelected(categorias)
-        storeSelectedCategories(categorias)
-    }
+    // componentDidupdate
+    useEffect(() => {
+        setSelected(props.bookFilters.categories)
+    }, [props.bookFilters.categories])
 
     // Array de actions para os botões
     const actions = [
         { label: "Limpar", onClick: cleanAllChecked },
-        { label: "Sel.Todos", onClick: checkAllOptions },
+        // { label: "Sel.Todos", onClick: checkAllOptions },
     ]
 
     return (
@@ -76,4 +75,12 @@ function CategoryFilter() {
     )
 }
 
-export default CategoryFilter
+const mapStateToProps = ({ bookFilters }) => ({
+    bookFilters
+})
+
+const mapDispatchToProps = {
+    setCategoryrFilter
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryFilter)

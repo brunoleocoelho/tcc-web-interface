@@ -20,13 +20,12 @@ function MainRouter(props) {
         <Switch>
             <Route exact path="/login" component={LoginPage} />
 
-            <PrivateRoute exact path="/dashboard" component={props => HomePage(props)} />
-            <PrivateRoute path="/livros" component={props => LivrosPage(props)} />
-            <PrivateRoute path="/sobre" component={props => AboutPage(props)} />
-            <PrivateRoute path="/temas-cores" component={props => TemasCoresPage(props)} />
+            <PrivateRoute exact path="/dashboard" component={HomePage} />
+            <PrivateRoute path="/livros" component={LivrosPage} />
+            <PrivateRoute path="/sobre" component={AboutPage} />
+            <PrivateRoute path="/temas-cores" component={TemasCoresPage} />
 
-            {/* <PrivateRoute exact path="/" component={props => HomePage(props)} /> */}
-            <Redirect from="/" to="/dashboard" component={props => HomePage(props)} />
+            <Redirect from="/" to="/dashboard" component={HomePage} />
         </Switch>
     )
 }

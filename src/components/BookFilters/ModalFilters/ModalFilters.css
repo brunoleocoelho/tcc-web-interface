@@ -1,0 +1,23 @@
+
+.modal-filter-container {
+    max-height: 98% !important;
+}
+
+.modal-filter-container .modal-header {
+    position: sticky;
+    opacity: 1;
+    top: 0;
+    z-index: 99 !important;
+}
+
+.modal-filter-container .modal-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal-filter-container .modal-title > div.modal-actions {
+    display: flex;
+    justify-content: space-evenly;
+}

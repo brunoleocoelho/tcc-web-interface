@@ -11,8 +11,6 @@ function PageActions({ actions, groupLast }) {
     // CONTEXT
     const { theme } = useContext(CustomThemeContext)
 
-    console.log(theme)
-
     const numActions = 3
     const firstActions = [...actions.filter((item, idx) => (idx < numActions))]
     const lastActions = [...actions.filter((item, idx) => (idx >= numActions))]

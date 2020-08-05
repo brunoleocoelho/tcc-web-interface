@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Form } from 'react-bootstrap'
-import { getAllAuthors, getSelectedAuthors, storeSelectedAuthors } from '../../../services/AuthorService'
+
+import { setAuthorFilter } from '../../../services/actions'
+import { getAllAuthors } from '../../../services/AuthorService'
 import Separator from '../Separator'
 import FilterActions from '../FilterActions'
 import '../BookFilters.css'
@@ -8,12 +11,15 @@ import '../BookFilters.css'
 /**
  * Componente que renderiza um filtro de autores
  */
-function AuthorFilter() {
+function AuthorFilter(props) {
+    // console.log('AuthorFilters', props)
+
     // STATE
     const [autores] = useState( getAllAuthors() )
-    const [selected, setSelected] = useState( getSelectedAuthors() )
+    const [selected, setSelected] = useState( props.bookFilters.authors )
     
     // FUNCTIONS
+    /** Atua na marcação do item de filtros */
     const handleAuthorChecked = (e) => {
         const autor = e.target.value
         let newSelected = []
@@ -22,28 +28,26 @@ function AuthorFilter() {
             newSelected = ([...selected, autor])
         else 
             newSelected = (selected.filter(aut => aut !== autor))
-        
-        newSelected.sort()
-        setSelected(newSelected)
-        storeSelectedAuthors(newSelected)
+
+        props.setAuthorFilter(newSelected)
     }
 
     /** Limpa todos os itens marcados */
     const cleanAllChecked = () => {
-        setSelected([])
-        storeSelectedAuthors([])
+        if (selected.length > 0) {
+            props.setAuthorFilter([])
+        }
     }
 
-    /** Marca todos os itens da lista */
-    const checkAllOptions = () => {
-        setSelected(autores)
-        storeSelectedAuthors(autores)
-    }
+    // componentDidUpdate
+    useEffect(() => {
+        setSelected(props.bookFilters.authors)
+    }, [props.bookFilters.authors])
 
     // Array de actions para os botões
     const actions = [
         { label: "Limpar", onClick: cleanAllChecked },
-        { label: "Sel.Todos", onClick: checkAllOptions },
+        // { label: "Sel.Todos", onClick: checkAllOptions },
     ]
 
     return (
@@ -54,7 +58,7 @@ function AuthorFilter() {
 
             <FilterActions actions={actions} />
 
-            { autores.map( autor => {
+            { autores.sort().map( autor => {
                 const idAuthor = `filter-author-${String(autor).replace(' ','')}`
                 const isChecked = selected.includes(autor)
 
@@ -76,4 +80,14 @@ function AuthorFilter() {
     )
 }
 
-export default AuthorFilter
+// REDUX
+const mapStateToProps = ({ bookFilters }) => ({
+    bookFilters
+})
+
+const mapDispatchToProps = {
+    setAuthorFilter,
+}
+
+// export default AuthorFilter
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorFilter)
