@@ -1,0 +1,15 @@
+/* ----- LOADING ----- */
+
+.loading {
+    width: 100%;
+    height: 30em;
+    text-align: center;
+}
+
+.loading > img {
+    width: 52px;
+}
+
+.loading > p {
+    text-align: center;
+}

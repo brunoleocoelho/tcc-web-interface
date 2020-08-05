@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Row } from 'react-bootstrap'
 import SectionSubject from './SectionSubject'
 import CustomThemeContext from '../../services/CustomThemeContext'
+import LoadingLocal from '../LoadingLocal'
 
 /**
  * Componente que renderiza um pequeno dashboard
@@ -44,9 +45,9 @@ function UserDashboardSection(props) {
     }
 
     // Function que devolve mensagem de carregamento
-    const renderStillLoading = () => (
-        <p className="text-center">CARREGANDO SEÇÕES...</p>
-    )
+    const renderStillLoading = () => {
+        return <LoadingLocal message="Carregando seções..." />
+    }
 
     // componentDidUpdate
     useEffect(() => {
