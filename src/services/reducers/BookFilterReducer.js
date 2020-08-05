@@ -10,7 +10,7 @@ const INITIAL = {
     categories: []
 }
 
-/** Functions para filtros de livros */
+/** Reducer para filtros de livros */
 function BookFilterReducer(state = INITIAL, action) {
     switch (action.type) {
         case AUTHOR_SET_FILTER:
