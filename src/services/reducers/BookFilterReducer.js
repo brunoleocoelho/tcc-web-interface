@@ -26,13 +26,9 @@ function BookFilterReducer(state = INITIAL, action) {
             }
         
         case CLEAN_FILTERS:
-            console.log({state, action})
-            return {
-                ...INITIAL
-            }
+            return INITIAL
 
         default:
-            // console.log({state, action})
             return state
     }
 
