@@ -1,9 +1,21 @@
 /* ------ BOOK CARD ------ */
 .book-container {
-    /* border: 1px solid rgba(0,0,0,.4) !important; */
     transition-duration: .3s;
     transition-timing-function: ease-in-out;
+    cursor: pointer;
 }
+
+/* HOVER sobre o card de livro */
+.book-container:hover {
+    box-shadow: 0px 0px 4px 4px rgba(20,20,20,0.4);
+    z-index: 1;
+}
+
+/* HOVER sobre o card de livro */
+.book-container:active {
+    border: 1px solid blue;
+}
+
 
 .book-header {
     height: 150px;
@@ -12,7 +24,9 @@
     overflow: hidden;
 }
 
-/* .book-actions {} */
+.book-actions {
+    text-align: center;
+}
 
 @media (min-width: 1200px) {
     .book-container.grid {

@@ -2,9 +2,9 @@ import React, { useState, useContext, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Container, Button, Row, Col, Badge } from 'react-bootstrap';
 
-import { getAllBooks } from '../../services/StorageService'
 import CustomThemeContext from '../../services/CustomThemeContext';
 import { cleanFilters } from '../../services/actions/BookFilterActions'
+import { setGetinfoBook } from '../../services/actions/GetinfoActions'
 import BookCard from '../../components/BookCard';
 import BookFilters from '../../components/BookFilters';
 import ContentWrapper from '../../components/ContentWrapper';
@@ -14,6 +14,7 @@ import LoadingLocal from '../../components/LoadingLocal';
 import { layouts } from '../../utils/constants'
 
 import './Livros.css'
+import BookInfoModal from '../../components/BookInfoModal';
 
 /**
  * Representa a página de seleção e filtro de livros
@@ -50,6 +51,11 @@ function Livros(props) {
             return
         }
         setFilteredBooks(newBookCollection)
+    }
+
+    /** Adiciona um livro para consulta */
+    const getInfo = (book) => {
+        props.setGetinfoBook(book)
     }
 
     // componentDidUpdate
@@ -118,6 +124,8 @@ function Livros(props) {
                         <FilteredBadges items={[...authorsFilter, ...categoriesFilter]} />
                     }
 
+                    <BookInfoModal />
+
                     <div className="main-row row">
                         <Col className="livros-col-filter" md={3} xl={2}>
                             <BookFilters />
@@ -141,6 +149,7 @@ function Livros(props) {
                                                     book={bk} 
                                                     theme={theme} 
                                                     layout={layout}
+                                                    onClick={() => getInfo(bk)}
                                                 />
                                             )) ) 
                                             : <EmptyContent />
@@ -190,7 +199,8 @@ const mapStateToProps = ({ filters, data }) => ({
 })
 
 const mapDispatchToProps = {
-    cleanFilters
+    cleanFilters,
+    setGetinfoBook
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Livros)

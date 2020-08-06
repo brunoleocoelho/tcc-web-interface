@@ -1,0 +1,22 @@
+/* ---- BOOK INFO MODAL ----- */
+
+.book-info-modal .modal-header .close {
+    color: gray;
+}
+
+.book-info-modal .modal-body {
+    text-align: center;
+}
+
+.book-info {
+    padding: 1.25rem;
+    text-align: start;
+}
+
+@media (min-width: 768px) {
+    .book-info-modal .modal-body {
+        display: flex;
+        text-align: start;
+    }
+
+}
