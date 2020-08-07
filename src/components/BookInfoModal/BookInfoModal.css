@@ -1,22 +1,60 @@
 /* ---- BOOK INFO MODAL ----- */
 
+/* Modal Header */
+.book-info-modal .modal-header {
+    position: sticky;
+    opacity: 1;
+    top: 0;
+    z-index: 99 !important;
+}
 .book-info-modal .modal-header .close {
     color: gray;
 }
 
-.book-info-modal .modal-body {
-    text-align: center;
+/* Form do livro */
+.book-info-form {
+    width: 100%;
 }
-
-.book-info {
-    padding: 1.25rem;
+.book-info-form .form-group {
     text-align: start;
 }
 
+/* Imagem do livro */
+.book-info-form .image-book {
+    text-align: center !important;
+}
+.book-info-form img {
+    width: 60%;
+    text-align: center;
+}
+
+/* Botão de escolha de imagem  */
+.book-info-form #image-upload {
+    opacity: 0;
+    height: 0;
+}
+.book-info-form .form-file-label {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    background-color: rgba(100, 100, 100, 0.2);
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.book-info-form .form-file-label:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Tamanho de tela MD */
 @media (min-width: 768px) {
     .book-info-modal .modal-body {
         display: flex;
         text-align: start;
     }
-
+    .book-info-form img {
+        width: 100%;
+    }
 }

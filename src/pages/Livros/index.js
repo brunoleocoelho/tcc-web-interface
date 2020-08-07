@@ -31,7 +31,6 @@ function Livros(props) {
     // STATE
     const [layout, setLayout] = useState(layouts.grid)
     const [filteredBooks, setFilteredBooks] = useState([])
-    const [qtdFiltered, setQtdFiltered] = useState(filteredBooks.length)
 
     // Aplicando filtros sobre os livros
     const handleBookFilters = () => {
@@ -64,9 +63,8 @@ function Livros(props) {
     }, [filters])
 
     useEffect(() => {
-        if (qtdFiltered === 0 && books.length > 0) {
+        if (filteredBooks.length === 0 && books.length > 0) {
             setFilteredBooks(books)
-            setQtdFiltered(books.length)
         }
     }, [books])
 
@@ -110,6 +108,7 @@ function Livros(props) {
     ]
 
     const title = "Livros"
+    const qtdFiltered = (filteredBooks.length)
     const subtitle = qtdFiltered > 0 ? `Total ${qtdFiltered} livros.` : '...'
     const isFiltered = (authorsFilter.length > 0 || categoriesFilter.length > 0)
 
