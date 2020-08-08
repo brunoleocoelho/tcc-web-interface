@@ -17,7 +17,7 @@ import { setEncodedUser } from "../AuthenticationService"
  * }} user o usuário autenticado
  */
 export function setUserInfo(user) {
-    setEncodedUser(user)
+    // setEncodedUser(user)
     return {
         type: USER_SET_INFO,
         user
@@ -26,7 +26,7 @@ export function setUserInfo(user) {
 
 /** Limpa as informações do usuário do REDUX */
 export function cleanUserInfo() {
-    setEncodedUser(null)
+    // setEncodedUser(null)
     return {
         type: USER_CLEAN_INFO,
         user: null

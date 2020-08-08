@@ -1,0 +1,14 @@
+[
+    {
+        "titulo": "Acesso à plataforma",
+        "conteudo": "Para solicitar acessoa Biblioteca Acadêmica ou obter mais informações, por favor entre em contato pelo e-mail: <a href=\"maito:email@faterj-petropolis.edu.br\">email@faterj-petropolis.edu.br</a>"
+    },
+    {
+        "titulo": "Sobre esta plataforma",
+        "conteudo": "Esta biblioteca web Este é um projeto de interface <i>web</i> de aplicação de biblioteca acadêmica para o Trabalho de Conclusão de Curso (TCC) de Tecnólogo em Tecnologia da Informação e Comunicação da FAETERJ Petrópolis (Faculdade de Educação Tecnológica do Estado do Rio de Janeiro, desenvolvido por Bruno Coelho com React."
+    },
+    {
+        "titulo": "Lorem Ipsum",
+        "conteudo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    }
+]

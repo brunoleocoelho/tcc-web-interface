@@ -74,13 +74,6 @@ function doLogout() {
     window.history.pushState(null, null, '/login')
 }
 
-
-/** Retorna avisos a serem mostrados na tela de login */
-function getLoginNews() {
-    const avisos = require('../assets/data/avisos.json')
-    return avisos
-}
-
 /** Armazena o tema visual escolhido pelo usuário */
 function setThemeToApply(theme) {
     localStorage.setItem(themeApplied, JSON.stringify(theme))
@@ -97,7 +90,6 @@ export {
     setTitleBarText,
     exceptionPages,
     doLogout,
-    getLoginNews,
     getUserMenu,
     setThemeToApply,
     getThemeApplied
