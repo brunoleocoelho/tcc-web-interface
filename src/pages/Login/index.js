@@ -7,7 +7,6 @@ import FormBuilder from '../../components/FormBuilder'
 import AlertCustom from '../../components/AlertCustom'
 import { setAuthUser, getUser } from '../../services/AuthenticationService'
 import { authUser } from '../../services/api/AuthUserServiceApi'
-import { setUserInfo } from '../../services/actions/UserActions'
 
 import LibraryBackground from '../../components/LibraryBackground'
 import LoadingLocal from '../../components/LoadingLocal'
@@ -56,7 +55,6 @@ function Login(props) {
         })
 
         setAuthUser(userValid)
-        props.setUserInfo(userValid)
 
         // vai para HomePage
         props.history.replace("/home")
@@ -138,11 +136,7 @@ const mapStateToProps = ({ userInfo }) => ({
     user: userInfo.user
 })
 
-const mapDispatchToProps = {
-    setUserInfo
-}
-
-
+const mapDispatchToProps = {}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

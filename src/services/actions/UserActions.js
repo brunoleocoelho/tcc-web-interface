@@ -37,6 +37,6 @@ export function cleanUserInfo() {
 export function setUserBooks(userBooks) {
     return {
         type: USER_SET_BOOK_INFO,
-        userBooks
+        payload: userBooks
     }
 }

@@ -4,13 +4,10 @@ import {
 } from '../actions/types'
 
 const INITIAL = {
-    user: null,
-    userBooks: {
-        lastRead: [],
-        inUse: [],
-        reserved: [],
-        favorites: []
-    }
+    lastRead: [],
+    inUse: [],
+    reserved: [],
+    favorites: []
 }
 
 /** Reducer para informações do usuário */
@@ -25,7 +22,7 @@ function UserReducer (state = INITIAL, action) {
         case USER_SET_BOOK_INFO:
             return {
                 ...state,
-                userBooks: action.userBooks
+                ...action.payload
             }
     
         default:
