@@ -11,6 +11,18 @@
     color: gray;
 }
 
+/* Header title e actions */
+.book-info-modal .modal-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+.book-info-modal .modal-title .actions-header {
+    display: flex;
+    justify-content: center;
+}
+
 /* Form do livro */
 .book-info-form {
     width: 100%;
@@ -28,12 +40,20 @@
     text-align: center;
 }
 
-/* Botão de escolha de imagem  */
+/* Botão nativo de escolha de imagem oculto */
 .book-info-form #image-upload {
     opacity: 0;
     height: 0;
 }
 .book-info-form .form-file-label {
+    /* Estilo para btoão full  */
+    /* position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    top: 0;
+    align-items: center;
+    color: lightgray */
     width: 100%;
     padding: 0.5rem;
     margin: 0.1rem;
@@ -44,8 +64,29 @@
     border-radius: 4px;
     cursor: pointer;
 }
+/* Botão full XY */
+/* .book-info-form .form-file-label .inner-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+} */
 .book-info-form .form-file-label:hover {
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Footer container e actions */
+.book-info-modal .modal-footer.actions-footer {
+    display: none;
+}
+
+@media (min-width: 576px) {
+    .book-info-modal .modal-title .actions-header {
+        display: none;
+    }
+    .book-info-modal .modal-footer.actions-footer {
+        display: flex;
+    }    
 }
 
 /* Tamanho de tela MD */
