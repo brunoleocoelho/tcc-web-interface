@@ -2,10 +2,6 @@ import {
     BOOKS_SET_ALL,
     AUTHORS_SET_ALL,
     CATEGORIES_SET_ALL,
-    BOOKS_SET_LASTREAD,
-    BOOKS_SET_DELIVER,
-    BOOKS_SET_RESERVED,
-    BOOKS_SET_FAVORITE,
 } from '../actions/types'
 
 // Valores iniciais do store'data'
@@ -13,10 +9,6 @@ const INITIAL = {
     books: [],
     authors: [],
     categories: [],
-    lastRead: [],
-    deliver: [],
-    reserved: [],
-    favorites: []
 }
 
 /** Reducer para livros. Store: 'data' */

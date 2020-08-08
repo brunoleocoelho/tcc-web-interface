@@ -6,7 +6,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
 
 import { configureStore } from '../app/store'
-import { storeAllBooks } from '../services/StorageService'
 import { setTitleBarText } from '../services/InterfaceService'
 import { CustomThemeProvider } from '../services/CustomThemeContext'
 import Header from '../components/Header';

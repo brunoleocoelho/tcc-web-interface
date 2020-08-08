@@ -1,9 +1,5 @@
 import {
     BOOKS_SET_ALL,
-    BOOKS_SET_LASTREAD,
-    BOOKS_SET_DELIVER,
-    BOOKS_SET_RESERVED,
-    BOOKS_SET_FAVORITE,
     AUTHORS_SET_ALL,
     CATEGORIES_SET_ALL,
 } from '../actions/types'

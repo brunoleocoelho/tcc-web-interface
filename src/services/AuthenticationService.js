@@ -48,10 +48,22 @@ function validateUser(userName = '') {
     return foundUser
 }
 
+/** Armazena o usuário encoded */
+function setEncodedUser(user) {
+    if (!user) {
+        unsetAuthUser()
+        return
+    }
+    const { id, userName, role } = user
+    const joined = [id, userName, role].join('-')
+    const b64EncdUser = window.btoa(joined)
+    localStorage.setItem(userAuth, b64EncdUser)
+}
 
 export {
     getUser,
     setAuthUser,
     unsetAuthUser,
-    validateUser
+    validateUser,
+    setEncodedUser
 }
