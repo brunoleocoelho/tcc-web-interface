@@ -1,5 +1,5 @@
-import React from 'react'
-import { Form } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Form, Accordion } from 'react-bootstrap'
 import Separator from '../Separator'
 import LoadingLocal from '../../LoadingLocal'
 import FilterActions from '../FilterActions'
@@ -7,7 +7,9 @@ import FilterActions from '../FilterActions'
 /** 
  * Rederiza filtros de livros da pagina
  */
-function FilterCheckList({ title, filterFields, filteredData, onCheck, cleanAction }) {   
+function FilterCheckList({ title, filterFields, filteredData, onCheck, cleanAction }) {  
+    const [isCollapsed, setIsCollapsed] = useState(false)
+    
     // Array de actions para os botões
     const actions = [
         { label: "Limpar", onClick: cleanAction },
@@ -15,39 +17,51 @@ function FilterCheckList({ title, filterFields, filteredData, onCheck, cleanActi
 
     const titleLwr = title.toLowerCase().replace(' ', '')
     const id = `filter-${titleLwr}`
+    const idContent = id + '-content'
+    const icon = isCollapsed ? 'down':'up'
 
     return (
-        <div id={id} className="filter-container">
+        <Accordion id={id} className="filter-container" defaultActiveKey={idContent}>
+            
             <Separator />
             
-            <h6>{ title }</h6>
+            <Accordion.Toggle 
+                as="div" 
+                eventKey={idContent} 
+                onClick={() => setIsCollapsed(!isCollapsed)}
+            >
+                <i className={`fa fa-chevron-${icon} float-right`}></i>
+                <h6>{ title }</h6>
+            </Accordion.Toggle>
 
             { (filterFields.length === 0)
                 ? <LoadingLocal />
-                : (<>
-                    <FilterActions actions={actions} />
+                : (<Accordion.Collapse eventKey={idContent}>
+                    <div>
+                        <FilterActions actions={actions} />
 
-                    { filterFields.sort().map( item => {
-                        const idItem = `filter-${titleLwr}-${String(item).replace(' ','')}`
-                        const isChecked = filteredData.includes(item)
+                        { filterFields.sort().map( item => {
+                            const idItem = `filter-${titleLwr}-${String(item).replace(' ','')}`
+                            const isChecked = filteredData.includes(item)
 
-                        return (
-                            <Form.Check 
-                                key={'key-'+idItem}
-                                id={idItem}
-                                type="checkbox"
-                                label={item}
-                                value={item}
-                                custom
-                                className="checkbox-style"
-                                onChange={onCheck}
-                                checked={isChecked}
-                            />
-                        )
-                    }) }
-                </>)
+                            return (
+                                <Form.Check 
+                                    key={'key-'+idItem}
+                                    id={idItem}
+                                    type="checkbox"
+                                    label={item}
+                                    value={item}
+                                    custom
+                                    className="checkbox-style"
+                                    onChange={onCheck}
+                                    checked={isChecked}
+                                />
+                            )
+                        }) }
+                    </div>
+                </Accordion.Collapse>)
             }
-        </div>
+        </Accordion>
     )
 }
 
