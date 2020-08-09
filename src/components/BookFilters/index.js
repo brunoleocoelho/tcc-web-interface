@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { connect } from 'react-redux'
-import { Container, Button, Modal } from 'react-bootstrap'
-
 import { cleanFilters } from '../../services/actions/BookFilterActions';
-import AuthorFilter from './AuthorFilter'
-import CategoryFilter from './CategoryFilter';
 import ModalFilters from './ModalFilters';
+import FilterContainer from './FilterContainer';
 
 import './BookFilters.css'
 
@@ -56,20 +53,6 @@ function BookFilters(props) {
     )
 }
 
-/**
- * Container contendo os filtros 
- */
-function FilterContainer({ title }) {
-    return (
-        <div>
-            <h5 className="d-none d-md-flex">{ title }</h5>
-
-            <AuthorFilter />
-            <CategoryFilter />
-
-        </div>
-    )
-}
 
 // Static function para abertura do modal por outros componentes
 BookFilters.showModal = () => showModal()

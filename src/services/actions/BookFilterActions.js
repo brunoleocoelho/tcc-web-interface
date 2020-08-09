@@ -15,7 +15,7 @@ export function setAuthorFilter(authorsFilter) {
  * Recebe as categorias para filtrar
  * @param {*} categoriesFilter 
  */
-export function setCategoryrFilter(categoriesFilter) {
+export function setCategoryFilter(categoriesFilter) {
     return {
         type: CATEGORY_SET_FILTER,
         categoriesFilter
