@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import { getLoginNews } from '../../services/api/NewsServiceApi'
 import LoadingLocal from '../../components/LoadingLocal'
+import { setTitleBarText } from '../../services/InterfaceService'
 
 /** 
  * Componente que serve para exibição de notícias na pagina de login
  */
 function LoginNewsBoard() {
+    setTitleBarText('Login')
+    
     // STATE
     const [avisos, setAvisos] = useState(null)
     
@@ -27,13 +30,13 @@ function LoginNewsBoard() {
     // RENDER
     return (
         <Container className="p-3 h-100 bg-light rounded-sm">
-            <h4 className="text-center">Notícias</h4>
+            <h4 className="text-center">Avisos</h4>
             { !avisos
                 ? <LoadingLocal />
                 : (avisos.length === 0)
                     ? (
                         <div className="text-center text-secondary">
-                            <h6>Não há avisos para serem exibidos</h6>
+                            <h6>Não há avisos a serem exibidos</h6>
                             <i className="fa fa-fw fa-newspaper-o" style={{ fontSize:'10rem' }}/>
                         </div>
                     )
