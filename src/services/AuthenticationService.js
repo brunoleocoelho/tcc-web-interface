@@ -1,6 +1,5 @@
 import users from '../assets/data/users.json'
-
-const userAuth = 'user-auth'
+import { userAuth } from './storageKeys'
 
 /**
  * Armazena localmente o usuário autenticado aplicação

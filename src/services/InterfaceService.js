@@ -1,7 +1,5 @@
-import { unsetAuthUser, getUser } from "./AuthenticationService";
-
-// Chaves de informações localStorage
-const themeApplied = 'theme-applied'
+import { unsetAuthUser } from "./AuthenticationService";
+import { themeApplied } from "./storageKeys";
 
 /**
  * Atualiza o título da página concateca 
@@ -39,33 +37,6 @@ function getNavbarData() {
     return headerData;
 }
 
-function getUserMenu() {
-    const user = getUser() 
-    // Formato: label: "", href: "", icon: "", elemtype: "", items: []
-    const menu = { 
-        label: (user? user.name : ''), 
-        icon: 'user', 
-        elemtype: 'dropdown', 
-        items: [
-            { label: 'Estante', href: '/', icon: 'bookmark', elemtype:'link', onClick: () => alert('clicou ESTANTE!') },
-            { label: '', elemtype: 'divider' },
-            { label: 'Sair', href: '/', icon: 'sign-out', elemtype:'link', onClick: doLogout },
-        ] 
-    }
-    return menu
-}
-
-/**
- * Retorna as páginas que podem ser exeibidas mesmo
- * que não tenha sido feito login
- */
-function exceptionPages() {
-    const { items } = getNavbarData()
-
-    const showNotLogged = items.filter( item => item.showNotLogged )
-    return showNotLogged
-}
-
 /**
  * Efeuta o logoff da aplicação e redireciona a tela de login
  */
@@ -88,9 +59,7 @@ function getThemeApplied() {
 export {
     getNavbarData,
     setTitleBarText,
-    exceptionPages,
     doLogout,
-    getUserMenu,
     setThemeToApply,
     getThemeApplied
 }
