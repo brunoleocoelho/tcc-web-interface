@@ -29,8 +29,10 @@ function PageActions({ actions, groupLast }) {
                 {...as}
                 {...rest}
             >
-                { icon && <i className={`fa fa-fw fa-${icon}`}></i> }
-                { label }
+                { rest.children || (<>
+                    { icon && <i className={`fa fa-fw fa-${icon}`}></i> }
+                    { label }
+                </>)}
             </Button>
         )
     }

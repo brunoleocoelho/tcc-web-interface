@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Container, Button, Row, Col, Badge } from 'react-bootstrap';
+import { Container, Col, Badge, Form, DropdownButton } from 'react-bootstrap';
 
 import CustomThemeContext from '../../services/CustomThemeContext';
 import { cleanFilters } from '../../services/actions/BookFilterActions'
@@ -31,6 +31,8 @@ function Livros(props) {
     // STATE
     const [layout, setLayout] = useState(layouts.grid)
     const [filteredBooks, setFilteredBooks] = useState([])
+    const [orderBy, setOrderBy] = useState('title')
+    const [orderWay, setOrderWay] = useState('asc')
 
     // Aplicando filtros sobre os livros
     const handleBookFilters = () => {
@@ -52,6 +54,14 @@ function Livros(props) {
         setFilteredBooks(newBookCollection)
     }
 
+    /** Ordenação os livros */
+    const handleSortBooks = (a,b) => {
+        const dir = (orderWay==='asc' ? 1 : -1)
+        if (a[orderBy] < b[orderBy]) return -1 * dir;
+        if (a[orderBy] > b[orderBy]) return 1 * dir;
+        return 0
+    }
+
     /** Adiciona um livro para consulta */
     const getInfo = (book) => {
         props.setGetinfoBook(book)
@@ -68,18 +78,61 @@ function Livros(props) {
         }
     }, [books])
 
+    // lista de ordenação
+    const sortList = [
+        { label: 'Título', value: 'title' },
+        { label: 'Autor', value: 'author' },
+        { label: 'Categoria', value: 'category' },
+        { label: 'Editora', value: 'publisher' },
+    ]
+
+    const sortOptions = (
+        <div className="sort-list p-3" style={theme.fourth}>
+            { sortList.sort().map(item => {
+                const idItem = `sort-${item.value}`
+                const isChecked = (item.value === orderBy)
+
+                return (
+                    <Form.Check 
+                        key={'key-'+idItem}
+                        id={idItem}
+                        type="checkbox"
+                        label={item.label}
+                        value={item.value}
+                        custom
+                        onChange={()=> setOrderBy(item.value)}
+                        checked={isChecked}
+                        style={theme.fourth}
+                    />
+                )
+            }) }
+        </div>
+    )
+
     const actions = [
         {
-            label: 'Busca Avançada',
-            onClick: () => alert('BUSCA AVANÇADA'),
+            label: orderBy,
+            title: (<>
+                <i className="fa fa-fw fa-sort"></i>
+                { sortList.find(item => item.value === orderBy).label }
+            </>),
             className: 'page-actions',
-            icon: 'search',
+            variant: theme.themeName,
+            as: DropdownButton,
+            children: sortOptions
+        },
+        {
+            label: 'Ordem',
+            title: 'Ordenar',
+            onClick: () => setOrderWay((orderWay==='asc' ? 'desc' : 'asc')),
+            className: 'page-actions',
+            icon: (orderWay==='asc' ? 'sort-alpha-asc' : 'sort-alpha-desc'),
         },
         { 
             label: 'Limpar filtros',
             title: 'Limpar filtros',
             onClick: props.cleanFilters, 
-            className: 'page-actions',
+            className: 'page-actions d-none d-md-block',
             icon: 'eraser'
         },
         {
@@ -137,11 +190,7 @@ function Livros(props) {
                                     <div className="row-inner row">
                                         {(qtdFiltered > 0)
                                             ? ( filteredBooks
-                                                .sort((a,b) => {
-                                                    if (a.title < b.title) return -1;
-                                                    if (a.title > b.title) return 1;
-                                                    return 0
-                                                })
+                                                .sort(handleSortBooks)
                                                 .map(bk => (
                                                 <BookCard 
                                                     key={bk.id} 

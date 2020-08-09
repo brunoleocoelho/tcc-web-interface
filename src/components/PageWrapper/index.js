@@ -17,10 +17,10 @@ function PageWrapper({ title, applyTheme, children }) {
 
     return (
         <div id={idPage} className="page-wrapper" style={user && themeApply}>
-            <BreadcrumbCustom
+            {/* <BreadcrumbCustom
                 theme={theme.third} 
                 current={title}
-            />
+            /> */}
             { children }
         </div>
     )
