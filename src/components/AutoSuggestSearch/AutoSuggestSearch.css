@@ -3,7 +3,7 @@
 button.btn-input-close {
     position: absolute; 
     right: 1px;
-    margin: 1px 0px;
+    margin: 0.1rem 0px;
     border: none;
 }
 
@@ -11,8 +11,89 @@ input.auto-suggest-input {
     padding-right: 2.8rem !important;
 }
 
+/* Container principal do autosuggest envolve tudo */
+#search-suggest .react-autosuggest__container,
+#search-suggest .react-autosuggest__container--open {
+    width: 100% !important;
+}
+
+/* Container do resultados de suggestions */
+#search-suggest 
+    .react-autosuggest__suggestions-container {
+        width: 100% !important;
+        position: absolute;
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+/* conteudo da linha superior das sugestion */
+#search-suggest 
+    .react-autosuggest__suggestions-container 
+        .container-top {
+            padding: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+/* container da lista de resultados */
+#search-suggest 
+    ul.react-autosuggest__suggestions-list {
+        padding: 0 !important;
+    }
+
+/* Item da lista de resultados */
+#search-suggest 
+    li.react-autosuggest__suggestion {
+        list-style: none !important;
+        cursor: pointer;
+    }
+#search-suggest 
+    li.react-autosuggest__suggestion:hover {
+        background-color: hsl(0 0% 70% / 0.5);
+        opacity: 0.7;
+    }
+
+/* Componente customiado do item da lista */
+#search-suggest
+    .react-autosuggest__suggestion
+        .row {
+            padding: 0.25rem 1rem
+        }
+#search-suggest
+    .react-autosuggest__suggestion
+        .col-2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+#search-suggest
+    .react-autosuggest__suggestion
+        .col-10 {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+#search-suggest
+    .react-autosuggest__suggestion
+        p {
+            margin-bottom: 0;
+        }
+#search-suggest
+    .react-autosuggest__suggestion
+        hr {
+            margin: 0px;
+            margin-top: 0.25rem;
+            background-color: hsl(200 0% 50% / 0.5);
+        }
+
+
+/* Tamanho de tela MD  */
 @media (min-width: 768px) {
-    button.btn-input-close {
+    /* button.btn-input-close,  */
+    button.btn-close-hide  {
         display: none;
     }
+    #search-suggest
+        .react-autosuggest__suggestion
+            p {
+                font-size: 0.85rem;
+            }
 }
