@@ -1,33 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 
 import FormBuilder from '../../components/FormBuilder'
 import AlertCustom from '../../components/AlertCustom'
-import { setAuthUser, validateUser, getUser } from '../../services/AuthenticationService'
-import { setTitleBarText, getLoginNews } from '../../services/InterfaceService'
+import { setAuthUser, getUser } from '../../services/AuthenticationService'
+import { authUser } from '../../services/api/AuthUserServiceApi'
+
 import LibraryBackground from '../../components/LibraryBackground'
+import LoadingLocal from '../../components/LoadingLocal'
+import LoginNewsBoard from './LoginNewsBoard'
 
 /**
  * Tela para login dos usuários estudante e profissional de biblioteca
  */
 function Login(props) {
-    setTitleBarText('Login')
+    // setTitleBarText('Login')
+    // PROPS
+    const { user } = props
 
     // STATE
     const [userName, setUserName] = useState('')
     const [pwd, setPwd] = useState('')
+    const [doingAuth, setDoingAuth] = useState(false) 
 
     // Se já estiver logado, redireciona a home
     const isUsrLgd = getUser()
     if (isUsrLgd) return <Redirect to={"/home"} />
 
     /** Envia os dados de login */
-    const doLogin = () => {
+    const doLogin = async () => {
         const completed = (userName.length > 0 && pwd.length > 0)
         if (!completed) return
         
-        const userValid = validateUser(userName)
+        const userValid = await authUser(userName)
+        
+        setDoingAuth(false)
         if (!userValid) {
             AlertCustom.show({
                 show: true, 
@@ -44,11 +53,13 @@ function Login(props) {
             icon: 'smile-o',
             type: 'success'
         })
+
         setAuthUser(userValid)
 
+        // vai para HomePage
         props.history.replace("/home")
     }
-  
+
     // Objeto com propriedades do formulário de login
     const formProps = {
         title: 'Login de usuário',
@@ -65,7 +76,7 @@ function Login(props) {
                 placeholder: 'Digite o nome de usuário',
                 description: 'Utilize o e-mail institucional da FAETERJ Petrópolis.',
                 type: 'text',
-                autocapitalize: 'off',
+                autoCapitalize: 'off',
                 value: userName,
                 required: true,
                 feedback: { invalid: 'Nome de usuário obrigatório.' },
@@ -89,7 +100,10 @@ function Login(props) {
                 label: 'Entrar',
                 style: 'success',
                 block: true,
-                onClick: doLogin,
+                onClick: () => {
+                    setDoingAuth(true)
+                    doLogin()
+                },
                 disabled: !(userName.length > 0 && pwd.length > 0)
             }
         ]
@@ -106,7 +120,10 @@ function Login(props) {
                 </Col>
 
                 <Col id="login-form-col" className='py-2 p-md-2 col-md-6 col-lg-4 order-1 order-md-2'>
-                    <FormBuilder formProps={formProps} />
+                    { doingAuth
+                        ? <LoadingLocal message="Autenticando..." />
+                        : <FormBuilder formProps={formProps} />
+                    }
                 </Col>
 
             </Row>
@@ -114,27 +131,12 @@ function Login(props) {
     )
 }
 
-/** Componente que serve para exibição de notícias na pagina de login */
-function LoginNewsBoard() {
-    const avisos = getLoginNews()
+// REDUX
+const mapStateToProps = ({ userInfo }) => ({
+    user: userInfo.user
+})
 
-    return (
-        <Container className="p-3 bg-light rounded-sm">
-            <h4 className="text-center">Notícias</h4>
-            { !avisos
-                ? (<h3>Não há avisos a serem exibidos</h3>)
-                : (
-                    avisos.map(noticia => (
-                        <div>
-                            <hr/>
-                            <h5>{ noticia.titulo }</h5>
-                            <p className="text-justify" dangerouslySetInnerHTML={{ __html: noticia.conteudo }}></p>
-                        </div>
-                    ))
-                )
-            }
-        </Container>
-    )
-}
+const mapDispatchToProps = {}
 
-export default Login
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

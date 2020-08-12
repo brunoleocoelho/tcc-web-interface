@@ -8,6 +8,37 @@
     margin: 0 !important;
 } */
 
+.page-actions {
+    font-size: 0.8rem !important;
+    padding: 0.5rem !important;
+}
+
+/* Botão dropdown menu actions */
+.page-actions .dropdown-toggle.btn.btn-primary {
+    padding: 0 !important;
+    font-size: 0.8rem !important;
+}
+.page-actions .dropdown-toggle {
+    background-color: transparent !important;
+    color: inherit !important;
+    border: none !important;
+}
+.page-actions .dropdown-toggle:focus {
+    box-shadow: inherit !important;
+}
+
+/* Lista do dropdown menu actions */
+.sort-list {
+    margin: -10px 0px;
+    box-shadow: 0px 0px 4px 4px rgba(20,20,20,0.4);
+}
+.sort-list .custom-control-label {
+    cursor: pointer !important;
+}
+.sort-list .custom-control-label:hover {
+    opacity: 0.75;
+}
+
 @media (min-width: 768px) {
     .row-inner {
         padding: 0.5rem;

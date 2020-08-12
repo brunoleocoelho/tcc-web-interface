@@ -10,7 +10,7 @@ import { themes, layouts } from '../../utils/constants'
  */
 function BookCard(props) {
     // PROPS
-    const { actions, book, theme, layout } = props
+    const { actions, book, onClick, theme, layout } = props
     
     // STATE
     // const [book, setBook] = useState(props.book)
@@ -35,6 +35,7 @@ function BookCard(props) {
             data-placement="top" 
             title={`${book.title} - ${book.author}`}
             style={theme.fourth}
+            onClick={onClick}
         >
             <Row className="mx-0">
                 <Card.Header className={cssHeader}>
@@ -46,7 +47,7 @@ function BookCard(props) {
                 </Card.Header>
 
                 <Col className={cssContent}>
-                    <Card.Body className="p-1 h-75" >
+                    <Card.Body className="p-1 h-100" >
                         <Card.Title as="h6" className="h6 text-truncate">
                             { book.title }
                         </Card.Title>
@@ -60,9 +61,9 @@ function BookCard(props) {
                                 { book.category ? book.category: 'Não categorizado' }
                             </small>
                         </Card.Text>
+                        
+                        <BookActions actions={actions} theme={theme} book={book} />
                     </Card.Body>
-
-                    <BookActions actions={actions} />
                 </Col>
             </Row>
         </Card>
@@ -70,7 +71,7 @@ function BookCard(props) {
 }
 
 BookCard.defaultProps = {
-    actions: () => {},
+    actions: [],
     book: null,
     theme: themes.light,
     layout: layouts.grid

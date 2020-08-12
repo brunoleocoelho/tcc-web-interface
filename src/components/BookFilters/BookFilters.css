@@ -5,9 +5,10 @@
 }
 
 .checkbox-style {
-    font-size: 12px; 
-    cursor: pointer;
-    padding: 4px 0px;
+    font-size: 0.9rem; 
+    padding: 0.75rem;
+    padding-left: 1.5rem !important;
+    /* cursor: pointer; */
 }
 
 .trucated-bar {
@@ -18,4 +19,13 @@
     left: 0;
     height: 60;
     width: 100%;
+}
+
+
+@media (min-width: 768px) {
+    .checkbox-style {
+        font-size: 0.75rem !important; 
+        padding: 0.25rem !important;
+        padding-left: 1.5rem !important;
+    }
 }

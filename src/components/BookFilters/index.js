@@ -1,91 +1,69 @@
-import React, { useState } from 'react'
-import { Container, Button, Modal } from 'react-bootstrap'
-import AuthorFilter from './AuthorFilter'
-import CategoryFilter from './CategoryFilter';
+import React, { useState, useEffect, useContext } from 'react'
+import { connect } from 'react-redux'
+import { cleanFilters } from '../../services/actions/BookFilterActions';
+import ModalFilters from './ModalFilters';
+import FilterContainer from './FilterContainer';
+
 import './BookFilters.css'
+
+// Helper para abertura de modal de filters
+let showModal = null
 
 /**
  * Componente que renderiza a barra de filtros de livros
  */
-function BookFilters() {
+function BookFilters(props) {
     const title = 'Filtros'
+    const maxWidthScreen = 768
+    const innerWidth = window.innerWidth
 
     // STATE
     const [modalShow, setModalShow] = useState(false);
+    
+    // Ação de abrir e fechar modal
+    const toggleShowModal = () => setModalShow(!modalShow)
 
-    return (
-        <React.Fragment>
+    // componentDidMount
+    useEffect(() => {
+        showModal = toggleShowModal
+    }, [])
+
+    // Renderiza em formato modal para telas pequenas
+    if (innerWidth <= maxWidthScreen) {
+        const modalActions = [
+            { label: 'Feito', variant: '', onClick: toggleShowModal, icon: 'check' },
+            { label: 'Limpar', variant: '', onClick: props.cleanFilters, icon: 'eraser' },
+        ]
+
+        return (
             <ModalFilters 
                 show={modalShow} 
-                onHide={() => setModalShow(false)}
-                titulo={title}
+                actions={modalActions}
+                title={title}
             >
                 <FilterContainer title={title} key="filter-modal" />
             </ModalFilters>
-            
-            <div className="p-2 d-md-none">
-                <Button
-                    variant="outline-primary" 
-                    onClick={() => setModalShow(true)}
-                >
-                    <i className={"fa fa-filter"}></i>
-                    { title }
-                </Button>
-            </div>
+        )
+    }
 
-            <div className="d-none d-md-flex">
-                <FilterContainer title={title} key="filter-side" />
-            </div>
-
-        </React.Fragment>
-    )
-}
-
-/**
- * Container contendo os filtros 
- */
-function FilterContainer({ title }) {
     return (
-        <div>
-            <h5 className="d-none d-md-flex">{ title }</h5>
-
-            <AuthorFilter />
-            <CategoryFilter />
-
+        <div className="d-none d-md-block">
+            <FilterContainer title={title} key="filter-side" />
         </div>
     )
 }
 
 
-function ModalFilters(props) {
-    // console.log("modal props", props)
-    const { show, onHide, titulo, children } = props
+// Static function para abertura do modal por outros componentes
+BookFilters.showModal = () => showModal()
 
-    return (
-        <Modal
-            {...props}
-            show={show}
-            size="lg"
-            aria-labelledby="modal-filters"
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="modal-filters">
-                    { titulo }
-                </Modal.Title>
-            </Modal.Header>
+// REDUX
+const mapStateToProps = ({ filters }) => ({
+    filters
+})
 
-            <Modal.Body>
-                { children }
-            </Modal.Body>
-
-            <Modal.Footer>
-                <Button onClick={onHide}>
-                    Feito
-                </Button>
-            </Modal.Footer>
-        </Modal>
-    );
+const mapDispatchToProps = {
+    cleanFilters
 }
 
-export default BookFilters
+export default connect(mapStateToProps, mapDispatchToProps)(BookFilters)

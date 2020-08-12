@@ -1,3 +1,5 @@
+import { doLogout } from "./InterfaceService"
+
 /**
  * Função que retorna titulo e menus para as páginas
  */
@@ -11,16 +13,6 @@ export const getNavData = () => ([
         label: "Livros",
         href: "/livros",
         icon: "book",
-    },
-    { 
-        label: "Resumo",
-        href:"",
-        icon: "bookmark"
-    },
-    { 
-        label: "Leituras",
-        href:"",
-        icon: "glass"
     },
     { 
         label: "Entregas",
@@ -51,5 +43,10 @@ export const getNavData = () => ([
         label: "Sobre",
         href: "/sobre",
         icon: "question",
-    }
+    },
+    { 
+        label: "Sair",
+        icon: "sign-out",
+        onClick: doLogout
+    },
 ])

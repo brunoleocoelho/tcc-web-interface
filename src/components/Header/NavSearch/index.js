@@ -9,29 +9,13 @@ function NavSearch(props) {
 
     // STATE
     const [showInput, setShowInput] = useState(false)
-    const [term, setTerm] = useState('')
 
     // CONTEXT
     const { theme } = useContext(CustomThemeContext)
 
-    // REF
-    const inputRef = useRef()
-
-    // INTERNAL FUNCTIONS
-    const handleSearch = (e) => {
-        setTerm(e.target.value)
-    }
-
     const handleShowInput = (e) => {
-        setTerm('')
         setShowInput(!showInput)
     }
-    
-    // componentDidUpdate
-    useEffect(() => {
-        if (!showInput) 
-            inputRef.current.focus()
-    }, [showInput])
     
     // CSS Button
     const btnColCss = [
@@ -58,11 +42,7 @@ function NavSearch(props) {
                 </div>
 
                 <div id="search-suggest" className={inputColCss}>
-                    <AutoSuggestSearch
-                        inputRef={inputRef}
-                        value={term}
-                        onChangeText={handleSearch}
-                        closeAction={handleShowInput} />
+                    <AutoSuggestSearch closeAction={handleShowInput} />
                 </div>
             </Form.Row>
         </Form>

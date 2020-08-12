@@ -18,7 +18,6 @@ function Header(props) {
     const{ pathname } = props.location
 
     // STATE
-    const [isNavShown, setIsNavShown] = useState(false)
     const [isLoginPage, setIsLoginPage] = useState((pathname === '/login'))
 
     // CONTEXT
