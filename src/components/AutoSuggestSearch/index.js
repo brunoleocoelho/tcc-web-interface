@@ -126,8 +126,8 @@ function AutoSuggestSearch(props) {
         value,
         onChange,
         onCloseInput,
-        onFocus: (e,a) => console.log("onFocus",{e,a}),
-        onBlur: (e,a) => console.log("onBlur",{e,a})
+        // onFocus: (e,a) => console.log("onFocus",{e,a}),
+        // onBlur: (e,a) => console.log("onBlur",{e,a})
     };
 
     // RENDER
