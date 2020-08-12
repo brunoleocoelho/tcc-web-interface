@@ -11,8 +11,7 @@ function PageWrapper({ title, applyTheme, children }) {
 
     const { theme } = useContext(CustomThemeContext)
     const user = getUser()
-    const titLwr = String(title).replace(' ', '-').toLowerCase()
-    const idPage = `page-wrapper-${titLwr}`
+    const idPage = `page-wrapper`
     const themeApply = applyTheme ? theme.primary : {}
 
     return (

@@ -32,7 +32,13 @@ input.auto-suggest-input {
             padding: 0.5rem;
             font-size: 0.95rem;
         }
-
+#search-suggest 
+    .react-autosuggest__suggestions-container 
+        .container-top 
+        a {
+            color: inherit;
+        }
+    
 /* container da lista de resultados */
 #search-suggest 
     ul.react-autosuggest__suggestions-list {
@@ -83,7 +89,12 @@ input.auto-suggest-input {
             margin-top: 0.25rem;
             background-color: hsl(200 0% 50% / 0.5);
         }
-
+#search-suggest
+    .react-autosuggest__suggestion
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
 /* Tamanho de tela MD  */
 @media (min-width: 768px) {

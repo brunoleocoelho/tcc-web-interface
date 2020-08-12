@@ -17,20 +17,22 @@ const renderInputComponent = (inputProps, inputRef) => (
 const getSuggestionValue = (suggestion) => suggestion.title;
 
 /** Renderiza um item de sugestão */
-const renderSuggestion = (suggestion) => {
+const renderSuggestion = (book) => {
     return (
-        <div className="row">
-            <div class="col-2">
-                <img src={suggestion.image_url} width={44} />
-            </div>
-            <div class="col-10">
-                <div>
-                    <p>{ suggestion.title }</p>
-                    <small>{ suggestion.author }</small>
+        <Link to={`/livros/info/${book.id}`}>
+            <div className="row">
+                <div className="col-2">
+                    <img src={book.image_url} width={44} />
                 </div>
-                <hr />
+                <div className="col-10">
+                    <div>
+                        <p>{ book.title }</p>
+                        <small>{ book.author }</small>
+                    </div>
+                    <hr />
+                </div>
             </div>
-        </div>
+        </Link>
     )
 }
 
@@ -41,7 +43,7 @@ const renderSuggestionsContainer = ({ containerProps, children, query }, theme) 
         <div style={theme.fourth} {...containerProps}>
             <div className="container-top">
                 { (children && query.length > 0) && (<>
-                    Enter para buscar "<strong>{query}</strong>"
+                    <Link to="#">Enter para buscar "<strong>{query}</strong>"</Link>
                 </>) }
             </div>
             { children }
@@ -86,7 +88,7 @@ function AutoSuggestSearch(props) {
         const inputLength = inputValue.length;
 
         const result = (inputLength > 2)
-            ? books.filter(lang => String(lang.title).toLowerCase().includes(inputValue))
+            ? books.filter(livro => String(livro.title).toLowerCase().includes(inputValue))
             : []
 
         return result

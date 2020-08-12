@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import { Button, ButtonGroup, DropdownButton, Dropdown, ButtonToolbar } from 'react-bootstrap';
 import { setTitleBarText } from '../../services/InterfaceService'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import EmptyContent from '../EmptyContent';
@@ -9,19 +8,16 @@ import PageActions from '../PageActions';
 /**
  * Envolve uma página da aplicação
  */
-function ContentWrapper({ title, subtitle, actions, applyTheme, isLoading, children }) {
+function ContentWrapper({ title, subtitle, actions, applyTheme, children }) {
     setTitleBarText(title)
 
     // CONTEXT
     const { theme } = useContext(CustomThemeContext)
 
-    if (isLoading) return <div>It's loading!!!</div>
-
     // identificadores
-    const titLwr = String(title).replace(' ', '-').toLowerCase()
-    const idwrapper = `content-wrapper-${titLwr}`
-    const idHeader = `header-${titLwr}`
-    const idSection = `section-${titLwr}`
+    const idwrapper = `content-wrapper`
+    const idHeader = `content-header`
+    const idSection = `content-section`
     const themeApply = applyTheme ? theme.primary : {}
 
     return (
