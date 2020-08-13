@@ -8,6 +8,7 @@ import './BookInfoForm.css'
 
 /** Form de informação de livros */
 function BookInfoForm(props) {
+    // console.log("=== BookInfoForm", props)
 
     const user = getUser()
     const isStudent = (user.role === 'estudante')
@@ -17,7 +18,7 @@ function BookInfoForm(props) {
 
     // STATE
     const [book, setBook] = useState(props.book)
-    const [toEdit, setToEdit] = useState(false)
+    const [toEdit, setToEdit] = useState(props.edit)
     const [msgImg, setMsgImg] = useState('')
 
     // REF
@@ -73,168 +74,192 @@ function BookInfoForm(props) {
         }
     }
 
+    // CDU
+    useEffect(() => {
+        if (toEdit !== props.edit) handleToEdit()
+    }, [props.edit])
+
     if (!book) return null
 
     // estilo dos inputs
     const styleApply = (!toEdit) ? theme.second : {}
-    const imgBtnInner = (
-        <div className="inner-btn">
-            <i className="fa fa-fw fa-file-image-o"/>
-            Trocar imagem
-        </div>
-    )
 
+    const bookForm = [
+        {
+            sm: "3",
+            fields: [{
+                groups: [{
+                    type: 'file',
+                    label: (
+                        <div className="inner-btn">
+                            <i className="fa fa-fw fa-file-image-o"/>
+                            Trocar imagem
+                        </div>
+                    ),
+                    disabled: (!toEdit),
+                    name: 'image_url',
+                    id: 'image-upload',
+                    accept: imgTypes.join(','),
+                    onChange: handleImg,
+                    multiple: false,
+                    src: book.image_url
+                }]
+            }]
+        },
+        {
+            fields: [{
+                groups: [{
+                    type: 'text',
+                    label: 'Id',
+                    name: 'id',
+                    id: 'id',
+                    value: book.id,
+                    sm: "3"
+                },{
+                    type: 'text',
+                    label: 'Titulo',
+                    name: 'title',
+                    id: 'title',
+                    value: book.title,
+                    sm: "9"
+                }]
+            },
+            {
+                groups: [{
+                    type: 'text',
+                    label: 'Autor',
+                    name: 'author',
+                    id: 'author',
+                    value: book.author,
+                    sm: "6"
+                },{
+                    type: 'text',
+                    label: 'Editora',
+                    name: 'publisher',
+                    id: 'publisher',
+                    value: book.publisher,
+                    sm: "6"
+                }]
+            },
+            {
+                groups: [{
+                    type: 'text',
+                    label: 'Categoria',
+                    name: 'category',
+                    id: 'category',
+                    value: book.category,
+                    sm: "6"
+                },{
+                    type: 'text',
+                    label: 'ISBN',
+                    name: 'isbn',
+                    id: 'isbn',
+                    value: book.isbn,
+                    sm: "6"
+                }]
+            },
+            {
+                groups: [{
+                    type: 'text',
+                    label: 'Ano Publicação',
+                    name: 'publication_year',
+                    id: 'publication_year',
+                    value: book.publication_year,
+                    sm: "4"
+                },{
+                    type: 'text',
+                    label: 'Local Publicação',
+                    name: 'publication_place',
+                    id: 'publication_place',
+                    value: book.publication_place,
+                    sm: "4"
+                },{
+                    type: 'text',
+                    label: 'Edição',
+                    name: 'edition',
+                    id: 'edition',
+                    value: book.edition,
+                    sm: "4"
+                }]
+            },
+            {
+                groups: [{
+                    as: 'textarea',
+                    label: 'Descrição',
+                    name: 'description',
+                    id: 'description',
+                    value: book.description,
+                    rows: '4',
+                }]
+            },
+            {
+                groups: [{
+                    type: 'text',
+                    label: 'Palavras-chave',
+                    name: 'keywords',
+                    id: 'keywords',
+                    value: book.keywords,
+                }]
+            }]
+        }
+    ]
+    
     return (
-        <Form className="book-info-form">
-            <Form.Row>
+    <Form className="book-info-form">
+        <Form.Row>
+            { bookForm.map((item, i) => {
+                const {fields, ...other} = item
 
-                <Col sm="3">
-                    <Form.Group className="image-book">
-                        <img ref={imgRef} id="imgbook" src={book.image_url} />
-                        { (!isStudent && toEdit) &&
-                            <Form.File 
-                                label={imgBtnInner} 
-                                disabled={!toEdit}
-                                name="image_url"
-                                id="image-upload" 
-                                accept={imgTypes.join(',')}
-                                onChange={handleImg}
-                                multiple={false}
-                            />
-                        }
-                        
-                        <Form.Text><small>{ msgImg }</small></Form.Text>
-                    </Form.Group>
-                </Col>
+                return (
+                    <Col {...other} key={'item-'+i}>
+                        { fields.map((field, j) => {
+                            const { groups } = field
 
-                <Col>
-                    <Form.Row>
-                        <Form.Group as={Col} sm="3">
-                            <Form.Label>Id</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="id"
-                                readOnly={!toEdit}
-                                value={ book.id }
-                                style={styleApply}/>
-                        </Form.Group> 
+                            return (
+                                <Form.Row key={'fields-'+j} >
+                                    { groups.map((group, k) => {
+                                        const { sm, label, type, ...otherGrp } = group
 
-                        <Form.Group as={Col} sm="9">
-                            <Form.Label>Titulo</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="title"
-                                readOnly={!toEdit}
-                                value={ book.title }
-                                style={styleApply}/>
-                        </Form.Group>
-                    </Form.Row>
+                                        // campo de imagem
+                                        if (type === 'file') {
+                                            const { src, ...otherFile } = otherGrp
+                                            return (
+                                                <Form.Group className="image-book" key={'group-'+k}>
+                                                    <img ref={imgRef} id="imgbook" src={src} />
+                                                    { (!isStudent && toEdit) &&
+                                                        <Form.File {...otherFile} />
+                                                    }
+                                                    
+                                                    <Form.Text>
+                                                        <small>{ msgImg }</small>
+                                                    </Form.Text>
+                                                </Form.Group>
+                                            )
+                                        }
 
-                    <Form.Row>
-                        <Form.Group as={Col} sm="6">
-                            <Form.Label>Autor</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="author"
-                                readOnly={!toEdit}
-                                value={ book.author }
-                                style={styleApply}/>
-                        </Form.Group> 
+                                        // Outros campos
+                                        return (
+                                            <Form.Group as={Col} sm={sm} key={'group-'+k} >
+                                                <Form.Label>{ label }</Form.Label>
+                                                <Form.Control
+                                                    type={type} 
+                                                    style={styleApply}
+                                                    readOnly={(!toEdit)}
+                                                    onChange={handleOnChange}
+                                                    {...otherGrp}
+                                                />
+                                            </Form.Group> 
+                                        )
+                                    })}
+                                </Form.Row>
+                            )
+                        }) }
+                    </Col>
+                )
 
-                        <Form.Group as={Col} sm="6">
-                            <Form.Label>Editora</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="publisher"
-                                readOnly={!toEdit}
-                                value={ book.publisher }
-                                style={styleApply}/>
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Form.Row>
-                        <Form.Group as={Col} sm="6">
-                            <Form.Label>Categoria</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="category"
-                                readOnly={!toEdit}
-                                value={ book.category }
-                                style={styleApply}/>
-                        </Form.Group>
-
-                        <Form.Group as={Col} sm="6">
-                            <Form.Label>ISBN</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="isbn"
-                                readOnly={!toEdit}
-                                value={ book.isbn }
-                                style={styleApply}/>
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Form.Row>
-                        <Form.Group as={Col} sm="4">
-                            <Form.Label>Ano Publicação</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="publication_year"
-                                readOnly={!toEdit}
-                                value={ book.publication_year }
-                                style={styleApply}/>
-                        </Form.Group>
-
-                        <Form.Group as={Col} sm="4">
-                            <Form.Label>Local Publicação</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="publication_place"
-                                readOnly={!toEdit}
-                                value={ book.publication_place }
-                                style={styleApply}/>
-                        </Form.Group>
-
-                        <Form.Group as={Col} sm="4">
-                            <Form.Label>Edição</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="edition"
-                                readOnly={!toEdit}
-                                value={ book.edition }
-                                style={styleApply}/>
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Descrição</Form.Label>
-                            <Form.Control 
-                                as="textarea"
-                                rows="3"
-                                onChange={handleOnChange}
-                                name="description"
-                                readOnly={!toEdit}
-                                value={ book.description }
-                                style={styleApply}/>
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Palavras-chave</Form.Label>
-                            <Form.Control 
-                                onChange={handleOnChange}
-                                name="keywords"
-                                readOnly={!toEdit}
-                                value={ book.keywords }
-                                style={styleApply}/>
-                        </Form.Group>
-                    </Form.Row>
-                </Col>
-
-            </Form.Row>
-        </Form>
+            })}
+        </Form.Row>
+    </Form>
     )
 }
 

@@ -9,7 +9,7 @@ import PageActions from '../PageActions';
  * Envolve uma página da aplicação
  */
 function ContentWrapper({ title, subtitle, actions, applyTheme, children }) {
-    setTitleBarText(title)
+    // setTitleBarText(title)
 
     // CONTEXT
     const { theme } = useContext(CustomThemeContext)

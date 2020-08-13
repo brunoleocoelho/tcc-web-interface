@@ -11,6 +11,7 @@
 /* Imagem do livro */
 .book-info-form .image-book {
     text-align: center !important;
+    padding: 1rem;
 }
 .book-info-form img {
     width: 60%;
@@ -42,12 +43,12 @@
     cursor: pointer;
 }
 /* Botão full XY */
-/* .book-info-form .form-file-label .inner-btn {
+.book-info-form .form-file-label .inner-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-} */
+}
 .book-info-form .form-file-label:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }

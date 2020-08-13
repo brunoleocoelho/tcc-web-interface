@@ -110,18 +110,12 @@ function BookInfoModal(props) {
 
     // botões de ação do formulário
     const actionButtons = (<>
-        { !isStudent && (<>
-            <Button variant={theme.themeName} onClick={handleToEdit}>
-                <Link to={`/livros/info/${book.id}`} >
-                    <i className="fa fa-fw fa-pencil"/>
-                    Editar
-                </Link>
-            </Button>
-            <Button variant={theme.themeName} disabled={!toEdit}>
-                <i className="fa fa-fw fa-floppy-o"/>
-                Salvar
-            </Button>
-        </>)}
+        <Button variant={theme.themeName} onClick={handleToEdit}>
+            <Link to={`/livros/info/${book.id}/view`} >
+                <i className="fa fa-fw fa-info"/>
+                Mais Detalhes
+            </Link>
+        </Button>
     </>)
 
     return (
