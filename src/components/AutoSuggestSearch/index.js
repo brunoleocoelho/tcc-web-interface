@@ -1,12 +1,13 @@
 import React, { useState, useContext, useRef } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Autosuggest from 'react-autosuggest'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import InputSuggestCustom from './InputSuggestCustom'
 import { setGetinfoBook } from '../../services/actions/GetinfoActions'
+import ItemSuggestionCustom from './ItemSuggestionCustom'
 
 import './AutoSuggestSearch.css'
-import { Link } from 'react-router-dom'
 
 /** Renderiza o componente de inut customizado */
 const renderInputComponent = (inputProps, inputRef) => (
@@ -14,26 +15,14 @@ const renderInputComponent = (inputProps, inputRef) => (
 )
 
 /** Retorna o valor a ser usado na escolha do usuário a ser mostrado no input */
-const getSuggestionValue = (suggestion) => suggestion.title;
+const getSuggestionValue = (suggestion) => {
+    return suggestion.title;
+}
 
 /** Renderiza um item de sugestão */
 const renderSuggestion = (book) => {
-    return (
-        <Link to={`/livros/info/${book.id}`}>
-            <div className="row">
-                <div className="col-2">
-                    <img src={book.image_url} width={44} />
-                </div>
-                <div className="col-10">
-                    <div>
-                        <p>{ book.title }</p>
-                        <small>{ book.author }</small>
-                    </div>
-                    <hr />
-                </div>
-            </div>
-        </Link>
-    )
+    if (!book.id) return <p>{ book.title }</p>
+    return <ItemSuggestionCustom book={book}/>
 }
 
 /** Renderiza o container de sugestões */
@@ -87,11 +76,9 @@ function AutoSuggestSearch(props) {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
 
-        const result = (inputLength > 2)
-            ? books.filter(livro => String(livro.title).toLowerCase().includes(inputValue))
-            : []
+        const result = (inputLength > 2) && books.filter(livro => String(livro.title).toLowerCase().includes(inputValue))
 
-        return result
+        return result || [{title:'nenhum resultado'}]
     }
 
     /** Chamada a cada atualização das sugestões */
@@ -119,7 +106,7 @@ function AutoSuggestSearch(props) {
      */
     const onSuggestionSelected = (event, suggestontext) => {
         const { suggestion } = suggestontext
-        props.setGetinfoBook(suggestion)
+        // props.setGetinfoBook(suggestion)
     }
 
     // Props para input

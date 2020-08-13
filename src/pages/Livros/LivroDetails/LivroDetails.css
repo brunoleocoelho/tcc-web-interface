@@ -1,0 +1,8 @@
+/* ---- LIVROS DETAILS ---- */
+
+.card-info {
+    margin-bottom: 1rem;
+}
+.card-info.section-info {
+    height: 100%;
+}

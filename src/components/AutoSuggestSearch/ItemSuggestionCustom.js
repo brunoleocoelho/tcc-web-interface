@@ -1,0 +1,24 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import './ItemSuggestionCustom.css'
+
+function ItemSuggestionCustom({ book }) {
+    return (
+        <Link to={`/livros/info/${book.id}`} className="item-suggest-custom">
+            <div className="row">
+                <div className="col-2">
+                    <img src={book.image_url} width={44} />
+                </div>
+                <div className="col-10">
+                    <div>
+                        <p>{ book.title }</p>
+                        <small>{ book.author }</small>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </Link>
+    )
+}
+
+export default ItemSuggestionCustom

@@ -1,23 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 import CustomThemeContext from '../../../services/CustomThemeContext'
 import { getOneBook, getAllBooks } from '../../../services/api/BookServiceApi'
 import PageWrapper from '../../../components/PageWrapper'
 import ContentWrapper from '../../../components/ContentWrapper'
 import LoadingLocal from '../../../components/LoadingLocal'
 import EmptyContent from '../../../components/EmptyContent'
+import BookCard from '../../../components/BookCard'
+import BookInfoForm from '../../../components/BookInfoForm'
+import ItemSuggestionCustom from '../../../components/AutoSuggestSearch/ItemSuggestionCustom'
+import './LivroDetails.css'
 
 function LivroDetails(props) {
-    // console.log("-- LivroDetails", props)
     // PROPS
-    const { match } = props
+    const { match, data } = props
     const { id } = match.params
+    const { books } = data
 
     // CONTEXT
     const { theme } = useContext(CustomThemeContext)
 
     // STATE
     const [book, setBook] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
 
     // Function que traz as informações do livro
     const getBookInfo = async () => {
@@ -28,30 +34,90 @@ function LivroDetails(props) {
         catch (error) {
             console.error('[ERRO] getBookInfo',error)    
         }
+        setIsLoading(false)
     }
 
     // componentDidMount
     useEffect(() => {
-        if (!book) getBookInfo()
+        if (!book){
+            setIsLoading(true)
+            getBookInfo()
+        }
     }, [])
 
     useEffect(() => {
-        if (book && id !== book.id) getBookInfo()
+        if (book && id !== book.id){
+            setIsLoading(true)
+            getBookInfo()
+        }
     }, [id])
 
+
+    
     // Renderiza as informações do livro
     const renderBookInfo = () => {
+        const sameAuthor =  books
+            .filter(bks => (bks.author === book.author && bks.id !== book.id))
+            .map((item,idx) => {
+                if (idx <= 3)
+                return <ItemSuggestionCustom book={item}/>
+            })
+    
+        const sameCategory =  books
+            .filter(bks => (bks.category === book.category && bks.id !== book.id))
+            .map((item,idx) => {
+                if (idx <= 3)
+                return <ItemSuggestionCustom book={item}/>
+            })
+
         return (
-            <div>
-                <p>{ book.title }</p>
-                <p>{ book.author }</p>
-                <p>{ book.publisher }</p>
-                <p>{ book.category }</p>
-            </div>
+            <Row>
+                <Col>
+                    <Card style={theme.fourth} className="card-info">
+                        <Card.Header>
+                            <Card.Title>Informações do Livro</Card.Title>
+                        </Card.Header>
+                        <Card.Body>
+                            <BookInfoForm book={book} />
+                        </Card.Body>
+                    </Card>
+                
+
+                    <Row>
+                        <Col xs={12} md={6}>
+                            <Card style={theme.fourth} className="card-info section-info">
+                                <Card.Header>
+                                    <Card.Title>Outros do mesmo Autor</Card.Title>
+                                </Card.Header>
+                                <Card.Body>
+                                    { sameAuthor.length > 0 
+                                        ? sameAuthor
+                                        : <EmptyContent message="Nennhum outro livro"/>
+                                    }
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                                
+                        <Col xs={12} md={6}>
+                            <Card style={theme.fourth} className="card-info section-info">
+                                <Card.Header>
+                                    <Card.Title>Outros da mesma Categoria</Card.Title>
+                                </Card.Header>
+                                <Card.Body>
+                                    { sameCategory.length > 0
+                                        ? sameCategory
+                                        : <EmptyContent message="Nenhum outro livro"/>
+                                    }
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
         )
     }
 
-    const title = `Livro: ${id}`
+    const title = `Livro (${id}) ${book ? book.title : ''}`
     const loadigMsg = 'Carregando informações...'
 
     return (
@@ -59,7 +125,7 @@ function LivroDetails(props) {
             <ContentWrapper title={title} /* subtitle={subtitle} actions={actions} */ >
             
                 <Container>
-                    { (!book)
+                    { (!book || isLoading)
                         ? <LoadingLocal message={loadigMsg} />
                         :(<>
                             {(Object.keys(book).length === 0)
@@ -75,4 +141,13 @@ function LivroDetails(props) {
     )
 }
 
-export default LivroDetails
+const mapStateToProps = ({ data }) => ({
+    data
+})
+
+const mapDispatchToProps = {
+    
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LivroDetails)

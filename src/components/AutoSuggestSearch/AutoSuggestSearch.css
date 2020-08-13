@@ -58,7 +58,7 @@ input.auto-suggest-input {
     }
 
 /* Componente customiado do item da lista */
-#search-suggest
+/* #search-suggest
     .react-autosuggest__suggestion
         .row {
             padding: 0.25rem 1rem
@@ -94,7 +94,7 @@ input.auto-suggest-input {
         a {
             color: inherit;
             text-decoration: none;
-        }
+        } */
 
 /* Tamanho de tela MD  */
 @media (min-width: 768px) {
