@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { connect } from 'react-redux'
 
-import { getAllAuthors, getAllCategories } from '../../services/api/BookServiceApi'
-import { cleanFilters, setAuthorFilter, setCategoryFilter } from '../../services/actions/BookFilterActions';
-import { setAllAuthors, setAllCategories } from '../../services/actions/BookActions'
+import { getAllAuthors, getAllCategories, getAllPublishers } from '../../services/api/BookServiceApi'
+import { cleanFilters, setAuthorFilter, setCategoryFilter, setPublishersFilter } from '../../services/actions/BookFilterActions';
+import { setAllAuthors, setAllCategories, setAllPublishers } from '../../services/actions/BookActions'
 import FilterCheckList from './FilterCheckList/FilterCheckList';
 
 /**
@@ -12,8 +12,8 @@ import FilterCheckList from './FilterCheckList/FilterCheckList';
 function FilterContainer(props) {
     // PROPS
     const { title } = props
-    const { authorsFilter, categoriesFilter } = props.filters
-    const { authors, categories } = props.data
+    const { authorsFilter, categoriesFilter, publishersFilter } = props.filters
+    const { authors, categories, publishers } = props.data
 
     // Function para check do filter
     const handleItemChecked = (e, arr, action) => {
@@ -32,13 +32,15 @@ function FilterContainer(props) {
     useEffect(() => {
         const getFilters = async () => {
             try {
-                const [dataAuthors, dataCategs] = await Promise.all([
+                const [dataAuthors, dataCategs, dataPubls] = await Promise.all([
                     (authors.length === 0) && getAllAuthors(),
-                    (categories.length === 0) && getAllCategories()
+                    (categories.length === 0) && getAllCategories(),
+                    (publishers.length === 0) && getAllPublishers(),
                 ])
 
                 dataAuthors && props.setAllAuthors(dataAuthors)
                 dataCategs && props.setAllCategories(dataCategs)
+                dataPubls && props.setAllPublishers(dataPubls)
             }
             catch(err) {
                 console.error('[ERRO] getFilters', err)
@@ -62,6 +64,13 @@ function FilterContainer(props) {
             filteredData: categoriesFilter,
             onCheck: e => handleItemChecked(e, categoriesFilter, props.setCategoryFilter),
             cleanAction: () => (categoriesFilter.length > 0) && props.setCategoryFilter([]),
+        },
+        { 
+            title: 'Editoras',
+            filterFields: publishers,
+            filteredData: publishersFilter,
+            onCheck: e => handleItemChecked(e, publishersFilter, props.setPublishersFilter),
+            cleanAction: () => (publishersFilter.length > 0) && props.setPublishersFilter([]),
         },
     ]
 
@@ -87,7 +96,8 @@ const mapStateToProps = ({ filters, data }) => ({
 const mapDispatchToProps = {
     cleanFilters, 
     setAuthorFilter, setAllAuthors,
-    setCategoryFilter, setAllCategories
+    setCategoryFilter, setAllCategories,
+    setPublishersFilter, setAllPublishers
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterContainer)

@@ -46,3 +46,17 @@ export async function getAllCategories() {
             return categs;
         })
 }
+
+/**
+ * Retorna as editoras dos livros da API **MOCK SIMULADO** 
+ */
+export async function getAllPublishers() {
+    return mockApiRequest(fetch('/mock/books.json'))
+        .then( data => {
+            const publishera = data.books.reduce((acum, val) => {
+                if (!acum.includes(val.publisher)) acum.push(val.publisher)
+                return acum
+            }, [])
+            return publishera;
+        })
+}

@@ -29,7 +29,7 @@ function LivrosList(props) {
     
     // PROPS
     const { user, filters, data } = props
-    const { authorsFilter, categoriesFilter } = filters
+    const { authorsFilter, categoriesFilter, publishersFilter } = filters
     const { books } = data
 
     // STATE
@@ -47,8 +47,10 @@ function LivrosList(props) {
             const isFromAuthor = authorsFilter.includes(item.author)
             // categoriesFilter
             const isFromCategories = categoriesFilter.includes(item.category)
+            // publishers
+            const isFromPublishers = publishersFilter.includes(item.publisher)
 
-            return (isFromAuthor || isFromCategories)
+            return (isFromAuthor || isFromCategories || isFromPublishers)
         }) 
 
         if (newBookCollection.length === 0) {
@@ -167,7 +169,7 @@ function LivrosList(props) {
     const title = "Livros"
     const qtdFiltered = (filteredBooks.length)
     const subtitle = qtdFiltered > 0 ? `Total ${qtdFiltered} livros.` : '...'
-    const isFiltered = (authorsFilter.length > 0 || categoriesFilter.length > 0)
+    const isFiltered = (authorsFilter.length > 0 || categoriesFilter.length > 0 || publishersFilter.length > 0)
 
     return (
         <PageWrapper title={title}>
@@ -177,7 +179,7 @@ function LivrosList(props) {
                 <Container id="livros-container" fluid>
 
                     { isFiltered && 
-                        <FilteredBadges items={[...authorsFilter, ...categoriesFilter]} />
+                        <FilteredBadges items={[...authorsFilter, ...categoriesFilter, ...publishersFilter]} />
                     }
 
                     <BookInfoModal />
