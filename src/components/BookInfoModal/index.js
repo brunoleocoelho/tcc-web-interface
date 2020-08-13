@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Modal, Form, Row, Col, Button } from 'react-bootstrap'
 import { cleanGetinfo } from '../../services/actions/GetinfoActions'
 import CustomThemeContext from '../../services/CustomThemeContext'
@@ -17,8 +18,8 @@ function BookInfoModal(props) {
     const { theme } = useContext(CustomThemeContext)
 
     // STATE
-    const [show, setShow] = useState((props.getinfo.book !== null))
-    const [book, setBook] = useState(null)
+    const [show, setShow] = useState((props.book !== null))
+    const [book, setBook] = useState(props.book)
     const [toEdit, setToEdit] = useState(false)
     const [msgImg, setMsgImg] = useState('')
 
@@ -28,7 +29,7 @@ function BookInfoModal(props) {
     // verifica se houve modificações de edição
     const checkChanges = () => {
         // Verifcando igualdade simples dos objetos
-        const bookProps = JSON.stringify(props.getinfo.book)
+        const bookProps = JSON.stringify(props.book)
         const bookHere = JSON.stringify(book)
         const isEqual = (bookProps === bookHere);
 
@@ -44,7 +45,8 @@ function BookInfoModal(props) {
             setShow(false)
             setToEdit(false)
             setMsgImg('')
-            setTimeout(() => props.cleanGetinfo(), 500)
+            // setTimeout(() => props.cleanGetinfo(), 500)
+            setTimeout(() => setBook(null), 500)
         }
     }
 
@@ -52,7 +54,7 @@ function BookInfoModal(props) {
     const handleToEdit = () => {
         const goAhead = checkChanges()
         if (!goAhead) return
-        setBook(props.getinfo.book)
+        setBook(props.book)
         setToEdit(!toEdit)
         setMsgImg('')
     }
@@ -88,11 +90,13 @@ function BookInfoModal(props) {
 
     // componentDidUpdate
     useEffect(() => {
-        const isReady = (props.getinfo.book !== null)
+        const isReady = (props.book !== null)
         setShow(isReady)
-        isReady && setBook(props.getinfo.book)
-    }, [props.getinfo.book])
+        isReady && setBook(props.book)
+    }, [props.book])
 
+
+    // SE NÃO HOUVER LIVRO NÃO REDENRIZA
     if (!book) return null
 
     // estilo dos inputs
@@ -108,8 +112,10 @@ function BookInfoModal(props) {
     const actionButtons = (<>
         { !isStudent && (<>
             <Button variant={theme.themeName} onClick={handleToEdit}>
-                <i className="fa fa-fw fa-pencil"/>
-                Editar
+                <Link to={`/livros/info/${book.id}`} >
+                    <i className="fa fa-fw fa-pencil"/>
+                    Editar
+                </Link>
             </Button>
             <Button variant={theme.themeName} disabled={!toEdit}>
                 <i className="fa fa-fw fa-floppy-o"/>

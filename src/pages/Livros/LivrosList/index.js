@@ -4,7 +4,6 @@ import { Container, Col, Badge, Form, DropdownButton } from 'react-bootstrap';
 
 import CustomThemeContext from '../../../services/CustomThemeContext';
 import { cleanFilters } from '../../../services/actions/BookFilterActions'
-import { setGetinfoBook } from '../../../services/actions/GetinfoActions'
 import { getAllBooks } from '../../../services/api/BookServiceApi'
 import { setAllBooks } from '../../../services/actions/BookActions';
 import BookCard from '../../../components/BookCard';
@@ -37,6 +36,7 @@ function LivrosList(props) {
     const [filteredBooks, setFilteredBooks] = useState([])
     const [orderBy, setOrderBy] = useState('title')
     const [orderWay, setOrderWay] = useState('asc')
+    const [bookInfo, setBookInfo] = useState(null)
 
     // Aplicando filtros sobre os livros
     const handleBookFilters = () => {
@@ -70,7 +70,7 @@ function LivrosList(props) {
 
     /** Adiciona um livro para consulta */
     const getInfo = (book) => {
-        props.setGetinfoBook(book)
+        setBookInfo(book)
     }
 
     // componentDidUpdate
@@ -182,7 +182,7 @@ function LivrosList(props) {
                         <FilteredBadges items={[...authorsFilter, ...categoriesFilter, ...publishersFilter]} />
                     }
 
-                    <BookInfoModal />
+                    <BookInfoModal book={bookInfo} />
 
                     <div className="main-row row">
                         <Col className="livros-col-filter" md={3} xl={2}>
@@ -254,7 +254,6 @@ const mapStateToProps = ({ filters, data }) => ({
 
 const mapDispatchToProps = {
     cleanFilters,
-    setGetinfoBook,
     setAllBooks
 }
 

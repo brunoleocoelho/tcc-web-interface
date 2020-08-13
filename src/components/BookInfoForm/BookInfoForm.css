@@ -52,10 +52,6 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Footer container e actions */
-.book-info-modal .modal-footer.actions-footer {
-    display: none;
-}
 
 @media (min-width: 576px) {
   

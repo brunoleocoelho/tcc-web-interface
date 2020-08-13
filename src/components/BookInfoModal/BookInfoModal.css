@@ -80,6 +80,11 @@
     display: none;
 }
 
+button a {
+    text-decoration: none !important;
+    color: inherit !important
+}
+
 @media (min-width: 576px) {
     .book-info-modal .modal-title .actions-header {
         display: none;
