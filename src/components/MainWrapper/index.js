@@ -33,7 +33,7 @@ function MainWrapper(props) {
             
             {user && <>
                 <ThemeButton />
-                <Footer />
+                {/* <Footer /> */}
             </>}
         </div>
     )
