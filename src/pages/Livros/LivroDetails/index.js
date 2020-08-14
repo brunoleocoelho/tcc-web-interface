@@ -23,7 +23,7 @@ function LivroDetails(props) {
     const user = getUser()
     const isStudent = (user.role === 'estudante')
     
-    const arrLocation = "(props.location.pathname)".split('/')
+    const arrLocation = (props.location.pathname).split('/')
     const lastIdx = (arrLocation.length -1)
     const viewEdit = arrLocation[lastIdx]
     const isEdit = (viewEdit === 'edit')
@@ -34,7 +34,7 @@ function LivroDetails(props) {
     // STATE
     const [book, setBook] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-    const [toEdit, setToEdit] = useState(isEdit)
+    const [toEdit, setToEdit] = useState(isEdit && !isStudent)
 
     // Function que traz as informações do livro
     const getBookInfo = async () => {
@@ -54,8 +54,9 @@ function LivroDetails(props) {
         // if (!goAhead) return
         // setBook(props.book)
         const ext = (toEdit) ? 'view' : 'edit'
-        arrLocation.pop()
-        props.history.push( arrLocation.join('/') + ext  )
+        const arrLocPathCopy = [...arrLocation]
+        arrLocPathCopy.pop()
+        props.history.push( arrLocPathCopy.join('/') +'/'+ ext )
     
         setToEdit(!toEdit)
     }
@@ -65,6 +66,11 @@ function LivroDetails(props) {
         if (!book){
             setIsLoading(true)
             getBookInfo()
+        }
+        if (isEdit && isStudent) {
+            const arrLocPathCopy = [...arrLocation]
+            arrLocPathCopy.pop()
+            props.history.push( arrLocPathCopy.join('/') +'/'+ 'view' )
         }
     }, [])
 
@@ -99,10 +105,36 @@ function LivroDetails(props) {
         ] 
         : []
 
+    /** Devolve no máximo 4 posições aleatórias de um array */
+    const getRandArrPos = (arr = []) => {
+        const arrLen = arr.length
+        if (!arrLen) return []
+
+        const qtd = (arrLen >= 4) ? 4 : arrLen
+        let pos = []
+        let discard = []
+
+        while (pos.length < qtd || discard.length === pos.length) {
+            const rand = Math.floor( Math.random() * arrLen )
+            if (!pos.includes(rand)) pos.push(rand)
+            else discard.push(rand)
+        }
+        
+        return pos
+    }
+
     // Renderiza as informações do livro
     const renderBookInfo = () => {
-        
-        console.log("renderBookInfo", book)
+        const sameAuthor = books.filter(bk => (
+            bk.author === book.author && bk.id !== book.id
+        ))
+        const sameCateg  = books.filter(bk => (
+            bk.category === book.category && bk.id !== book.id
+        ))
+
+        const randAutor = getRandArrPos(sameAuthor)
+        const randCateg = getRandArrPos(sameCateg)
+
         const booksRelated = [
             {
                 xs: '12',
@@ -110,12 +142,10 @@ function LivroDetails(props) {
                 card: {
                     title: 'Outros do mesmo autor',
                     emptyMsg: 'Nenhum outro livro deste autor',
-                    body: books
-                        .filter(bk => (bk.author === book.author && bk.id !== book.id))
-                        .map((item,idx) => {
-                            if (idx <= 3)
-                            return <ItemSuggestionCustom key={'ItemSugg-author-'+idx} book={item}/>
-                        })
+                    body: randAutor.map((num,idx) => {
+                        const item = sameAuthor[num]
+                        return <ItemSuggestionCustom key={'ItemSugg-author-'+idx} book={item}/>
+                    })
                 }
             },{
                 xs: '12',
@@ -123,12 +153,10 @@ function LivroDetails(props) {
                 card: {
                     title: 'Outros da mesma categoria',
                     emptyMsg: 'Nenhum outro livro desta categoria',
-                    body: books
-                        .filter(bk => (bk.category === book.category && bk.id !== book.id))
-                        .map((item,idx) => {
-                            if (idx <= 3)
-                            return <ItemSuggestionCustom key={'ItemSugg-category-'+idx} book={item}/>
-                        })
+                    body: randCateg.map((num,idx) => {
+                        const item = sameCateg[num]
+                        return <ItemSuggestionCustom key={'ItemSugg-category-'+idx} book={item}/>
+                    })
                 }
             }
         ]
@@ -145,7 +173,7 @@ function LivroDetails(props) {
                         </Card.Body>
                     </Card>
 
-                    <Row>
+                    <Row className="related-books">
                         { booksRelated.map((item, idx) => {
                             const { card, ...otherCol } = item
 

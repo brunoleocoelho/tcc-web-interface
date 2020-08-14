@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import LivrosList from './LivrosList'
 import LivroDetails from './LivroDetails'
 
@@ -13,6 +13,8 @@ function Livros(props) {
         <Switch>
             <Route exact path={match.path} component={LivrosList} />
             <Route path={`${match.path}/info/:id`} component={LivroDetails} />
+            
+            <Redirect to={match.path} />
         </Switch>
     )
 }

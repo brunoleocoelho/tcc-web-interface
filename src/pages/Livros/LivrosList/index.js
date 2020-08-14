@@ -79,8 +79,9 @@ function LivrosList(props) {
     }, [filters])
 
     useEffect(() => {
-        if (filteredBooks.length === 0 && books.length > 0) {
-            setFilteredBooks(books)
+        const isEmpty = (filteredBooks.length === 0 && books.length > 0)
+        if (isEmpty) {
+            handleBookFilters()
         }
     }, [books])
 
