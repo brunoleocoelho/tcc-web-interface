@@ -48,7 +48,7 @@ function BookCard(props) {
 
                 <Col className={cssContent}>
                     <Card.Body className="p-1 h-100" >
-                        <Card.Title as="h6" className="h6 text-truncate">
+                        <Card.Title as="div" className="card-book-title">
                             { book.title }
                         </Card.Title>
 

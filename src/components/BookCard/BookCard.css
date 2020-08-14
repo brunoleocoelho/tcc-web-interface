@@ -24,6 +24,10 @@
     overflow: hidden;
 }
 
+.card-title.card-book-title {
+    font-size: 0.85rem;
+}
+
 .book-actions {
     text-align: center;
 }
