@@ -28,7 +28,7 @@
     display: none;
 }
 
-button a {
+a.btn {
     text-decoration: none !important;
     color: inherit !important
 }

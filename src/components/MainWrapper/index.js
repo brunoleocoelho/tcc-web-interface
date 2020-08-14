@@ -20,7 +20,8 @@ function MainWrapper(props) {
 
     const pageContentCss = [
         'main-content footer-offset',
-        (user ? 'col-12 col-md-9 col-xl-10' : '')
+        (user ? 'col-12 col-md-9 col-xl-10' : ''),
+        (user ? 'other-pages' : 'login-page'),
     ].join(' ')
 
     return (

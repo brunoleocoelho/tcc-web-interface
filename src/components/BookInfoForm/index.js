@@ -123,6 +123,14 @@ function BookInfoForm(props) {
                     value: book.title,
                     sm: "9"
                 }]
+            },{
+                groups: [{
+                    type: 'text',
+                    label: 'Subtítulo',
+                    name: 'subtitle',
+                    id: 'subtitle',
+                    value: book.subtitle
+                }]
             },
             {
                 groups: [{

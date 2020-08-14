@@ -12,6 +12,7 @@
 .book-info-form .image-book {
     text-align: center !important;
     padding: 1rem;
+    margin: 0 auto;
 }
 .book-info-form img {
     width: 60%;
