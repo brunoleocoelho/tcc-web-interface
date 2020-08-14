@@ -21,6 +21,7 @@ const getSuggestionValue = (suggestion) => {
 
 /** Renderiza um item de sugestão */
 const renderSuggestion = (book) => {
+    if (!book) return null
     if (!book.id) return <p>{ book.title }</p>
     return <ItemSuggestionCustom book={book}/>
 }
@@ -32,7 +33,7 @@ const renderSuggestionsContainer = ({ containerProps, children, query }, theme) 
         <div style={theme.fourth} {...containerProps}>
             <div className="container-top">
                 { (children && query.length > 0) && (<>
-                    <Link to="#">Enter para buscar "<strong>{query}</strong>"</Link>
+                    <Link to="#">Buscando por: "<strong>{query}</strong>"</Link>
                 </>) }
             </div>
             { children }
@@ -132,7 +133,7 @@ function AutoSuggestSearch(props) {
             renderInputComponent={props => renderInputComponent(props, inputRef)}
             renderSuggestionsContainer={(props) => renderSuggestionsContainer(props, theme)}
             onSuggestionSelected={onSuggestionSelected}
-            // focusInputOnSuggestionClick
+            focusInputOnSuggestionClick={false}
             // alwaysRenderSuggestions
         />
     );
