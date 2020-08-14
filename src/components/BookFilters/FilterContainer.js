@@ -52,18 +52,18 @@ function FilterContainer(props) {
     // filtros a renderizar
     const filters = [
         { 
-            title: 'Autores',
-            filterFields: authors,
-            filteredData: authorsFilter,
-            onCheck: e => handleItemChecked(e, authorsFilter, props.setAuthorFilter),
-            cleanAction: () => (authorsFilter.length > 0) && props.setAuthorFilter([]),
-        },
-        { 
             title: 'Categorias',
             filterFields: categories,
             filteredData: categoriesFilter,
             onCheck: e => handleItemChecked(e, categoriesFilter, props.setCategoryFilter),
             cleanAction: () => (categoriesFilter.length > 0) && props.setCategoryFilter([]),
+        },
+        { 
+            title: 'Autores',
+            filterFields: authors,
+            filteredData: authorsFilter,
+            onCheck: e => handleItemChecked(e, authorsFilter, props.setAuthorFilter),
+            cleanAction: () => (authorsFilter.length > 0) && props.setAuthorFilter([]),
         },
         { 
             title: 'Editoras',
