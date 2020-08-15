@@ -1,0 +1,29 @@
+# Project with ReactJS
+
+# Use Node image for Docker
+image: node:10.22.0
+
+## Run it before everything
+before_script:
+  - rm -rf node_modules
+  - npm install
+
+# Apply settings for job 'pages'
+pages:
+  script:
+    - npm run build
+    - rm -rf public
+    - mv build public
+  artifacts:
+    paths:
+      - public
+  # cache:
+  #   paths:
+  #     - node_modules
+  #   key: project
+  # Run deploy only when 'master' branch
+  only:
+    - master
+
+## After deploy, page can be accessed by URL
+## https://brunoleocoelho.gitlab.io/interface-web-biblioteca-tcc/
