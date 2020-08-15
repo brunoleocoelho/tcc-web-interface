@@ -15,6 +15,8 @@ import MainWrapper from '../components/MainWrapper';
 // Atualizando título da página
 setTitleBarText()
 
+const baseUrl = process.env.REACT_APP_BASEURL
+
 /** Container para o App com inicialização do store REDUX */
 function AppContainer({ children }) {
     if (!children) return null
@@ -33,7 +35,7 @@ function App() {
     return (
         <AppContainer>
             <div className="App">
-                <BrowserRouter>
+                <BrowserRouter basename={baseUrl} >
                     <CustomThemeProvider>
                         
                         <Header />
