@@ -29,6 +29,7 @@ function FilterCheckList({ title, filterFields, filteredData, onCheck, cleanActi
                 as="div" 
                 eventKey={idContent} 
                 onClick={() => setIsCollapsed(!isCollapsed)}
+                className="toggler-collapse"
             >
                 <i className={`fa fa-chevron-${icon} float-right`}></i>
                 <h6>{ title }</h6>
@@ -37,7 +38,7 @@ function FilterCheckList({ title, filterFields, filteredData, onCheck, cleanActi
             { (filterFields.length === 0)
                 ? <LoadingLocal />
                 : (<Accordion.Collapse eventKey={idContent}>
-                    <div>
+                    <div className="content">
                         <FilterActions actions={actions} />
 
                         { filterFields.sort().map( item => {

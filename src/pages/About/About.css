@@ -1,0 +1,21 @@
+/* --- ABOUT ---- */
+
+#about-page .content-place {
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+#about-page .logo {
+    text-align: center;
+    height: 100%;
+}
+
+#about-page .sobre p {
+    text-align: justify;
+}
+
+@media (min-width: 576px) {
+    #about-page {
+        padding-top: 4% !important;
+    }
+}

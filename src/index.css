@@ -21,3 +21,28 @@ html {
 .full-height {
   height: inherit !important;
 }
+
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #d3d3d3;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #808080;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5f5f5f; 
+}
+
+/* ::-webkit-scrollbar-button {
+  background: #a3a3a3;
+} */
