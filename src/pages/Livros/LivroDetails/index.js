@@ -8,10 +8,11 @@ import PageWrapper from '../../../components/PageWrapper'
 import ContentWrapper from '../../../components/ContentWrapper'
 import LoadingLocal from '../../../components/LoadingLocal'
 import EmptyContent from '../../../components/EmptyContent'
-import BookCard from '../../../components/BookCard'
 import BookInfoForm from '../../../components/BookInfoForm'
 import ItemSuggestionCustom from '../../../components/AutoSuggestSearch/ItemSuggestionCustom'
+import { getRandArrPos } from '../../../utils/utilFunctions'
 import './LivroDetails.css'
+
 
 function LivroDetails(props) {
     // console.log("+++ LivroDetails", props)
@@ -105,24 +106,6 @@ function LivroDetails(props) {
         ] 
         : []
 
-    /** Devolve no máximo 4 posições aleatórias de um array */
-    const getRandArrPos = (arr = []) => {
-        const arrLen = arr.length
-        if (!arrLen) return []
-
-        const qtd = (arrLen >= 4) ? 4 : arrLen
-        let pos = []
-        let discard = []
-
-        while (pos.length < qtd || discard.length === pos.length) {
-            const rand = Math.floor( Math.random() * arrLen )
-            if (!pos.includes(rand)) pos.push(rand)
-            else discard.push(rand)
-        }
-        
-        return pos
-    }
-
     // Renderiza as informações do livro
     const renderBookInfo = () => {
         const sameAuthor = books.filter(bk => (
@@ -131,9 +114,10 @@ function LivroDetails(props) {
         const sameCateg  = books.filter(bk => (
             bk.category === book.category && bk.id !== book.id
         ))
-
-        const randAutor = getRandArrPos(sameAuthor)
-        const randCateg = getRandArrPos(sameCateg)
+        
+        const qtdShow = 4
+        const randAutor = getRandArrPos(sameAuthor, qtdShow)
+        const randCateg = getRandArrPos(sameCateg, qtdShow)
 
         const booksRelated = [
             {

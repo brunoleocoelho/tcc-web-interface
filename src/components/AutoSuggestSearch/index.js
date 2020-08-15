@@ -27,14 +27,18 @@ const renderSuggestion = (book) => {
 }
 
 /** Renderiza o container de sugestões */
-const renderSuggestionsContainer = ({ containerProps, children, query }, theme) => {
+const renderSuggestionsContainer = ({ containerProps, children, query }, adicProps) => {
     if (!children) return null
+
+    const { count, theme } = adicProps
+    const textoTop = (count === 0)
+        ? 'Nenhum resultado'
+        : (<>{count} Resultado{(count > 1) ?'s' :''} para "<strong>{query}</strong>"</>)
+        
     return (
         <div style={theme.fourth} {...containerProps}>
             <div className="container-top">
-                { (children && query.length > 0) && (<>
-                    <Link to="#">Buscando por: "<strong>{query}</strong>"</Link>
-                </>) }
+                { (children && query.length > 0) && textoTop }
             </div>
             { children }
         </div>
@@ -43,6 +47,7 @@ const renderSuggestionsContainer = ({ containerProps, children, query }, theme) 
 
 /**
  * Componente que encapsula o Autosuggest para busca
+ * @see https://github.com/moroshko/react-autosuggest
  */
 function AutoSuggestSearch(props) {
     // console.log('AutoSuggestSearch', props)
@@ -79,7 +84,7 @@ function AutoSuggestSearch(props) {
 
         const result = (inputLength > 2) && books.filter(livro => String(livro.title).toLowerCase().includes(inputValue))
 
-        return result || [{title:'nenhum resultado'}]
+        return result || []
     }
 
     /** Chamada a cada atualização das sugestões */
@@ -120,6 +125,12 @@ function AutoSuggestSearch(props) {
         // onBlur: (e,a) => console.log("onBlur",{e,a})
     };
 
+    // Props adicionais para container
+    const adicProps = {
+        theme, 
+        count: suggestions.length
+    }
+
     // RENDER
     return (
         <Autosuggest
@@ -131,7 +142,7 @@ function AutoSuggestSearch(props) {
             renderSuggestion={renderSuggestion}
             inputProps={inputProps}
             renderInputComponent={props => renderInputComponent(props, inputRef)}
-            renderSuggestionsContainer={(props) => renderSuggestionsContainer(props, theme)}
+            renderSuggestionsContainer={(props) => renderSuggestionsContainer(props, adicProps)}
             onSuggestionSelected={onSuggestionSelected}
             focusInputOnSuggestionClick={false}
             // alwaysRenderSuggestions

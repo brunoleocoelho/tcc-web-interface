@@ -22,7 +22,7 @@ input.auto-suggest-input {
     .react-autosuggest__suggestions-container {
         width: 100% !important;
         position: absolute;
-        box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        box-shadow: 0px 0px 8px rgba(0,0,0,0.5);
     }
 
 /* conteudo da linha superior das sugestion */
@@ -43,6 +43,9 @@ input.auto-suggest-input {
 #search-suggest 
     ul.react-autosuggest__suggestions-list {
         padding: 0 !important;
+        max-height: 400px;
+        overflow: overlay;
+        overflow-x: hidden;
     }
 
 /* Item da lista de resultados */

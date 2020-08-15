@@ -12,6 +12,7 @@ function ItemSuggestionCustom({ book }) {
                 <div className="col-10">
                     <div>
                         <p>{ book.title }</p>
+                        <p><small>{ book.subtitle }</small></p>
                         <small>{ book.author }</small>
                     </div>
                     <hr />

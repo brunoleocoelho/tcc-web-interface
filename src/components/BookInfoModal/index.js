@@ -130,7 +130,7 @@ function BookInfoModal(props) {
             className="book-info-modal"
         >
             <Modal.Header 
-                claassName="book-info-header"
+                className="book-info-header"
                 style={theme.fourth}
                 closeButton 
             >
