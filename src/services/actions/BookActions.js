@@ -2,6 +2,7 @@ import {
     BOOKS_SET_ALL,
     AUTHORS_SET_ALL,
     CATEGORIES_SET_ALL,
+    PUBLISHERS_SET_ALL,
 } from '../actions/types'
 
 /**
@@ -34,5 +35,16 @@ export function setAllCategories(categories) {
     return {
         type: CATEGORIES_SET_ALL,
         categories
+    }
+}
+
+/**
+ * Armazena no redux as editoras dos livros
+ * @param {*} publishers todas as editoras dos livros
+ */
+export function setAllPublishers(publishers) {
+    return {
+        type: PUBLISHERS_SET_ALL,
+        publishers
     }
 }

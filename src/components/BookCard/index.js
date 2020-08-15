@@ -23,8 +23,8 @@ function BookCard(props) {
     const isGrid = (layout === layouts.grid)
 
     const cssCard = `book-container px-md-1 col-12 ${isGrid && 'col-sm-4 col-md-4 col-lg-3 grid'}`
-    const cssHeader = `book-header col-4 ${isGrid && 'col-sm-12'}`
-    const cssContent = `px-0 ${isGrid && 'col-sm-12'}`
+    const cssHeader = `book-header col-3 ${isGrid && 'col-sm-12'}`
+    const cssContent = `${isGrid ? 'p-2 px-sm-0 col-sm-12' : 'p-2 cb-text-lg'}`
 
     // RENDER
     return (
@@ -48,8 +48,11 @@ function BookCard(props) {
 
                 <Col className={cssContent}>
                     <Card.Body className="p-1 h-100" >
-                        <Card.Title as="h6" className="h6 text-truncate">
-                            { book.title }
+                        <Card.Title as="div" className="card-book-title">
+                            { (isGrid)
+                                ? `${book.title.substring(0,40)}${book.title.length > 40 ? '...' : ''}` 
+                                : book.title
+                            }
                         </Card.Title>
 
                         <Card.Text>

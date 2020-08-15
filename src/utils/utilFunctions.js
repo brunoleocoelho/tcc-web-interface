@@ -46,3 +46,26 @@ export const buildFormJS = (bookData) => {
 
     return formulario
 }
+
+
+/**
+ * Devolve no máximo 'n' posições aleatórias de um array
+ * @param {array} arr array a ser usado (default `[]`)
+ * @param {number} n array a ser usado (default 1)
+ */
+export const getRandArrPos = (arr = [], n = 1) => {
+    const arrLen = arr.length
+    if (!arrLen) return []
+
+    const qtd = (arrLen >= n) ? n : arrLen
+    let pos = []
+    let discard = []
+
+    while (pos.length < qtd || discard.length === pos.length) {
+        const rand = Math.floor( Math.random() * arrLen )
+        if (!pos.includes(rand)) pos.push(rand)
+        else discard.push(rand)
+    }
+    
+    return pos
+}

@@ -2,6 +2,7 @@ import {
     BOOKS_SET_ALL,
     AUTHORS_SET_ALL,
     CATEGORIES_SET_ALL,
+    PUBLISHERS_SET_ALL,
 } from '../actions/types'
 
 // Valores iniciais do store'data'
@@ -9,6 +10,7 @@ const INITIAL = {
     books: [],
     authors: [],
     categories: [],
+    publishers: []
 }
 
 /** Reducer para livros. Store: 'data' */
@@ -32,6 +34,11 @@ function BooksReducer(state = INITIAL, action) {
                 categories: action.categories
             }
 
+        case PUBLISHERS_SET_ALL:
+            return {
+                ...state,
+                publishers: action.publishers
+            }
         default:
             return state
     }

@@ -23,61 +23,14 @@
     justify-content: center;
 }
 
-/* Form do livro */
-.book-info-form {
-    width: 100%;
-}
-.book-info-form .form-group {
-    text-align: start;
-}
-
-/* Imagem do livro */
-.book-info-form .image-book {
-    text-align: center !important;
-}
-.book-info-form img {
-    width: 60%;
-    text-align: center;
-}
-
-/* Botão nativo de escolha de imagem oculto */
-.book-info-form #image-upload {
-    opacity: 0;
-    height: 0;
-}
-.book-info-form .form-file-label {
-    /* Estilo para btoão full  */
-    /* position: absolute;
-    bottom: 1rem;
-    left: 0;
-    right: 0;
-    top: 0;
-    align-items: center;
-    color: lightgray */
-    width: 100%;
-    padding: 0.5rem;
-    margin: 0.1rem;
-    font-size: 0.9rem;
-    text-align: center;
-    background-color: rgba(100, 100, 100, 0.2);
-    border: 1px solid lightgray;
-    border-radius: 4px;
-    cursor: pointer;
-}
-/* Botão full XY */
-/* .book-info-form .form-file-label .inner-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-} */
-.book-info-form .form-file-label:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
 /* Footer container e actions */
 .book-info-modal .modal-footer.actions-footer {
     display: none;
+}
+
+a.btn {
+    text-decoration: none !important;
+    color: inherit !important
 }
 
 @media (min-width: 576px) {

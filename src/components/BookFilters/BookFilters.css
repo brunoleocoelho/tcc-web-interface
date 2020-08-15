@@ -10,6 +10,10 @@
     padding-left: 1.5rem !important;
     /* cursor: pointer; */
 }
+.checkbox-style .custom-control-label:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
 
 .trucated-bar {
     background: linear-gradient(0deg, #fff, rgba(255,255,255,0) 100%);
@@ -21,6 +25,15 @@
     width: 100%;
 }
 
+.filter-container div.content {
+    max-height: 360px;
+    overflow: auto;
+}
+
+.filter-container div.toggler-collapse:hover {
+    opacity: 0.75;
+    cursor: pointer;
+}
 
 @media (min-width: 768px) {
     .checkbox-style {

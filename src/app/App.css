@@ -4,6 +4,10 @@
   min-height: 100%;
 }
 
+#root {
+  height: 100%;
+}
+
 /* ADJUSTES DE OFFSET PARA FOOTER */
 #main-page-content.footer-offset {
   padding-bottom: 150px !important;

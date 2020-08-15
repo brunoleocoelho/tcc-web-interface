@@ -1,4 +1,9 @@
-import { AUTHOR_SET_FILTER, CATEGORY_SET_FILTER, CLEAN_FILTERS } from './types'
+import {
+    AUTHOR_SET_FILTER,
+    CATEGORY_SET_FILTER,
+    CLEAN_FILTERS,
+    PUBLISHER_SET_FILTER
+} from './types'
 
 /**
  * Recebe os autores para filtrar
@@ -19,6 +24,17 @@ export function setCategoryFilter(categoriesFilter) {
     return {
         type: CATEGORY_SET_FILTER,
         categoriesFilter
+    }
+}
+
+/**
+ * Recebe as editoras para filtrar
+ * @param {*} publishersFilter 
+ */
+export function setPublishersFilter(publishersFilter) {
+    return {
+        type: PUBLISHER_SET_FILTER,
+        publishersFilter
     }
 }
 

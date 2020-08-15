@@ -3,16 +3,17 @@ import EmptyContent from '../EmptyContent'
 import './PageWrapper.css'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import { getUser } from '../../services/AuthenticationService'
+import { setTitleBarText } from '../../services/InterfaceService'
 
 /**
  * Container principal com layout default de uma página
  */
 function PageWrapper({ title, applyTheme, children }) {
+    setTitleBarText(title)
 
     const { theme } = useContext(CustomThemeContext)
     const user = getUser()
-    const titLwr = String(title).replace(' ', '-').toLowerCase()
-    const idPage = `page-wrapper-${titLwr}`
+    const idPage = `page-wrapper`
     const themeApply = applyTheme ? theme.primary : {}
 
     return (

@@ -21,8 +21,20 @@ export const CustomThemeProvider = ({ children }) => {
         setTheme(themes[themeName])
     }
 
+    //workaround para div App
+    const setAppbackground = () => {
+        const app = document.querySelector('.App')
+        app.style.backgroundColor = theme.primary.backgroundColor
+    }
+
+    // componentDidMount equivalente
+    useEffect(() => {
+        setAppbackground()
+    }, [])
+
     // componentDidUpdate equivalente
     useEffect(() => {
+        setAppbackground()
         setThemeToApply(theme)
     }, [theme])
 

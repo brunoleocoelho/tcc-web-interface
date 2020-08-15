@@ -38,7 +38,7 @@ function Home(props) {
 
     return (
         <PageWrapper title="Dashboard">
-            <ContentWrapper title="Dashboard" actions={actions} >
+            <ContentWrapper title="Dashboard" /* actions={actions} */ >
                 <Container id="home-student" className="p-0 full-height" fluid>
                     <Row id="home-content" className="m-0 text-md-left full-height">
                         <div id="home-body" className="home-body p-0 text-md-left col">
