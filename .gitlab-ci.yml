@@ -4,12 +4,13 @@
 image: node:10.22.0
 
 ## Run it before everything
-before_script:
-  - rm -rf node_modules
-  - npm install
+cache:
+  paths:
+    - node_modules/
 
 # Apply settings for job 'pages'
 pages:
+  stage: deploy
   script:
     - npm run build
     - rm -rf public
@@ -17,13 +18,8 @@ pages:
   artifacts:
     paths:
       - public
-  # cache:
-  #   paths:
-  #     - node_modules
-  #   key: project
-  # Run deploy only when 'master' branch
   only:
-    - master
+    - master # Run deploy only when 'master' branch
 
 ## After deploy, page can be accessed by URL
 ## https://brunoleocoelho.gitlab.io/interface-web-biblioteca-tcc/
