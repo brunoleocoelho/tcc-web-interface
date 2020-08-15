@@ -3,27 +3,30 @@
 # Use Node image for Docker
 image: node:10.22.0
 
+cache:
+  paths:
+    - node_modules/
+
 before_script:
   - cat /proc/sys/fs/inotify/max_user_watches 
   - sysctl fs.inotify.max_user_watches=524288
-  - cat /proc/sys/fs/inotify/max_user_watches 
-  - npm install
+  - npm cache clean --force
+  - CI=false npm install
 
-# Apply settings for job 'pages'
 pages:
   stage: deploy
   script:
-    - npm run build
+    - CI=false npm run build
     - rm -rf public
     - mv build public
   artifacts:
     paths:
       - public
-  cache:
-    paths:
-      - node_modules/
   only:
     - master # Run deploy only when 'master' branch
+
+after_script:
+  - rm -rf node_modules
 
 ## After deploy, page can be accessed by URL
 ## https://brunoleocoelho.gitlab.io/interface-web-biblioteca-tcc/
