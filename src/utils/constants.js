@@ -70,3 +70,6 @@ export const layouts = {grid:'grid', list:'list'}
 
 // MOCK para tempo de requisição
 export const REQUEST_TIME_MS = 2000
+
+// URL base conforme ambiente
+export const baseUrl = process.env.REACT_APP_BASEURL || ''

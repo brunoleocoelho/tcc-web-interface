@@ -11,13 +11,10 @@ import { CustomThemeProvider } from '../services/CustomThemeContext'
 import Header from '../components/Header';
 import AlertCustom from '../components/AlertCustom';
 import MainWrapper from '../components/MainWrapper';
+import { baseUrl } from '../utils/constants';
 
 // Atualizando título da página
 setTitleBarText()
-
-const host = process.env.PUBLIC_URL
-const baseUrl = process.env.REACT_APP_BASEURL
-console.log('[INFO] Paths', {host, baseUrl})
 
 /** Container para o App com inicialização do store REDUX */
 function AppContainer({ children }) {
@@ -37,7 +34,7 @@ function App() {
     return (
         <AppContainer>
             <div className="App">
-                <BrowserRouter basename={host + baseUrl} >
+                <BrowserRouter basename={baseUrl} >
                     <CustomThemeProvider>
                         
                         <Header />

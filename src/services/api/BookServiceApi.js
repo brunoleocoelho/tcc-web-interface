@@ -1,10 +1,11 @@
 import { mockApiRequest } from "./mockApi"
+import { baseUrl } from "../../utils/constants"
 
 /**
  * Retorna os livros da API **MOCK SIMULADO** 
  */
 export async function getAllBooks() {
-    return mockApiRequest(fetch('./mock/books.json'))
+    return mockApiRequest(fetch(baseUrl + '/mock/books.json'))
         .then( data => data.books)
 }
 
@@ -12,7 +13,7 @@ export async function getAllBooks() {
  * Retorna informações de um livro conforme seu 'id' da API **MOCK SIMULADO** 
  */
 export async function getOneBook(id) {
-    return mockApiRequest(fetch('./mock/books.json'))
+    return mockApiRequest(fetch(baseUrl + '/mock/books.json'))
         .then(data => {
             const info = (data) && data.books.find(book => book.id === id)
             return info || {}
@@ -23,7 +24,7 @@ export async function getOneBook(id) {
  * Retorna os autores dos livros da API **MOCK SIMULADO** 
  */
 export async function getAllAuthors() {
-    return mockApiRequest(fetch('./mock/books.json'))
+    return mockApiRequest(fetch(baseUrl + '/mock/books.json'))
         .then( data => {
             const authors = data.books.reduce((acum, val) => {
                 if (!acum.includes(val.author)) acum.push(val.author)
@@ -37,7 +38,7 @@ export async function getAllAuthors() {
  * Retorna as categorias dos livros da API **MOCK SIMULADO** 
  */
 export async function getAllCategories() {
-    return mockApiRequest(fetch('./mock/books.json'))
+    return mockApiRequest(fetch(baseUrl + '/mock/books.json'))
         .then( data => {
             const categs = data.books.reduce((acum, val) => {
                 if (!acum.includes(val.category)) acum.push(val.category)
@@ -51,7 +52,7 @@ export async function getAllCategories() {
  * Retorna as editoras dos livros da API **MOCK SIMULADO** 
  */
 export async function getAllPublishers() {
-    return mockApiRequest(fetch('./mock/books.json'))
+    return mockApiRequest(fetch(baseUrl + '/mock/books.json'))
         .then( data => {
             const publishera = data.books.reduce((acum, val) => {
                 if (!acum.includes(val.publisher)) acum.push(val.publisher)
