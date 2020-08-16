@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { getAllAuthors, getAllCategories, getAllPublishers } from '../../services/api/BookServiceApi'
@@ -11,7 +11,7 @@ import FilterCheckList from './FilterCheckList/FilterCheckList';
  */
 function FilterContainer(props) {
     // PROPS
-    const { title } = props
+    const { title, setAllAuthors, setAllCategories, setAllPublishers } = props
     const { authorsFilter, categoriesFilter, publishersFilter } = props.filters
     const { authors, categories, publishers } = props.data
 
@@ -38,16 +38,16 @@ function FilterContainer(props) {
                     (publishers.length === 0) && getAllPublishers(),
                 ])
 
-                dataAuthors && props.setAllAuthors(dataAuthors)
-                dataCategs && props.setAllCategories(dataCategs)
-                dataPubls && props.setAllPublishers(dataPubls)
+                dataAuthors && setAllAuthors(dataAuthors)
+                dataCategs && setAllCategories(dataCategs)
+                dataPubls && setAllPublishers(dataPubls)
             }
             catch(err) {
                 console.error('[ERRO] getFilters', err)
             }
         }
         getFilters()
-    }, [])
+    })
 
     // filtros a renderizar
     const filters = [

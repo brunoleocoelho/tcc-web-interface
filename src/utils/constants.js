@@ -69,7 +69,7 @@ export const themes = { light, dark }
 export const layouts = {grid:'grid', list:'list'}
 
 // MOCK para tempo de requisição
-export const REQUEST_TIME_MS = 2000
+export const REQUEST_TIME_MS = 1000
 
 // URL base conforme ambiente
 export const baseUrl = process.env.REACT_APP_BASEURL || ''

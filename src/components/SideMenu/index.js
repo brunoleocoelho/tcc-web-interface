@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link, NavLink, withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { Nav, Button } from 'react-bootstrap'
 
 import { setAllBooks } from '../../services/actions/BookActions'
@@ -17,7 +17,7 @@ let sideMenuToggle = null
  * Rendriza o menu lateral
  */
 function SideMenu(props) {
-    const { location, books } = props
+    const { location, books, setAllBooks } = props
 
     // state
     const [showSide, setShowSide] = useState(false)
@@ -39,7 +39,7 @@ function SideMenu(props) {
         const getBooks = async () => {
             try {
                 const data = await getAllBooks()
-                props.setAllBooks(data)
+                setAllBooks(data)
             }
             catch (error) {
                 console.log("[ERRO] SideMenu CDM", error)
@@ -47,7 +47,7 @@ function SideMenu(props) {
         }
         if (books.length === 0) getBooks()
         sideMenuToggle = toggleSide
-    }, [])
+    })
 
     const sideMenus = [
         ...getNavData(),

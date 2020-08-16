@@ -25,7 +25,7 @@ function LoginNewsBoard() {
             }
         }
         if (!avisos) getNews()
-    }, [])
+    })
 
     // RENDER
     return (

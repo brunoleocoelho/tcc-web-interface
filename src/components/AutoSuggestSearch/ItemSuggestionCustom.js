@@ -7,7 +7,7 @@ function ItemSuggestionCustom({ book }) {
         <Link to={`/livros/info/${book.id}/view`} className="item-suggest-custom">
             <div className="row">
                 <div className="col-2">
-                    <img src={book.image_url} width={44} />
+                    <img src={book.image_url} width={44} alt={book.title} />
                 </div>
                 <div className="col-10">
                     <div>

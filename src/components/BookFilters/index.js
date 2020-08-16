@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { cleanFilters } from '../../services/actions/BookFilterActions';
 import ModalFilters from './ModalFilters';
@@ -26,7 +26,7 @@ function BookFilters(props) {
     // componentDidMount
     useEffect(() => {
         showModal = toggleShowModal
-    }, [])
+    })
 
     // Renderiza em formato modal para telas pequenas
     if (innerWidth <= maxWidthScreen) {

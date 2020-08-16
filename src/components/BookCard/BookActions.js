@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Row, Col } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 function BookActions({ actions, book, theme }) {
     const hasActions = (actions && actions.length > 0)

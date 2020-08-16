@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { Button, ButtonGroup, DropdownButton, Dropdown, ButtonToolbar } from 'react-bootstrap';
+import React, { useContext } from 'react'
+import { Button, ButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import CustomThemeContext from '../../services/CustomThemeContext';
 
 import './PageActions.css'

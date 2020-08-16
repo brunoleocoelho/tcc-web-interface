@@ -22,7 +22,7 @@ function About() {
                 <Row>
                     <Col sm={3}>
                         <div className="content-place logo" style={theme.fourth}>
-                            <img src={imgLogo} width={200} />
+                            <img src={imgLogo} width={200} alt="book-logo-img" />
                         </div>
                     </Col>
                     <Col>

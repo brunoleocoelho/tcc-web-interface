@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -16,10 +16,6 @@ import LoginNewsBoard from './LoginNewsBoard'
  * Tela para login dos usuários estudante e profissional de biblioteca
  */
 function Login(props) {
-    // setTitleBarText('Login')
-    // PROPS
-    const { user } = props
-
     // STATE
     const [userName, setUserName] = useState('')
     const [pwd, setPwd] = useState('')

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import CustomThemeContext from '../../../services/CustomThemeContext'
-import { getOneBook, getAllBooks } from '../../../services/api/BookServiceApi'
+import { getOneBook } from '../../../services/api/BookServiceApi'
 import { getUser } from '../../../services/AuthenticationService'
 import PageWrapper from '../../../components/PageWrapper'
 import ContentWrapper from '../../../components/ContentWrapper'
@@ -57,13 +57,19 @@ function LivroDetails(props) {
         const ext = (toEdit) ? 'view' : 'edit'
         const arrLocPathCopy = [...arrLocation]
         arrLocPathCopy.pop()
-        props.history.push( arrLocPathCopy.join('/') +'/'+ ext )
+        props.history.push( [...arrLocPathCopy, ext].join('/') )
     
         setToEdit(!toEdit)
     }
 
-    // componentDidMount
-    useEffect(() => {
+    const handleIdChange = () => {
+        if (book && id !== book.id){
+            setIsLoading(true)
+            getBookInfo()
+        }
+    }
+
+    const handleInit = () => {
         if (!book){
             setIsLoading(true)
             getBookInfo()
@@ -71,16 +77,14 @@ function LivroDetails(props) {
         if (isEdit && isStudent) {
             const arrLocPathCopy = [...arrLocation]
             arrLocPathCopy.pop()
-            props.history.push( arrLocPathCopy.join('/') +'/'+ 'view' )
+            props.history.push( [...arrLocPathCopy, 'view'].join('/') )
         }
-    }, [])
+    }
 
-    useEffect(() => {
-        if (book && id !== book.id){
-            setIsLoading(true)
-            getBookInfo()
-        }
-    }, [id])
+    // componentDidMount
+    useEffect(handleInit)
+
+    useEffect(handleIdChange, [id])
 
     // botões de ação do formulário
     const actions = (!isStudent) 
@@ -124,7 +128,7 @@ function LivroDetails(props) {
                 xs: '12',
                 md: '6',
                 card: {
-                    title: 'Outros do mesmo autor',
+                    title: 'Livros do mesmo autor',
                     emptyMsg: 'Nenhum outro livro deste autor',
                     body: randAutor.map((num,idx) => {
                         const item = sameAuthor[num]
@@ -135,7 +139,7 @@ function LivroDetails(props) {
                 xs: '12',
                 md: '6',
                 card: {
-                    title: 'Outros da mesma categoria',
+                    title: 'Livros da mesma categoria',
                     emptyMsg: 'Nenhum outro livro desta categoria',
                     body: randCateg.map((num,idx) => {
                         const item = sameCateg[num]
