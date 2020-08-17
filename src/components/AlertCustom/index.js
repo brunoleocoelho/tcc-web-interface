@@ -24,7 +24,6 @@ function AlertCustom() {
     // if (!alertState) return null;
 
     const { show, message, type, title, icon, onCloseAction, closeable } = alertState
-    console.log("AlertCustom", alertState)
 
     return ( 
         <Alert 
