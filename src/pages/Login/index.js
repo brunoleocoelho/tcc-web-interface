@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -60,11 +60,6 @@ function Login(props) {
     const formProps = {
         title: 'Login de usuário',
         classes: 'p-3 ',
-        style: { 
-            border: '1px solid lightgrey', 
-            borderRadius: 4,
-            backgroundColor: 'lightgrey'
-        },
         fields: [
             {
                 id: 'userName',
@@ -116,10 +111,18 @@ function Login(props) {
                 </Col>
 
                 <Col id="login-form-col" className='py-2 p-md-2 col-md-6 col-lg-4 order-1 order-md-2'>
-                    { doingAuth
-                        ? <LoadingLocal message="Autenticando..." />
-                        : <FormBuilder formProps={formProps} />
-                    }
+                    <div style={{ 
+                        border: '1px solid lightgrey', 
+                        borderRadius: 4,
+                        backgroundColor: 'lightgrey',
+                        height: 330,
+                        maxHeight: 330
+                    }}>
+                        { doingAuth
+                            ? <LoadingLocal message="Autenticando..." />
+                            : <FormBuilder formProps={formProps} />
+                        }
+                    </div> 
                 </Col>
 
             </Row>

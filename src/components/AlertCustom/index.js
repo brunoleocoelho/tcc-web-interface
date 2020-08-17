@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Alert } from 'react-bootstrap'
+import './AlertCustom.css'
 
-let timeout = 4000
+let timeout = 3000
 let changeAlertState = null
+const initialAlertState = { show: false }
 
 /**
  * Renderiza um alerta na tela
  */
 function AlertCustom() {
     // STATE
-    const [alertState, setAlertState] = useState(null)
+    const [alertState, setAlertState] = useState(initialAlertState)
 
     // componentDidMount
     useEffect(() => {
@@ -19,17 +21,19 @@ function AlertCustom() {
     }, [])
 
     // Se 'alertState' null, não renderizar
-    if (!alertState) return null;
+    // if (!alertState) return null;
 
     const { show, message, type, title, icon, onCloseAction, closeable } = alertState
-    
+    console.log("AlertCustom", alertState)
+
     return ( 
         <Alert 
-            show={show} 
+            // show={show} 
             variant={type || 'primary'}
             onClose={onCloseAction} 
             dismissible={closeable}
-            style={styles.alertStyle}
+            // style={styles.alertStyle}
+            className={`alertcustom-container ${show ? 'visible' : 'unvisible'}`}
             transition
         >
             { title && (
@@ -62,26 +66,21 @@ AlertCustom.show = function({show, message, icon, type, title = null, onCloseAct
         show, message, icon, type, title, onCloseAction, closeable
     })
 
+    // Fecha
     setTimeout(() => {
-        changeAlertState(null)
+        changeAlertState({
+            show: false, message, icon, type, title, onCloseAction, closeable
+        })
     }, timeout);
+
+    // apaga
+    setTimeout(() => AlertCustom.clean(), (timeout*1.5));
+
 }
 
 /** Atua na ocultação do AlertCustom */
-AlertCustom.close = function() {
-    changeAlertState(null)
-}
-
-const styles = {
-    alertStyle: {
-        position: 'absolute',
-        width: 'fit-content',
-        margin: 'auto',
-        boxShadow: '4px 4px 12px black',
-        bottom: 12,
-        right: 12,
-        zIndex: 9999,
-    }
+AlertCustom.clean = function() {
+    changeAlertState(initialAlertState)
 }
 
 export default AlertCustom
