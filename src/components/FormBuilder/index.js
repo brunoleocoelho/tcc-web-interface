@@ -42,16 +42,16 @@ function FormBuilder({ formProps }) {
         <Form 
             noValidate
             className={classes && classes}
-            validated={validated} 
             onSubmit={formSubmitAction}
+            {...validate && {validated}} 
             {...rest}
         >
             { title && <Form.Text className="h4 text-center">{ title }</Form.Text> }
 
-            { fields && fields.map( field => {
+            { fields && fields.map( (field, idx) => {
                 if (!fieldTypes.includes(field.type)) return null
                 
-                const fieldKey = `field-${field.type}-${field.id}`
+                const fieldKey = `field-${idx}-${field.label}-${field.id}`
                 switch (field.type) {
                     case 'text':
                     case 'password':
@@ -70,7 +70,7 @@ function FormBuilder({ formProps }) {
                     { actions.map( (act, idx) => {
                         const keyBtn = `btnform-${idx}`
 
-                        if (act.type && act.type === 'submit') {
+                        if (act.type && act.type === 'submit' && validate) {
                             onSubmitAction = (e) => {
                                 const isValid = handleSubmit(e)
                                 const action = JSON.parse(JSON.stringify(act.onClick))

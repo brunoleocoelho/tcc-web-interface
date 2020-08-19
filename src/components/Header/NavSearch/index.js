@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
-import { Form, Col, Button } from 'react-bootstrap'
+import React, { useState, useContext } from 'react'
+import { Form, Button } from 'react-bootstrap'
 import AutoSuggestSearch from '../../AutoSuggestSearch'
 import CustomThemeContext from '../../../services/CustomThemeContext'
 import './NavSearch.css'
 
-function NavSearch(props) {
+function NavSearch() {
     // console.log('NavSearch', props)
 
     // STATE

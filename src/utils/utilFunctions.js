@@ -47,7 +47,6 @@ export const buildFormJS = (bookData) => {
     return formulario
 }
 
-
 /**
  * Devolve no máximo 'n' posições aleatórias de um array
  * @param {array} arr array a ser usado (default `[]`)
@@ -68,4 +67,40 @@ export const getRandArrPos = (arr = [], n = 1) => {
     }
     
     return pos
+}
+
+/**
+ * Converte query string em array de chaves e valores
+ * @param {string} search query string completa
+ */
+export const parseQueryString = (search) => {
+    if (!search) return []
+
+    const firstChar = search.substr(0,1)
+    if (firstChar !== '?') return []
+
+    const searchQueries = search.substr(1).split('&').map( item => {
+        const [ key, value ] = decodeURI(item).split('=')
+        return { key, value }
+    })
+    return searchQueries
+}
+
+/**
+ * Constrói a query string para uri
+ * @param {*} queries objeto contendo chave e valor
+ */
+export const buildUriEcoded = (queries) => {
+    const params = Object.keys(queries)
+    const arrQueries = []
+    
+    if (params) {
+        params.forEach(chave => {
+            const isEmpty = (String(queries[chave]).length === 0)
+            if (!isEmpty) arrQueries.push(`${chave}=${queries[chave]}`)
+        })
+    }
+
+    const finalQryStrings = arrQueries.length ? ('?'+ arrQueries.join('&')) : ''
+    return encodeURI(finalQryStrings)
 }

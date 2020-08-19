@@ -1,4 +1,3 @@
-import users from '../assets/data/users.json'
 import { userAuth } from './storageKeys'
 
 /**
@@ -38,18 +37,6 @@ function unsetAuthUser() {
     return true
 }
 
-/**
- * MOCK que faz a "autenticação fake" do usuário
- * @param {string} userName o nome de usuário para acesso
- */
-function validateUser(userName = '') {
-    if (userName.length === 0) return false
-
-    const foundUser = users.find(usr => usr.userName === userName)
-    
-    if (!foundUser) return false
-    return foundUser
-}
 
 /** Armazena o usuário encoded */
 function setEncodedUser(user) {
@@ -72,6 +59,5 @@ export {
     getUser,
     setAuthUser,
     unsetAuthUser,
-    validateUser,
     setEncodedUser
 }

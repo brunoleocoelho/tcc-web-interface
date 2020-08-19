@@ -27,16 +27,16 @@ export const CustomThemeProvider = ({ children }) => {
         app.style.backgroundColor = theme.primary.backgroundColor
     }
 
-    // componentDidMount equivalente
-    useEffect(() => {
-        setAppbackground()
-    }, [])
-
-    // componentDidUpdate equivalente
-    useEffect(() => {
+    const handleChanges = () => {
         setAppbackground()
         setThemeToApply(theme)
-    }, [theme])
+    }
+
+    // componentDidMount equivalente
+    useEffect(() => setAppbackground())
+
+    // componentDidUpdate equivalente
+    useEffect(handleChanges, [theme])
 
     return (
         <CustomThemeContext.Provider 

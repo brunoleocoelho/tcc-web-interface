@@ -7,7 +7,8 @@ import {
     AboutPage, 
     LoginPage, 
     LivrosPage,
-    TemasCoresPage
+    TemasCoresPage,
+    BuscaPage
 }from '../pages'
 
 
@@ -22,6 +23,7 @@ function MainRouter(props) {
 
             <PrivateRoute exact path="/dashboard" component={HomePage} />
             <PrivateRoute path="/livros" component={LivrosPage} />
+            <PrivateRoute path="/busca" component={BuscaPage} />
             <PrivateRoute path="/sobre" component={AboutPage} />
             <PrivateRoute path="/temas-cores" component={TemasCoresPage} />
 

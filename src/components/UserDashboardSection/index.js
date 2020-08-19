@@ -44,23 +44,16 @@ function UserDashboardSection(props) {
         setSections(allSections)
     }
 
-    // Function que devolve mensagem de carregamento
-    const renderStillLoading = () => {
-        return <LoadingLocal message="Carregando seções..." />
+    const handleBookChanges = () => {
+        if (sections.length === 0 && books.length > 0) fillSections()
     }
 
     // componentDidUpdate
-    useEffect(() => {
-        if (sections.length === 0) fillSections(books)
-    }, [ books ])
+    useEffect(handleBookChanges, [ books ])
 
-    // componentDidUpdate
-    useEffect(() => {
-        if (books.length > 0) {
-            fillSections()
-        }
-    }, [ books ])
-
+    // Function que devolve mensagem de carregamento
+    const stillLoading = <LoadingLocal message="Carregando seções..." />
+    
     // RENDER
     return (
         <div id="user-dashboard-container" 
@@ -69,7 +62,7 @@ function UserDashboardSection(props) {
         >
             <Row id="user-dashboard-sections" className="p-2 m-0">
                 { (books.length === 0)
-                    ? renderStillLoading()
+                    ? stillLoading
                     : (
                         sections.map((sct, idxSct) => {
                             const key = `${idxSct}-${sct.title.replace(' ','')}`

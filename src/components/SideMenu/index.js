@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link, NavLink, withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { Nav, Button } from 'react-bootstrap'
 
-import { setAllBooks } from '../../services/actions/BookActions'
+import { setAllBooks, setAllAuthors, setAllCategories, setAllPublishers } from '../../services/actions/BookActions'
 import { getNavData } from '../../services/NavigationService'
-import { getAllBooks } from '../../services/api/BookServiceApi'
+import { getAllBooks, getAllAuthors, getAllCategories, getAllPublishers } from '../../services/api/BookServiceApi'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import UserSummaryCard from '../UserSummaryCard'
 import './SideMenu.css'
@@ -17,7 +17,8 @@ let sideMenuToggle = null
  * Rendriza o menu lateral
  */
 function SideMenu(props) {
-    const { location, books } = props
+    const { location, data, setAllBooks, setAllAuthors, setAllCategories, setAllPublishers } = props
+    const { books, authors, categories, publishers } = data
 
     // state
     const [showSide, setShowSide] = useState(false)
@@ -34,20 +35,32 @@ function SideMenu(props) {
         action && action()
     }
 
-    // componentDidMount equivalente
-    useEffect(() => {
-        const getBooks = async () => {
-            try {
-                const data = await getAllBooks()
-                props.setAllBooks(data)
-            }
-            catch (error) {
-                console.log("[ERRO] SideMenu CDM", error)
-            }
+    // obtem os livros, autores, categorias, e editoras populando redux
+    const getBooks = async () => {
+        try {
+            const dataBooks = (books.length === 0) && await getAllBooks()
+            const dataAuthors = (authors.length === 0) && await getAllAuthors()
+            const dataCategs = (categories.length === 0) && await getAllCategories()
+            const dataPubls = (publishers.length === 0) && await getAllPublishers()
+
+            dataBooks && setAllBooks(dataBooks)
+            dataAuthors && setAllAuthors(dataAuthors)
+            dataCategs && setAllCategories(dataCategs)
+            dataPubls && setAllPublishers(dataPubls)
         }
-        if (books.length === 0) getBooks()
+        catch (error) {
+            console.log("[ERRO] SideMenu CDM", error)
+        }
+    }
+
+    // function para chamada inicial
+    const startMenu = () => {
+        getBooks()
         sideMenuToggle = toggleSide
-    }, [])
+    }
+    
+    // componentDidMount equivalente
+    useEffect(startMenu, [])
 
     const sideMenus = [
         ...getNavData(),
@@ -129,11 +142,14 @@ SideMenu.toggle = () => sideMenuToggle()
 
 // REDUX
 const mapStateToProps = ({ data }) => ({
-    books: data.books
+    data
 })
 
 const mapDispatchToProps = {
-    setAllBooks
+    setAllBooks, 
+    setAllAuthors, 
+    setAllCategories,
+    setAllPublishers
 }
 
 export default withRouter( connect(mapStateToProps, mapDispatchToProps)(SideMenu) )

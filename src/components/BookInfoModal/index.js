@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Modal, Form, Row, Col, Button } from 'react-bootstrap'
+import { Modal, Form, Col, Button } from 'react-bootstrap'
 import { cleanGetinfo } from '../../services/actions/GetinfoActions'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import { getUser } from '../../services/AuthenticationService'
@@ -148,7 +148,7 @@ function BookInfoModal(props) {
 
                         <Col sm="3">
                             <Form.Group className="image-book">
-                                <img ref={imgRef} id="imgbook" src={book.image_url} />
+                                <img ref={imgRef} id="imgbook" src={book.image_url} alt="book" />
                                 { (!isStudent && toEdit) &&
                                     <Form.File 
                                         label={imgBtnInner} 

@@ -4,7 +4,6 @@ import { Container, Col, Badge, Form, DropdownButton } from 'react-bootstrap';
 
 import CustomThemeContext from '../../../services/CustomThemeContext';
 import { cleanFilters } from '../../../services/actions/BookFilterActions'
-import { getAllBooks } from '../../../services/api/BookServiceApi'
 import { setAllBooks } from '../../../services/actions/BookActions';
 import BookCard from '../../../components/BookCard';
 import BookFilters from '../../../components/BookFilters';
@@ -27,13 +26,13 @@ function LivrosList(props) {
     const { theme } = useContext(CustomThemeContext)
     
     // PROPS
-    const { user, filters, data } = props
+    const { filters, data } = props
     const { authorsFilter, categoriesFilter, publishersFilter } = filters
     const { books } = data
 
     // STATE
     const [layout, setLayout] = useState(layouts.grid)
-    const [filteredBooks, setFilteredBooks] = useState([])
+    const [filteredBooks, setFilteredBooks] = useState(books)
     const [orderBy, setOrderBy] = useState('title')
     const [orderWay, setOrderWay] = useState('asc')
     const [bookInfo, setBookInfo] = useState(null)
@@ -67,23 +66,22 @@ function LivrosList(props) {
         if (a[orderBy] > b[orderBy]) return 1 * dir;
         return 0
     }
-
+    
     /** Adiciona um livro para consulta */
     const getInfo = (book) => {
         setBookInfo(book)
     }
 
-    // componentDidUpdate
-    useEffect(() => {
-        handleBookFilters()
-    }, [filters])
-
-    useEffect(() => {
+    const handleBookChanges = () => {
         const isEmpty = (filteredBooks.length === 0 && books.length > 0)
         if (isEmpty) {
             handleBookFilters()
         }
-    }, [books])
+    }
+
+    // componentDidUpdate
+    useEffect(handleBookFilters, [filters])
+    useEffect(handleBookChanges, [books])
 
     // lista de ordenação
     const sortList = [

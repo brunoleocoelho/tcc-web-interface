@@ -38,11 +38,13 @@ function BookInfoForm(props) {
 
     // function que habilita editar item
     const handleToEdit = () => {
-        const goAhead = checkChanges()
-        if (!goAhead) return
-        setBook(props.book)
-        setToEdit(!toEdit)
-        setMsgImg('')
+        if (toEdit !== props.edit) {
+            const goAhead = checkChanges()
+            if (!goAhead) return
+            setBook(props.book)
+            setToEdit(!toEdit)
+            setMsgImg('')
+        }
     }
 
     // manuseia as alterações nos campos
@@ -75,9 +77,7 @@ function BookInfoForm(props) {
     }
 
     // CDU
-    useEffect(() => {
-        if (toEdit !== props.edit) handleToEdit()
-    }, [props.edit])
+    useEffect(handleToEdit, [props.edit])
 
     if (!book) return null
 
@@ -233,7 +233,7 @@ function BookInfoForm(props) {
                                             const { src, ...otherFile } = otherGrp
                                             return (
                                                 <Form.Group className="image-book" key={'group-'+k}>
-                                                    <img ref={imgRef} id="imgbook" src={src} />
+                                                    <img ref={imgRef} id="imgbook" src={src} alt="" />
                                                     { (!isStudent && toEdit) &&
                                                         <Form.File {...otherFile} />
                                                     }
