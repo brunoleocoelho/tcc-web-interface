@@ -19,9 +19,6 @@ function BodySection({ title, items, note, variant, bodyStyle, layout }) {
     return (
         <Row id={idBody} className="section-body p-2 m-0" style={contentStyle}>
             { items.map((bk, idx) => {
-                
-                if (idx >= 4) return null
-
                 return (
                     <SectionBook 
                         key={`${bk.id}-${bk.isbn}`} 

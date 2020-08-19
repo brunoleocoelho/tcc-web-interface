@@ -4,6 +4,7 @@ import { Row } from 'react-bootstrap'
 import SectionSubject from './SectionSubject'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import LoadingLocal from '../LoadingLocal'
+import { getRandArrPos } from '../../utils/utilFunctions'
 
 /**
  * Componente que renderiza um pequeno dashboard
@@ -19,6 +20,13 @@ function UserDashboardSection(props) {
     const [sections, setSections] = useState([])
 
     // FUNCTIONS
+    // deveolve livros aleatorios p/ simular tela dashboard
+    const getRandomBooks = () => {
+        const arrNum = getRandArrPos(books, 4)
+        const arrResult = books.filter((item, idx) => arrNum.includes(idx))
+        return arrResult
+    }
+
     // Function que popula as seções
     const fillSections = () => {
         if (!books) return
@@ -26,19 +34,19 @@ function UserDashboardSection(props) {
         const allSections = [
             { 
                 title:'Últimos Lidos', icon:'binoculars', iconColor: 'darkolivegreen',
-                items: [...books], note: ['há', 'dias'], variant: 'success'
+                items: getRandomBooks(), note: ['há', 'dias'], variant: 'success'
             },
             { 
                 title:'Entregas', icon:'warning', iconColor: 'darkorange',
-                items: [...books], note: ['em', 'dias'], variant: 'warning'
+                items: getRandomBooks(), note: ['em', 'dias'], variant: 'warning'
             },
             { 
                 title:'Reservas', icon:'book', iconColor: 'darkcyan',
-                items: [...books], note: ['há', 'dias'], variant: 'info'
+                items: getRandomBooks(), note: ['há', 'dias'], variant: 'info'
             },
             { 
                 title:'Favoritos', icon:'star', iconColor: 'royalblue',
-                items: [...books], note: ['*****'], variant: null
+                items: getRandomBooks(), note: ['*****'], variant: null
             }
         ]
         setSections(allSections)
