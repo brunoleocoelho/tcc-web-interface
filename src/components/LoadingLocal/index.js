@@ -7,7 +7,7 @@ const imgLoading = require('../../assets/img/loading.gif')
 function LoadingLocal({ message }) {
     return (
         <div className="loading">
-            <img src={imgLoading} />
+            <img src={imgLoading} alt="Loading" />
             <p>{ message }</p>
         </div>
     )

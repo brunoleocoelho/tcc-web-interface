@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+
 import Autosuggest from 'react-autosuggest'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import InputSuggestCustom from './InputSuggestCustom'
@@ -98,23 +98,6 @@ function AutoSuggestSearch(props) {
         setSuggestions([])
     }
 
-    /**
-     * Chamado quando um item de sugestão é selecionado
-     * @param {*} event o evento em si de escolha
-     * @param {{
-     *  suggestion: string,
-     *  suggestionValue: string,
-     *  suggestionIndex: number,
-     *  sectionIndex: number,
-     *  method: any
-     * }} suggestontext conjunto de informações referente a busca
-     * @see https://github.com/moroshko/react-autosuggest#onsuggestionselected-optional
-     */
-    const onSuggestionSelected = (event, suggestontext) => {
-        const { suggestion } = suggestontext
-        // props.setGetinfoBook(suggestion)
-    }
-
     // Props para input
     const inputProps = {
         placeholder: 'Buscar livro...',
@@ -143,7 +126,6 @@ function AutoSuggestSearch(props) {
             inputProps={inputProps}
             renderInputComponent={props => renderInputComponent(props, inputRef)}
             renderSuggestionsContainer={(props) => renderSuggestionsContainer(props, adicProps)}
-            onSuggestionSelected={onSuggestionSelected}
             focusInputOnSuggestionClick={false}
             // alwaysRenderSuggestions
         />

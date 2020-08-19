@@ -46,7 +46,7 @@ function SectionBook(props) {
             <div className={css[dsp].bookBody}>
 
                 <div className={css[dsp].bookCont}>
-                    <img src={book.image_url} className={css[dsp].bookImg} />
+                    <img src={book.image_url} className={css[dsp].bookImg} alt="" />
                 </div>
                 
                 <div className={css[dsp].bookTitle}>

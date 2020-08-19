@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
-import { getAllAuthors, getAllCategories, getAllPublishers } from '../../services/api/BookServiceApi'
-import { cleanFilters, setAuthorFilter, setCategoryFilter, setPublishersFilter } from '../../services/actions/BookFilterActions';
-import { setAllAuthors, setAllCategories, setAllPublishers } from '../../services/actions/BookActions'
+import { 
+    cleanFilters, setAuthorFilter, setCategoryFilter, setPublishersFilter 
+} from '../../services/actions/BookFilterActions';
 import FilterCheckList from './FilterCheckList/FilterCheckList';
 
 /**
@@ -27,27 +27,6 @@ function FilterContainer(props) {
 
         action(newSelected)
     }
-
-    // componentDidMount
-    useEffect(() => {
-        const getFilters = async () => {
-            try {
-                const [dataAuthors, dataCategs, dataPubls] = await Promise.all([
-                    (authors.length === 0) && getAllAuthors(),
-                    (categories.length === 0) && getAllCategories(),
-                    (publishers.length === 0) && getAllPublishers(),
-                ])
-
-                dataAuthors && props.setAllAuthors(dataAuthors)
-                dataCategs && props.setAllCategories(dataCategs)
-                dataPubls && props.setAllPublishers(dataPubls)
-            }
-            catch(err) {
-                console.error('[ERRO] getFilters', err)
-            }
-        }
-        getFilters()
-    }, [])
 
     // filtros a renderizar
     const filters = [
@@ -95,9 +74,9 @@ const mapStateToProps = ({ filters, data }) => ({
 
 const mapDispatchToProps = {
     cleanFilters, 
-    setAuthorFilter, setAllAuthors,
-    setCategoryFilter, setAllCategories,
-    setPublishersFilter, setAllPublishers
+    setAuthorFilter,
+    setCategoryFilter,
+    setPublishersFilter
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterContainer)

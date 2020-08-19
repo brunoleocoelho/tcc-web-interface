@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import { themes } from '../../utils/constants';
 import Separator from '../BookFilters/Separator';

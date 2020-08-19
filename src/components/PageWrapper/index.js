@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import EmptyContent from '../EmptyContent'
-import './PageWrapper.css'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import { getUser } from '../../services/AuthenticationService'
 import { setTitleBarText } from '../../services/InterfaceService'
+import './PageWrapper.css'
 
 /**
  * Container principal com layout default de uma página
@@ -28,7 +28,7 @@ function PageWrapper({ title, applyTheme, children }) {
 }
 
 
-function BreadcrumbCustom({ current, theme }){
+/* function BreadcrumbCustom({ current, theme }){
     return (
         <div style={{
             display:"block",
@@ -40,7 +40,7 @@ function BreadcrumbCustom({ current, theme }){
             <small> {`Home > ${current}`} </small>
         </div>
     )
-}
+} */
 
 PageWrapper.defaultProps = {
     title: 'Page', 

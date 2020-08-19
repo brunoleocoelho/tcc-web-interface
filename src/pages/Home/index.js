@@ -1,12 +1,8 @@
-import React, { useContext } from 'react'
-import { Container, Row, Button } from 'react-bootstrap';
+import React from 'react'
+import { Container, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-
-import { getNavData } from '../../services/NavigationService';
-import CustomThemeContext from '../../services/CustomThemeContext';
 import ContentWrapper from '../../components/ContentWrapper';
 import PageWrapper from '../../components/PageWrapper';
-import SideMenu from '../../components/SideMenu';
 import UserDashboardSection from '../../components/UserDashboardSection'
 import './Home.css'
 
@@ -17,24 +13,8 @@ function Home(props) {
     // props
     const { user } = props
 
-    // CONTEXT
-    const { theme } = useContext(CustomThemeContext)
-
     // se não há user redireciona login
     if (!user) return <Redirect to="/login" />
-
-    const actions = [
-        {
-            label: 'Teste1',
-            onClick: () => alert('Teste1'),
-            icon: 'smile-o',
-        },
-        {
-            label: 'Teste2',
-            onClick: () => alert('Teste2'),
-            icon: 'frown-o',
-        },
-    ]
 
     return (
         <PageWrapper title="Dashboard">

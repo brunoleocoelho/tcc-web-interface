@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Row, Col, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { getUser } from '../../services/AuthenticationService'
 import Avatar from '../Avatar'
 import CustomThemeContext from '../../services/CustomThemeContext'

@@ -16,6 +16,7 @@ function Avatar({ userImg, width, style }) {
                 src={userImg}
                 width={width} 
                 style={styles.avtImg}
+                alt="user"
             />
         </div>
     )

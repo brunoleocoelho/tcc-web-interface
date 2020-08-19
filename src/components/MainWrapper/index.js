@@ -6,7 +6,7 @@ import CustomThemeContext from '../../services/CustomThemeContext'
 import SideMenu from '../SideMenu'
 import EmptyContent from '../EmptyContent'
 import './MainWrapper.css'
-import Footer from '../Footer'
+// import Footer from '../Footer'
 import ThemeButton from '../ThemeButton'
 
 /**

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Navbar, Button } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 
 import CustomThemeContext from '../../services/CustomThemeContext'
 import NavBrand from './NavBrand'

@@ -1,0 +1,23 @@
+
+.alertcustom-container {
+    position: fixed !important;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto;
+    /* margin-top: -10rem !important; */
+    /* top: 4rem; */
+    bottom: 0.5rem;
+    right: 1rem;
+    left: 1rem;
+    z-index: 9999;
+    box-shadow: black 4px 4px 12px;
+    transition: margin 0.1s ease-in-out !important;
+}
+
+.alertcustom-container.visible {
+    margin-right: 0px !important;
+}
+
+.alertcustom-container.unvisible {
+    margin-right: -20rem !important;
+}
