@@ -90,7 +90,7 @@ export const parseQueryString = (search) => {
  * Constrói a query string para uri
  * @param {*} queries objeto contendo chave e valor
  */
-export const buildUriEcoded = (queries) => {
+export const buildUriEncoded = (queries) => {
     const params = Object.keys(queries)
     const arrQueries = []
     
