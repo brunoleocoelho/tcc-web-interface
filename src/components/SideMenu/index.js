@@ -58,6 +58,12 @@ function SideMenu(props) {
         getBooks()
         sideMenuToggle = toggleSide
     }
+
+    // retorna o path raíz da url
+    const getRootLocation = () => {
+        const root = String(location.pathname).split('/')[1]
+        return root
+    }
     
     // componentDidMount equivalente
     useEffect(startMenu, [])
@@ -88,7 +94,7 @@ function SideMenu(props) {
                 <Nav className="flex-column">
                     { sideMenus.map((mn, idx) => {
                         const key = `${idx}-${String(mn.label).replace(' ', '-')}`
-                        const isActive = (mn.href === location.pathname)
+                        const isActive = (mn.href === `/${getRootLocation()}`)
 
                         return (
                             <NavLink 

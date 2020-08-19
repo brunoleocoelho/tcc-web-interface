@@ -12,16 +12,13 @@ function BodySection({ title, items, note, variant, bodyStyle, layout }) {
     /** Retorna uma nota de aviso sobre o item */
     const renderNoteText = (idx) => (
         <Badge variant={variant}>
-            {note.join(` ${idx} `) }
+            { note(idx) }
         </Badge>
     )
 
     return (
         <Row id={idBody} className="section-body p-2 m-0" style={contentStyle}>
             { items.map((bk, idx) => {
-                
-                if (idx >= 4) return null
-
                 return (
                     <SectionBook 
                         key={`${bk.id}-${bk.isbn}`} 

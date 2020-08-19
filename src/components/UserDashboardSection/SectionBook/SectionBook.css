@@ -2,26 +2,35 @@
 /* .section-book {} */
 
 /* ----- IMAGES ----- */
-.listImg {
+.section-book .listImg {
     overflow: hidden;
     width: 30px;
 }
-.gridImg {
+.section-book .gridImg {
     height: 7rem;
     width: auto;
     max-width: 90%;
 }
 
+.section-book .section-book-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.section-book .book-body:hover {
+    opacity: 0.8;
+}
+
 /* Tamanho de tela 'sm' */
 @media (min-width: 576px) {
-    .gridImg {
+    .section-book .gridImg {
         height: 10rem;
     }
 }
 
 /* Tamanho de tela 'md' */
 @media (min-width: 768px) {
-    .gridImg {
+    .section-book .gridImg {
         height: 11rem;
     }    
 }    

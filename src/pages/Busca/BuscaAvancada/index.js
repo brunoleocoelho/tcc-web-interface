@@ -60,7 +60,7 @@ function BuscaAvançadaForm(props) {
     }
 
     // limpa os parametros
-    const cleanParams = () => setParams({})
+    // const cleanParams = () => setParams({})
     
     /** Atualiza os parametros e livros encontrados na busca */
     const handleFoundBooks = (e) => {
@@ -72,7 +72,6 @@ function BuscaAvançadaForm(props) {
         Object.keys(params).forEach(item => {
             const paramItem = params[item]
             if (paramItem === "") return 
-            console.log('=== params', {item, paramItem})
 
             books.forEach(bk => {
                 const bkItem = bk[item]
@@ -158,7 +157,7 @@ function BuscaAvançadaForm(props) {
                     defaultValue: '',
                     children: [
                         <option value=''>...</option>,
-                        ...(authors && authors.map((autor, idx) => {
+                        ...(authors && authors.sort().map((autor, idx) => {
                             return <option value={autor} key={`author-${idx}`}>{autor}</option>
                         }))
                     ]
@@ -197,7 +196,7 @@ function BuscaAvançadaForm(props) {
                     defaultValue: '',
                     children: [
                         <option value=''>...</option>,
-                        ...(publishers && publishers.map((editora, idx) => {
+                        ...(publishers && publishers.sort().map((editora, idx) => {
                             return <option value={editora} key={`publisher-${idx}`}>{editora}</option>
                         }))
                     ]
@@ -283,7 +282,7 @@ function BuscaAvançadaForm(props) {
                                 eventKey={idForm} 
                                 className="accord-toggle"
                                 variant={theme.themeName}
-                                actionClick={() => {
+                                onClick={() => {
                                     setIsFormOpen(!isFormOpen)
                                 }}
                             >
