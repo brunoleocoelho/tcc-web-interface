@@ -12,7 +12,7 @@ function BodySection({ title, items, note, variant, bodyStyle, layout }) {
     /** Retorna uma nota de aviso sobre o item */
     const renderNoteText = (idx) => (
         <Badge variant={variant}>
-            {note.join(` ${idx} `) }
+            { note(idx) }
         </Badge>
     )
 

@@ -5,6 +5,7 @@ import SectionSubject from './SectionSubject'
 import CustomThemeContext from '../../services/CustomThemeContext'
 import LoadingLocal from '../LoadingLocal'
 import { getRandArrPos } from '../../utils/utilFunctions'
+import './UserDashboardSection.css'
 
 /**
  * Componente que renderiza um pequeno dashboard
@@ -34,19 +35,29 @@ function UserDashboardSection(props) {
         const allSections = [
             { 
                 title:'Últimos Lidos', icon:'binoculars', iconColor: 'darkolivegreen',
-                items: getRandomBooks(), note: ['há', 'dias'], variant: 'success'
+                items: getRandomBooks(), variant: 'success', note: (n) => ['há', 'dias'].join(` ${n} `)
             },
             { 
                 title:'Entregas', icon:'warning', iconColor: 'darkorange',
-                items: getRandomBooks(), note: ['em', 'dias'], variant: 'warning'
+                items: getRandomBooks(), variant: 'warning', note: (n) => ['em', 'dias'].join(` ${n} `)
             },
             { 
                 title:'Reservas', icon:'book', iconColor: 'darkcyan',
-                items: getRandomBooks(), note: ['há', 'dias'], variant: 'info'
+                items: getRandomBooks(), variant: 'info', note: (n) => ['há', 'dias'].join(` ${n} `)
             },
             { 
                 title:'Favoritos', icon:'star', iconColor: 'royalblue',
-                items: getRandomBooks(), note: ['*****'], variant: null
+                items: getRandomBooks(), variant: null, note: (num) => {
+                    let stars = []
+                    for (let idx = 0; idx <= num; idx++) {
+                        stars.push( 
+                            <i className="star fa fa-star" key={`star-${idx}`}></i> 
+                        )
+                    }
+                    return <div className="stars-container">
+                        { stars.map(item => item) }
+                    </div>
+                }
             }
         ]
         setSections(allSections)

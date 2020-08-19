@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './SectionBook.css'
 
 /**
@@ -14,7 +15,7 @@ function SectionBook(props) {
             container: 'col-12',
             noteMark: 'float-right',
             bookCont: 'text-center',
-            bookBody: 'p-1 row',
+            bookBody: 'book-body p-1 row',
             bookImg: 'listImg',
             bookTitle: 'col-10 text-wrap'
         },
@@ -22,7 +23,7 @@ function SectionBook(props) {
             container: 'col-3',
             noteMark: 'position-absolute',
             bookCont: 'text-center',
-            bookBody: '',
+            bookBody: 'book-body',
             bookImg: 'listImg gridImg',
             bookTitle: 'small text-center px-1'
         }
@@ -33,28 +34,32 @@ function SectionBook(props) {
         book.isbn,
         book.title.replace(" ","").toLowerCase()
     ].join('-')
+
+    const pathUrlBook = `/livros/info/${book.id}/view`
     
     return (
         <div id={id} className={'section-book p-0 '+ css[dsp].container}>
+            <Link to={pathUrlBook} className="section-book-link">
 
-            { noteMark &&
-                <div className={css[dsp].noteMark} >
-                    { noteMark }
+                { noteMark &&
+                    <div className={css[dsp].noteMark} >
+                        { noteMark }
+                    </div>
+                }
+
+                <div className={css[dsp].bookBody}>
+
+                    <div className={css[dsp].bookCont}>
+                        <img src={book.image_url} className={css[dsp].bookImg} alt="" />
+                    </div>
+                    
+                    <div className={css[dsp].bookTitle}>
+                        { book.title }
+                    </div>
+
                 </div>
-            }
-
-            <div className={css[dsp].bookBody}>
-
-                <div className={css[dsp].bookCont}>
-                    <img src={book.image_url} className={css[dsp].bookImg} alt="" />
-                </div>
-                
-                <div className={css[dsp].bookTitle}>
-                    { book.title }
-                </div>
-
+        </Link>
             </div>
-        </div>
     )
 }
 
