@@ -92,10 +92,15 @@ export const parseQueryString = (search) => {
  */
 export const buildUriEcoded = (queries) => {
     const params = Object.keys(queries)
-    const arrQueries = params.map(chave => {
-        return `${chave}=${queries[chave]}`
-    })
+    const arrQueries = []
+    
+    if (params) {
+        params.forEach(chave => {
+            const isEmpty = (String(queries[chave]).length === 0)
+            if (!isEmpty) arrQueries.push(`${chave}=${queries[chave]}`)
+        })
+    }
 
-    const finalQryStrings = '?'+ arrQueries.join('&')
+    const finalQryStrings = arrQueries.length ? ('?'+ arrQueries.join('&')) : ''
     return encodeURI(finalQryStrings)
 }
