@@ -15,7 +15,7 @@ export const getNavData = () => ([
         icon: "book",
     },
     { 
-        label: "Busca",
+        label: "Busca Avançada",
         href: "/busca",
         icon: "search",
     },

@@ -8,7 +8,7 @@ import PageWrapper from '../../../components/PageWrapper'
 import ContentWrapper from '../../../components/ContentWrapper'
 import CustomThemeContext from '../../../services/CustomThemeContext'
 import ItensResultadoBusca from './ItensResultadoBusca'
-import { buildUriEcoded, parseQueryString } from '../../../utils/utilFunctions'
+import { buildUriEncoded, parseQueryString } from '../../../utils/utilFunctions'
 import './BuscaAvancada.css'
 
 function BuscaAvançadaForm(props) {
@@ -40,7 +40,7 @@ function BuscaAvançadaForm(props) {
 
     // Monta na URL a busca efetuada
     const writeUrlQry = () => {
-        const strQry = buildUriEcoded(params)
+        const strQry = buildUriEncoded(params)
         const path = [ location.pathname, strQry ].join('')
         props.history.push(path)
     }

@@ -31,9 +31,10 @@ const renderSuggestionsContainer = ({ containerProps, children, query }, adicPro
     if (!children) return null
 
     const { count, theme } = adicProps
+    const plural = (count > 1) ?'s' :''
     const textoTop = (count === 0)
         ? 'Nenhum resultado'
-        : (<>{count} Resultado{(count > 1) ?'s' :''} para "<strong>{query}</strong>"</>)
+        : (<>{count} Resultado{plural} primário{plural} para "<strong>{query}</strong>"</>)
         
     return (
         <div style={theme.fourth} {...containerProps}>
@@ -81,8 +82,11 @@ function AutoSuggestSearch(props) {
     const getSuggestions = (value) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
-
-        const result = (inputLength > 2) && books.filter(livro => String(livro.title).toLowerCase().includes(inputValue))
+        const numResults = 5
+        
+        let result = (inputLength > 1) && books 
+            .filter(livro => String(livro.title).toLowerCase().includes(inputValue))
+            .filter((item, idx) => (idx < numResults))
 
         return result || []
     }
