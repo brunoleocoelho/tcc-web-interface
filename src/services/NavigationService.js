@@ -14,26 +14,11 @@ export const getNavData = () => ([
         href: "/livros",
         icon: "book",
     },
-    // { 
-    //     label: "Entregas",
-    //     href:"",
-    //     icon: "warning"
-    // },
-    // { 
-    //     label: "Reservas",
-    //     href:"",
-    //     icon: "book"
-    // },
-    // { 
-    //     label: "Favoritos",
-    //     href:"",
-    //     icon: "star"
-    // },
-    // { 
-    //     label: "Histórico",
-    //     href:"",
-    //     icon: "history"
-    // },
+    { 
+        label: "Busca",
+        href: "/busca",
+        icon: "search",
+    },
     { 
         label: "Temas e cores",
         href:"/temas-cores",

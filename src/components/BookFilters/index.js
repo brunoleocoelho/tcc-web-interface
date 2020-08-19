@@ -45,12 +45,13 @@ function BookFilters(props) {
             </ModalFilters>
         )
     }
-
-    return (
-        <div className="d-none d-md-block">
-            <FilterContainer title={title} key="filter-side" />
-        </div>
-    )
+    else {
+        return (
+            <div className="d-none d-md-block">
+                <FilterContainer title={title} key="filter-side" />
+            </div>
+        )
+    }
 }
 
 

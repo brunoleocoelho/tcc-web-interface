@@ -32,7 +32,7 @@ function LivrosList(props) {
 
     // STATE
     const [layout, setLayout] = useState(layouts.grid)
-    const [filteredBooks, setFilteredBooks] = useState([])
+    const [filteredBooks, setFilteredBooks] = useState(books)
     const [orderBy, setOrderBy] = useState('title')
     const [orderWay, setOrderWay] = useState('asc')
     const [bookInfo, setBookInfo] = useState(null)
