@@ -20,7 +20,7 @@ input.auto-suggest-input {
 /* Container do resultados de suggestions */
 #search-suggest 
     .react-autosuggest__suggestions-container {
-        width: 100% !important;
+        /* width: 100% !important; */
         position: absolute;
         box-shadow: 0px 0px 8px rgba(0,0,0,0.5);
     }
@@ -111,3 +111,11 @@ input.auto-suggest-input {
                 font-size: 0.85rem;
             }
 }
+
+/* Tamanho de tela Lg)
+@media (min-width: 992px) {
+#search-suggest 
+    .react-autosuggest__suggestions-container {
+        width: auto !important;
+    }
+} */

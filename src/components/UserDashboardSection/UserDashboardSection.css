@@ -1,7 +1,7 @@
 div {
     transition-delay: 0;
     transition-property: color, background-color;
-    transition-duration: 200ms ;
+    transition-duration: 20ms ;
 }
 
 .dashboard-container {
