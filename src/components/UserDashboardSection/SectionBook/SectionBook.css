@@ -37,8 +37,8 @@
 
 /* Tamanho de tela 'lg' */
 @media (min-width: 992px) {
-    .gridImg {
-        height: 8rem;
+    .section-book .gridImg {
+        height: 7rem;
     }    
 }    
 
